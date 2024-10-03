@@ -1,2 +1,8 @@
-# bcp-portal-it-software
-Many types of software are used in BIMCAP. If an employee faces any software related problem then he downloads these software from anywhere in his system. Due to which the possibility of virus entering his system increases. So, that is why these things can be prevented by using this portal.
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
