@@ -21,6 +21,7 @@ table {
     text-align: left;
     border-bottom: 1px solid #ddd;
   }
+
 /* defualt property */
 .d-flex{
     display: flex;
@@ -147,7 +148,7 @@ section.login-page-section {
     border-color: #eee;
 }
 .bgImageFromMiddleTop{
-    width: 600px;
+    width: 100%;
     height: 320px;
     background-repeat: no-repeat;
     position: absolute;
@@ -156,7 +157,7 @@ section.login-page-section {
     z-index: -1;
 }
 .bgImageFromMiddleButtom{
-    width: 600px;
+    width: 100%;
     height: 320px;
     background-repeat: no-repeat;
     position: absolute;
@@ -209,7 +210,7 @@ nav.leftsidebar {
     text-decoration: none;
 }
 .bgImageFromMiddleButtom-left{
-    left: 13%;
+    left: 0;
 }
 section.main-content-section {
     padding: 50px;
@@ -228,8 +229,8 @@ section.main-content-section {
 }
 section.dashboard-grid-section {
     display: flex;
-    width: 1010px;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 .dashboard-grid-part {
     display: flex;
@@ -363,7 +364,7 @@ section.software-list-table.software-list-table-style table tr th {
 
 
 section.software-details-head {
-    width: 1440px;
+    width: 100%;
 }
 span.software-list-action-btn svg {
     font-size: 20px;
@@ -744,18 +745,18 @@ section.profile-buttom-details {
 }
 section.software-grids {
     display: flex;
-    justify-content: space-between;
-    width: 1440px;
+    justify-content: start;
     flex-wrap: wrap;
 }
 .software-grid {
-    width: 320px;
+    width: 300px;
     background-color: #ffffff;
     padding: 15px;
     border-radius: 5px;
     box-shadow: 0px 2px 8px #ededed;
     border: 1px solid #dddddd91;
     margin-bottom: 15px;
+    margin-right: 15px;
 }
 .software-grid-img img {
     object-fit: cover;
@@ -765,7 +766,7 @@ section.software-grids {
     margin: 10px 0px 10px 0px;
 }
 section.software-grid-main {
-    width: 1440px;
+    width: 100%;
 }
 .software-grid-cover {
     margin-top: 8%;
