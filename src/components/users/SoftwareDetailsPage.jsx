@@ -43,7 +43,7 @@ const SoftwareDetailsPage = () => {
                 <section className='software-details-mid'>
                     <div className='software-details-boxes-indetails-page'> 
                         <div className='dashboard-grid-value-show'>
-                          <div className='score-dash'><BiStats />&nbsp; <span>02</span></div>
+                          <div className='score-dash'><BiStats />&nbsp; <span>03</span></div>
                           <div className='score-title-dash'>Seats</div>
                         </div>
                         <div className='dashboard-grid-value-show'>
@@ -60,7 +60,7 @@ const SoftwareDetailsPage = () => {
                 </section>
                 <section className='software-details-down'>
                   <div className='software-info-cover'>
-                      <h3>Information :</h3>
+                      <h3>Information : </h3>
                       <ul>
                         <li>AutoCAD 2024, improved performance for users.</li>
                         <li>Uses the DWG file format, ensuring compatibility with other CAD applications.</li>
