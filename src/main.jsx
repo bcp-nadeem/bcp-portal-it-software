@@ -14,6 +14,7 @@ import UserProfile from './components/admin/UserProfile.jsx'
 import UserProfileList from './components/admin/UserProfileList.jsx'
 import SoftwareGrid from './components/users/SoftwareGrid.jsx'
 import SoftwareDetailsPage from './components/users/SoftwareDetailsPage.jsx'
+import NotificationForm from './components/admin/NotificationForm.jsx'
 
 
 const router = createBrowserRouter(
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       <Route path='/software-details/:softwareId' element={<SoftwareDetailPage />} />
       <Route path='/user-profile/:userId' element={<UserProfile />} />
       <Route path='/user-profile-list' element={<UserProfileList />} />
+      <Route path='/notification-form' element={<NotificationForm />} />
 
       {/* User Routers */}
 

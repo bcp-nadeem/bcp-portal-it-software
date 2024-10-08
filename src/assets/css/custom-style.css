@@ -22,6 +22,10 @@ table {
     border-bottom: 1px solid #ddd;
   }
 
+  .text-center{
+    text-align: center;
+  }
+
 /* defualt property */
 .d-flex{
     display: flex;
@@ -440,6 +444,7 @@ section.software-details-down {
     position: absolute;
     left: 0;
     top: 0;
+    z-index: 999;
 }
 
 .model-property {
@@ -889,4 +894,13 @@ section.software-grid-main {
 }
 .asm-input-insert-box .MuiFormControl-root {
     margin: 0;
+}
+section.notification-grid-cover img {
+    object-fit: contain;
+    width: 70px;
+    height: 70px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
 }

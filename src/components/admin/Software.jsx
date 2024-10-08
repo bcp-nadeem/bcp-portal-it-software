@@ -12,6 +12,11 @@ import { BsTrash } from "react-icons/bs";
 import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 
@@ -20,7 +25,7 @@ const columns = [
   { field: 'id', headerName: 'ID', width: 60 },
   { field: 'softwareImage', headerName: 'Software Image', width: 120, renderCell: renderSoftwareImage },
   { field: 'softwareName', headerName: 'Software Name', width: 200 },
-  { field: 'softwareType', headerName: 'Type', width: 200 },
+  { field: 'softwareCategory', headerName: 'Category', width: 200 },
   { field: 'softwareVersion', headerName: 'Version', width: 200 },
   { field: 'softwareSeats', headerName: 'Seats', width: 200 },
   { field: 'softwareStatus', headerName: 'Status', width: 200 },
@@ -28,7 +33,7 @@ const columns = [
 ];
 
 const rows = [
-  { id: 1, softwareImage: 'https://example.com/user1.jpg', softwareName: 'AutoCAD', softwareType: 'Autodesk', softwareVersion: '2022', softwareSeats: '2', softwareStatus: 'Active'  },
+  { id: 1, softwareImage: 'https://example.com/user1.jpg', softwareName: 'AutoCAD', softwareCategory: 'Autodesk', softwareVersion: '2022', softwareSeats: '2', softwareStatus: 'Active'  },
 ];
 
 function renderSoftwareImage() {
@@ -42,7 +47,17 @@ const paginationModel = { page: 0, pageSize: 5 };
 
 const Software = () => {
 
-  // const [isOpen, setIsOpen] = useState(false); 
+  const [dropDown, setDropDown] = useState(false);
+
+  const handleChangeDropDown = (event) => {
+    setDropDown(event.target.value);
+  };
+
+  const [statusDropDown, setStatusDropDown] = useState(false);
+
+  const handleChangeStatusDropDown = (event) => {
+    setStatusDropDown(event.target.value);
+  };
 
   const [isOpenAddSoftware, setisOpenAddSoftware] = useState(false); 
   const [isOpenEditSoftware, setisOpenEditSoftware] = useState(false); 
@@ -111,10 +126,23 @@ const Software = () => {
                                 <TextField id="standard-basic" label="Enter software name" variant="standard" />
                               </div>
                               <div className='asm-input-insert-box'>
-                                <TextField id="standard-basic" label="Software Category" variant="standard" />
-                              </div>
-                              <div className='asm-input-insert-box'>
-                                <TextField id="standard-basic" label="Software Type" variant="standard" />
+                                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                                      <InputLabel id="demo-simple-select-standard-label">Software Category</InputLabel>
+                                      <Select
+                                        labelId="demo-simple-select-standard-label"
+                                        id="demo-simple-select-standard"
+                                        value={dropDown}
+                                        onChange={handleChangeDropDown}
+                                        label="Age"
+                                      >
+                                        <MenuItem value="">
+                                          <em>None</em>
+                                        </MenuItem>
+                                        <MenuItem value="">1</MenuItem>
+                                        <MenuItem value="">2</MenuItem>
+                                        <MenuItem value="">3</MenuItem>
+                                      </Select>
+                                  </FormControl>
                               </div>
                               <div className='asm-input-insert-box'>
                                 <TextField id="standard-basic" label="Software version" variant="standard" />
@@ -123,7 +151,23 @@ const Software = () => {
                                 <TextField id="standard-basic" label="Software Seats" variant="standard" />
                               </div>
                               <div className='asm-input-insert-box'>
-                                <TextField id="standard-basic" label="Software Status" variant="standard" />
+                              <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                                    <InputLabel id="demo-simple-select-standard-label">Software Category</InputLabel>
+                                      <Select
+                                        labelId="demo-simple-select-standard-label"
+                                        id="demo-simple-select-standard"
+                                        value={statusDropDown}
+                                        onChange={handleChangeStatusDropDown}
+                                        label="Age"
+                                      >
+                                        <MenuItem value="">
+                                          <em>None</em>
+                                        </MenuItem>
+                                        <MenuItem value="">1</MenuItem>
+                                        <MenuItem value="">2</MenuItem>
+                                        <MenuItem value="">3</MenuItem>
+                                      </Select>
+                                  </FormControl>
                               </div>
                             </div>
                             <div className='asm-upload-insert'>
@@ -135,6 +179,7 @@ const Software = () => {
                             </div>
                         </div>
                     </div>
+                    
                   <div className='model-footer'>
                         <div className='asm-button-submit'>
                           <Button variant="contained">Submit</Button>
@@ -142,6 +187,8 @@ const Software = () => {
                   </div>
                 </div>
               </section>
+
+              
 
               
           : ""}

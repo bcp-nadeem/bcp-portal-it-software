@@ -7,6 +7,11 @@ import { IoClose } from "react-icons/io5";
 import { FiEdit3 } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 import { Button, TextField } from '@mui/material';
@@ -26,7 +31,11 @@ const paginationModel = { page: 0, pageSize: 5 };
 
 const Category = () => {
 
-  // const [isOpen, setIsOpen] = useState(false); 
+  const [statusDropDown, setStatusDropDown] = useState(false);
+
+  const handleChangeStatusDropDown = (event) => {
+    setStatusDropDown(event.target.value);
+  };
 
   const [isOpenAddCategory, setisOpenAddCategory] = useState(false); 
   const [isOpenEditCategory, setisOpenEditCategory] = useState(false); 
@@ -77,7 +86,23 @@ const Category = () => {
                                 <TextField id="standard-basic" label="Enter category name" variant="standard" />
                               </div>
                               <div className='asm-input-insert-box'>
-                                <TextField id="standard-basic" label="Enter category status" variant="standard" />
+                                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                                    <InputLabel id="demo-simple-select-standard-label">Category Category</InputLabel>
+                                      <Select
+                                        labelId="demo-simple-select-standard-label"
+                                        id="demo-simple-select-standard"
+                                        value={statusDropDown}
+                                        onChange={handleChangeStatusDropDown}
+                                        label="Age"
+                                      >
+                                        <MenuItem value="">
+                                          <em>None</em>
+                                        </MenuItem>
+                                        <MenuItem value="">1</MenuItem>
+                                        <MenuItem value="">2</MenuItem>
+                                        <MenuItem value="">3</MenuItem>
+                                      </Select>
+                                  </FormControl>
                               </div>
                             </div>
                         </div>

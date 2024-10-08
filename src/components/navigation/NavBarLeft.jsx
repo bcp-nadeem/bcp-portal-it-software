@@ -2,10 +2,7 @@ import { FiGrid } from "react-icons/fi";
 import { FiCode } from "react-icons/fi";
 import { FiGitMerge } from "react-icons/fi";
 import { FiBell } from "react-icons/fi";
-import { FiTool } from "react-icons/fi";
 import { FiUser } from "react-icons/fi";
-
-
 
 import {NavLink} from 'react-router-dom'
 
@@ -55,14 +52,6 @@ const NavBarLeft = () => {
                 `${isActive ? "isActive" : ""}`
               }
             >Notificatioin</NavLink>
-          </div>
-          <div className="navlink-text">
-            <FiTool  />
-            <NavLink to="/settings" 
-              className={({isActive}) =>
-                `${isActive ? "isActive" : ""}`
-              }
-            >Settings</NavLink>
           </div>
         </div>
       </nav>
