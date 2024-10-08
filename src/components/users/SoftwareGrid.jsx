@@ -22,7 +22,7 @@ const SoftwareGrid = () => {
 
                 <section className='searchbar-softwarelist-top-cover'>
                     <div className='searchbar-softwarelist'>
-                        <input type="search" name='' id='' placeholder='Search...' />
+                        {/* <input type="search" name='' id='' placeholder='Search...' /> */}
                     </div>
                 </section>
 

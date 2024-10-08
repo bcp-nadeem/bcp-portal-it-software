@@ -1,4 +1,6 @@
 import bgImageFromMiddle from '../../assets/images/bg/bg-mid-section.png'
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 
 const LoginPage = () => {
@@ -14,13 +16,16 @@ const LoginPage = () => {
               <div className="login-main-box">
                 <div className="login-box-title">LOGIN</div>
                 <div className="login-box-input">
-                  <input type="text" name="" id="" placeholder="Enter username" />
-                </div>
-                <div className="login-box-input">
-                  <input type="text" name="" id="" placeholder="Enter password" />
+                <TextField
+                    required
+                    id="standard-required"
+                    label="Username (Required)"
+                    placeholder="Enter your username"
+                    variant="standard"
+                  />
                 </div>
                 <div className="login-box-btn">
-                  <button id="" name="">Login</button>
+                    <Button variant="contained" aria-label="Login" size="small" >Submit</Button>
                 </div>
               </div>
           </div>

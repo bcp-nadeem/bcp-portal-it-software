@@ -1,19 +1,32 @@
 import { useState } from 'react';
 import bgImageFromMiddle from '../../assets/images/bg/bg-mid-section.png'
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { PiDotsThreeOutlineVertical } from "react-icons/pi";
 import { FiPlus } from "react-icons/fi";
-import { MdOutlineModeEdit } from "react-icons/md";
-import { MdDeleteOutline } from "react-icons/md";
 import { FiEdit2 } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import { FiEdit3 } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 
+import { DataGrid } from '@mui/x-data-grid';
+import Paper from '@mui/material/Paper';
+import { Button, TextField } from '@mui/material';
+
+
+const columns = [
+  { field: 'id', headerName: 'ID', width: 60 },
+  { field: 'categoryName', headerName: 'Category Name', width: 200 },
+  { field: 'categoryStatus', headerName: 'Status', width: 200 }
+];
+
+const rows = [
+  { id: 1, categoryName: 'AutoCAD', categoryStatus: 'Active'},
+];
+
+const paginationModel = { page: 0, pageSize: 5 };
 
 const Category = () => {
 
-  const [isOpen, setIsOpen] = useState(false); 
+  // const [isOpen, setIsOpen] = useState(false); 
 
   const [isOpenAddCategory, setisOpenAddCategory] = useState(false); 
   const [isOpenEditCategory, setisOpenEditCategory] = useState(false); 
@@ -32,36 +45,19 @@ const Category = () => {
 
                 <section className='searchbar-softwarelist-top-cover d-flex'>
                     <button className='add-user-btn-style' onClick={() => setisOpenAddCategory(true)}><FiPlus /> Add Category</button>
-                    <div className='searchbar-softwarelist'>
-                        <input type="search" name='' id='' placeholder='Search...' />
-                    </div>
                 </section>
-                <section className='software-list-table software-list-table-style mt-70'>
-                <table>
-                    <tr>
-                      <th>Category Name</th>
-                      <th>Status</th>
-                      <th>Action</th>
-                    </tr>
-                    <tr>
-                      <td className='link-text-software-list'>
-                        AutoCAD
-                      </td>
-                      <td>Active</td>
-                      <td><span className='software-list-action-btn' onClick={() => setIsOpen(!isOpen)} ><PiDotsThreeOutlineVertical /></span>
-
-                      {isOpen ?
-
-                      <div className='toggle-curd-list'>
-                        <ul>
-                          <li onClick={() => setisOpenEditCategory(true)}><MdOutlineModeEdit /> Edit Category</li>
-                          <li onClick={() => setisOpenDeleteCategory(true)}><MdDeleteOutline /> Delete Category</li>
-                        </ul>
-                      </div>
-                       :  ""}
-                    </td>
-                    </tr>
-                  </table>
+                <section className='software-list-table software-list-table-style mt-20'>
+                  <Paper sx={{ height: 600, width: '1440px' }}>
+                      <DataGrid
+                        rowHeight={60}
+                        rows={rows}
+                        columns={columns}
+                        initialState={{ pagination: { paginationModel } }}
+                        pageSizeOptions={[5, 10, 20, 30]}
+                        checkboxSelection
+                        sx={{ border: 0 }}
+                      />
+                  </Paper>
                 </section>
 
             </section>
@@ -78,23 +74,17 @@ const Category = () => {
                         <div className='add-software-model-form'>
                             <div className='asm-input-insert'>
                               <div className='asm-input-insert-box'>
-                                <label htmlFor="">Category name</label>
-                                <input type="text" placeholder='Enter category name' />
+                                <TextField id="standard-basic" label="Enter category name" variant="standard" />
                               </div>
                               <div className='asm-input-insert-box'>
-                                <label htmlFor="">Category status</label>
-                                <select name="" id="">
-                                  <option value="" selected disabled>Enter category status</option>
-                                  <option value="">Active</option>
-                                  <option value="">Inactive</option>
-                                </select>
+                                <TextField id="standard-basic" label="Enter category status" variant="standard" />
                               </div>
                             </div>
                         </div>
                     </div>
                   <div className='model-footer'>
                         <div className='asm-button-submit'>
-                          <button className='' id=''>Submit</button>
+                          <Button variant="contained">Submit</Button>
                         </div>
                   </div>
                 </div>

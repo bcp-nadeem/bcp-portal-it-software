@@ -2,21 +2,47 @@ import { useState } from 'react';
 import bgImageFromMiddle from '../../assets/images/bg/bg-mid-section.png'
 import AvatarImg from '../../assets/images/software/software-img.png'
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { PiDotsThreeOutlineVertical } from "react-icons/pi";
 import { FiPlus } from "react-icons/fi";
-import { MdOutlineModeEdit } from "react-icons/md";
-import { MdDeleteOutline } from "react-icons/md";
-import { Link } from 'react-router-dom';
+import userProfileImg from '../../assets/images/profile/profile-image.png'
 import { FiEdit2 } from "react-icons/fi";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 import { FiEdit3 } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
+import { TextField } from '@mui/material';
+import Button from '@mui/material/Button';
+
+import { DataGrid } from '@mui/x-data-grid';
+import Paper from '@mui/material/Paper';
+
+
+const columns = [
+  { field: 'id', headerName: 'ID', width: 60 },
+  { field: 'softwareImage', headerName: 'Software Image', width: 120, renderCell: renderSoftwareImage },
+  { field: 'softwareName', headerName: 'Software Name', width: 200 },
+  { field: 'softwareType', headerName: 'Type', width: 200 },
+  { field: 'softwareVersion', headerName: 'Version', width: 200 },
+  { field: 'softwareSeats', headerName: 'Seats', width: 200 },
+  { field: 'softwareStatus', headerName: 'Status', width: 200 },
+  
+];
+
+const rows = [
+  { id: 1, softwareImage: 'https://example.com/user1.jpg', softwareName: 'AutoCAD', softwareType: 'Autodesk', softwareVersion: '2022', softwareSeats: '2', softwareStatus: 'Active'  },
+];
+
+function renderSoftwareImage() {
+  return (
+    <img src={userProfileImg} alt="Software Image" style={{ width: '50px', height: '50px', borderRadius: '50%' }} />
+  );
+}
+
+const paginationModel = { page: 0, pageSize: 5 };
 
 
 const Software = () => {
 
-  const [isOpen, setIsOpen] = useState(false); 
+  // const [isOpen, setIsOpen] = useState(false); 
 
   const [isOpenAddSoftware, setisOpenAddSoftware] = useState(false); 
   const [isOpenEditSoftware, setisOpenEditSoftware] = useState(false); 
@@ -41,45 +67,19 @@ const Software = () => {
 
                 <section className='searchbar-softwarelist-top-cover d-flex'>
                     <button className='add-user-btn-style' onClick={() => setisOpenAddSoftware(true)}><FiPlus /> Add Software</button>
-                    <div className='searchbar-softwarelist'>
-                        <input type="search" name='' id='' placeholder='Search...' />
-                    </div>
                 </section>
-                <section className='software-list-table software-list-table-style mt-70'>
-                <table>
-                    <tr>
-                      <th>Software</th>
-                      <th>Type</th>
-                      <th>Version</th>
-                      <th>Seats</th>
-                      <th>Status</th>
-                      <th>Action</th>
-                    </tr>
-                    <tr>
-                      <td className='link-text-software-list'>
-                        <img src={AvatarImg} alt="software-image" className='software-list-image' />&nbsp;&nbsp;&nbsp;
-                        <Link to="/software-details/1">AutoCAD</Link>
-                      </td>
-                      <td>Autodesk</td>
-                      <td>2022</td>
-                      <td>2</td>
-                      <td>Active</td>
-                      <td><span className='software-list-action-btn' onClick={() => setIsOpen(!isOpen)} ><PiDotsThreeOutlineVertical /></span>
-
-                      {isOpen ?
-
-                      <div className='toggle-curd-list'>
-                        <ul>
-                          <li onClick={() => setisOpenEditSoftware(true)}><MdOutlineModeEdit /> Edit Software</li>
-                          <li onClick={() => setisOpenDeleteSoftware(true)}><MdDeleteOutline /> Delete Software</li>
-                        </ul>
-                      </div>
-                      
-
-                       :  ""}
-                    </td>
-                    </tr>
-                  </table>
+                <section className='software-list-table software-list-table-style mt-20'>
+                    <Paper sx={{ height: 600, width: '1440px' }}>
+                        <DataGrid
+                          rowHeight={60}
+                          rows={rows}
+                          columns={columns}
+                          initialState={{ pagination: { paginationModel } }}
+                          pageSizeOptions={[5, 10, 20, 30]}
+                          checkboxSelection
+                          sx={{ border: 0 }}
+                        />
+                    </Paper>
                 </section>
 
             </section>
@@ -108,32 +108,22 @@ const Software = () => {
                             </div>
                             <div className='asm-input-insert'>
                               <div className='asm-input-insert-box'>
-                                <label htmlFor="">Software name</label>
-                                <input type="text" placeholder='Enter software name' />
+                                <TextField id="standard-basic" label="Enter software name" variant="standard" />
                               </div>
                               <div className='asm-input-insert-box'>
-                                <label htmlFor="">Software Category</label>
-                                <select name="" id="">
-                                  <option value="" selected disabled>Enter software category</option>
-                                  <option value="">1</option>
-                                  <option value="">2</option>
-                                </select>
+                                <TextField id="standard-basic" label="Software Category" variant="standard" />
                               </div>
                               <div className='asm-input-insert-box'>
-                                <label htmlFor="">Software type</label>
-                                <input type="text" placeholder='Enter software type' />
+                                <TextField id="standard-basic" label="Software Type" variant="standard" />
                               </div>
                               <div className='asm-input-insert-box'>
-                                <label htmlFor="">Software version</label>
-                                <input type="text" placeholder='Enter software version' />
+                                <TextField id="standard-basic" label="Software version" variant="standard" />
                               </div>
                               <div className='asm-input-insert-box'>
-                                <label htmlFor="">Software version</label>
-                                <select name="" id="">
-                                  <option value="" selected disabled>Enter software status</option>
-                                  <option value="">1</option>
-                                  <option value="">2</option>
-                                </select>
+                                <TextField id="standard-basic" label="Software Seats" variant="standard" />
+                              </div>
+                              <div className='asm-input-insert-box'>
+                                <TextField id="standard-basic" label="Software Status" variant="standard" />
                               </div>
                             </div>
                             <div className='asm-upload-insert'>
@@ -147,11 +137,13 @@ const Software = () => {
                     </div>
                   <div className='model-footer'>
                         <div className='asm-button-submit'>
-                          <button className='' id=''>Submit</button>
+                          <Button variant="contained">Submit</Button>
                         </div>
                   </div>
                 </div>
               </section>
+
+              
           : ""}
 
           {isOpenEditSoftware ? 
@@ -178,7 +170,7 @@ const Software = () => {
                             <div className='asm-input-insert'>
                               <div className='asm-input-insert-box'>
                                 <label htmlFor="">Software name</label>
-                                <input type="text" placeholder='Enter software name' />
+                                <TextField id="standard-basic" label="Enter software name" variant="standard" />
                               </div>
                               <div className='asm-input-insert-box'>
                                 <label htmlFor="">Software Category</label>

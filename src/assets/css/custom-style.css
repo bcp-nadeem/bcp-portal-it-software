@@ -44,7 +44,9 @@ table {
 .mt-50{
     margin-top: 50px;
 }
-
+.mt-20{
+    margin-top: 20px;
+}
 nav.main-nav-bar.nav-auth-page {
     justify-content: center;
 }
@@ -126,10 +128,8 @@ section.login-page-section {
     margin-bottom: 15px;
 }
 .login-box-input input {
-    padding: 15px 30px;
+    padding: 15px 15px;
     width: 300px;
-    border: 1px solid #eee;
-    border-radius: 5px;
 }
 .login-box-btn{
     margin-top: 20px;
@@ -137,12 +137,9 @@ section.login-page-section {
 .login-box-btn button {
     background-color: var(--primary_color);
     color: #fff;
-    padding: 15px 50px;
-    border: 1px solid #eee;
+    padding: 8px 50px;
     border-radius: 5px;
-    font-size: 14px;
     font-weight: 600;
-    width: 110px;
 }
 .login-box-input input:focus-visible{
     border-color: #eee;
@@ -296,21 +293,16 @@ section.dashboard-grid-section {
     line-height: 22px;
 }
 section.searchbar-softwarelist-top-cover {
-    position: absolute;
-    right: 10%;
+    
+    justify-content: flex-end;
 }
 .searchbar-softwarelist input {
-    padding: 12px 15px;
-    width: 300px;
-    border-radius: 5px;
-    border: none;
     background: #ebebebba;
 }
-section.software-list-table.software-list-table-style {
+/* section.software-list-table.software-list-table-style {
     width: 1440px;
     max-width: 100%;
-    border-top: 1px solid #eee;
-}
+} */
 section.software-list-table.software-list-table-style table tr td {
     padding: 10px 10px;
 }
@@ -455,7 +447,7 @@ section.software-details-down {
     justify-content: center;
 }
 .model-wrapper {
-    background-color: #F0F0F0;
+    background-color: #f9f9f9;
     width: 800px;
     border-radius: 8px;
     position: absolute;
@@ -514,16 +506,12 @@ section.software-details-down {
     flex-direction: column;
 }
 .asm-input-insert-box label {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
     margin-bottom: 8px;
     color: #64788C;
 }
-.asm-input-insert-box input {
-    padding: 10px;
-    border: 1px solid #e5e5e5;
-    border-radius: 5px;
-}
+
 .asm-input-insert-box select {
     padding: 10px;
     border: 1px solid #e7e7e7;
@@ -540,12 +528,7 @@ section.software-details-down {
     padding: 15px;
     border-top: 1px solid #ececec;
 }
-.asm-button-submit button {
-    padding: 10px 60px;
-    border: 1px solid #dadada;
-    border-radius: 5px;
-    font-size: 12px;
-}
+
 .asm-button-submit {
     text-align: center;
 }
@@ -605,12 +588,6 @@ label.close-model svg {
     justify-content: center;
 }
 .delete-software-cover-btn button {
-    padding: 10px 30px;
-    font-size: 14px;
-    font-weight: 600;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
     margin: 5px;
 }
 .delete-software-cover-btn .button-delete{
@@ -909,4 +886,7 @@ section.software-grid-main {
 .software-quiek-info-btns button.software-quiek-info-btn-moreinfo {
     background-color: #64788C;
     color: #fff;
+}
+.asm-input-insert-box .MuiFormControl-root {
+    margin: 0;
 }
