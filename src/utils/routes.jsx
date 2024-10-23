@@ -1,3 +1,4 @@
+// src/router/index.js (or wherever your router configuration is)
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../componenets/Layout.jsx";
 import LoginPage from "../pages/LoginPage.jsx";
@@ -7,6 +8,7 @@ import SoftwareDetails from "../pages/SoftwareDetails.jsx";
 import SoftwareList from "../pages/SoftwareList.jsx";
 import CategoryList from "../pages/CategoryList.jsx";
 import UserProfile from "../pages/UserProfile.jsx";
+import ProtectedRoute from "../componenets/ProtectedRoute.jsx";
 
 // Declare the router
 const router = createBrowserRouter([
@@ -16,43 +18,64 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <LoginPage />
+        element: <LoginPage />,
       },
       {
         path: "/dashboard",
-        children : [
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        ),
+        children: [
           {
-            path : "",
-            element: <Dashboard />,
-          },
-          {
-            path : "about",
+            path: "about",
             element: <div>About</div>,
-          }
-        ]
+          },
+        ],
       },
       {
-        path : "/software",
-        element: <SoftwareGrid />,
+        path: "/software",
+        element: (
+          <ProtectedRoute requireAdmin={true}>
+            <SoftwareGrid />
+          </ProtectedRoute>
+        ), // Only accessible to admins
       },
       {
-        path : "/software-details/:softwareId",
-        element: <SoftwareDetails />,
+        path: "/software-details/:softwareId",
+        element: (
+          <ProtectedRoute requireAdmin={true}>
+            <SoftwareDetails />
+          </ProtectedRoute>
+        ), // Only accessible to admins
       },
       {
-        path : "/software-list",
-        element: <SoftwareList />,
+        path: "software-list",
+        element: (
+          <ProtectedRoute requireAdmin={true}>
+            <SoftwareList />
+          </ProtectedRoute>
+        ), // Only accessible to admins
       },
       {
-        path : "/category-list",
-        element: <CategoryList />,
+        path: "/category-list",
+        element: (
+          <ProtectedRoute requireAdmin={true}>
+            <CategoryList />
+          </ProtectedRoute>
+        ), // Only accessible to admins
       },
       {
-        path : "/user-profile",
-        element: <UserProfile />,
-      }
-    ]
-  }
+        path: "/user-profile",
+        element: (
+          <ProtectedRoute>
+            <UserProfile />
+          </ProtectedRoute>
+        ),
+      },
+    ],
+  },
 ]);
 
 // Export the router

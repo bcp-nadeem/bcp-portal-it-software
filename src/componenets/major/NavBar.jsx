@@ -24,6 +24,7 @@ import { useState } from 'react';
 import Image from '../minor/Image';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../store/AuthContext';
 
     const darkTheme = createTheme({
         palette: {
@@ -35,6 +36,7 @@ import { Link } from 'react-router-dom';
     });
 
   const NavBar = () => {
+    const {logout , user} = useAuth();
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   
@@ -80,7 +82,7 @@ import { Link } from 'react-router-dom';
           <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
         </Link>
         <Link to="/">
-          <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+          <MenuItem onClick={logout}>Logout</MenuItem>
         </Link>
         
       </Menu>
@@ -155,25 +157,27 @@ import { Link } from 'react-router-dom';
 
     return (
       <>
-        <Box sx={{ flexGrow: 1 }}>
-        <ThemeProvider theme={darkTheme}>
-            <AppBar position="static" className='nav-bar-style'>
-              <Toolbar>
-                  <Button className='nav-btn-color' onClick={toggleDrawer(true)}><IoMenu /></Button>
-                  <Image src="https://bimcapability.com/assets/img/bimcap_logo.png" className="img-logo" />
-              
+        {user && (
+        <>
+          <Box sx={{ flexGrow: 1 }}>
+            <ThemeProvider theme={darkTheme}>
+              <AppBar position="static" className="nav-bar-style">
+                <Toolbar>
+                  <Button className="nav-btn-color" onClick={toggleDrawer(true)}>
+                    <IoMenu />
+                  </Button>
+                  <Image
+                    src="https://bimcapability.com/assets/img/bimcap_logo.png"
+                    className="img-logo"
+                  />
                   <Box sx={{ flexGrow: 1 }} />
                   <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                  <IconButton
-                      size="large"
-                      aria-label="show 17 new notifications"
-                      color="inherit"
-                  >
+                    <IconButton size="large" aria-label="show notifications" color="inherit">
                       <Badge badgeContent={1} color="error">
-                      <IoNotifications />
+                        <IoNotifications />
                       </Badge>
-                  </IconButton>
-                  <IconButton
+                    </IconButton>
+                    <IconButton
                       size="large"
                       edge="end"
                       aria-label="account of current user"
@@ -181,32 +185,34 @@ import { Link } from 'react-router-dom';
                       aria-haspopup="true"
                       onClick={handleProfileMenuOpen}
                       color="inherit"
-                  >
+                    >
                       <MdOutlineAccountCircle />
-                  </IconButton>
+                    </IconButton>
                   </Box>
                   <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                  <IconButton
+                    <IconButton
                       size="large"
                       aria-label="show more"
                       aria-controls={mobileMenuId}
                       aria-haspopup="true"
                       onClick={handleMobileMenuOpen}
                       color="inherit"
-                  >
+                    >
                       <IoMdMore />
-                  </IconButton>
+                    </IconButton>
                   </Box>
-              </Toolbar>
-            </AppBar>
-        </ThemeProvider>
-            
-        {renderMobileMenu}
-        {renderMenu}
-      </Box>
-      <Drawer open={open} onClose={toggleDrawer(false)}>
-        {DrawerList}
-      </Drawer>
+                </Toolbar>
+              </AppBar>
+            </ThemeProvider>
+
+            {renderMobileMenu}
+            {renderMenu}
+          </Box>
+          <Drawer open={open} onClose={toggleDrawer(false)}>
+            {DrawerList}
+          </Drawer>
+        </>
+      )}
       </>
     );
   }

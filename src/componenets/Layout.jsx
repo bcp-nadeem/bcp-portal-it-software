@@ -1,8 +1,14 @@
 import { Outlet } from 'react-router-dom'
 import BGImage from '../assets/images/bg/bg-mid-section.png'
 import NavBar from './major/NavBar'
+import { useAuth } from '../store/AuthContext';
+import { useEffect } from 'react';
 
 const Layout = () => {
+  const {refreshToken} = useAuth();
+  useEffect(() => {
+    refreshToken()
+  },[])
 
   return (
     <div>
