@@ -2,13 +2,12 @@ import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-const TextEditor = () => {
+const TextEditor = ({value, setValue}) => {
 
-    const [value, setValue] = useState('');
 
   return (
     <>
-        <ReactQuill theme="snow" value={value} onChange={setValue} />
+        <ReactQuill theme="snow" value={value} onChange={(e)=>setValue(e.target.value)} />
     </>
   )
 }

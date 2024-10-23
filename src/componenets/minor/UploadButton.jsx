@@ -14,11 +14,12 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-const UploadButton = ({title , onClickHander, className}) => {
+const UploadButton = ({title, setValue, onClickHander, className}) => {
   return (
     <>
     <Button
       component="label"
+
       onClick={onClickHander} 
       className={`${className}` }
       role={undefined}
@@ -29,7 +30,7 @@ const UploadButton = ({title , onClickHander, className}) => {
       {title}
       <VisuallyHiddenInput
         type="file"
-        onChange={(event) => console.log(event.target.files)}
+        onChange={(event) => setValue(event.target.files)}
         multiple
       />
     </Button>

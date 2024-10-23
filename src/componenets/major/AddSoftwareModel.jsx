@@ -28,6 +28,7 @@ const AddSoftwareModel = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [dataToAdd, setDataToAdd] = useState({});
 
   return (
     <>
@@ -52,7 +53,7 @@ const AddSoftwareModel = () => {
                 </div>
                 <div className='upload-img-btn'>
                   <div className='mt-20'>
-                    <UploadButton title="Choose File" onClickHander="" className="" />
+                    <UploadButton setValue={setDataToAdd} title="Choose File" onClickHander="" className="" />
                   </div>
                   <br />
                   <Divider />
@@ -66,18 +67,18 @@ const AddSoftwareModel = () => {
             <Paper className='mt-20' elevation={0}>
               <FormGroup className='d-flex model-from-style'>
                 <FormControl className='from-controll'>
-                  <InputTypes id="standard-basic" className="" type="text" labe="Standard" variant="standard" placeholder="Enter Software Name" />
+                  <InputTypes value={dataToAdd?.name} setValue={setDataToAdd} id="standard-basic" className="" type="text" labe="Standard" variant="standard" placeholder="Enter Software Name" />
                 </FormControl>
                 <FormControl className='from-controll'>
                   <CategoryDropdown id="" className="margin-none" title="Select Category" />
                 </FormControl>
                 <FormControl className='from-controll'>
                
-                  <InputTypes id="standard-basic" className="" type="number" labe="Standard" variant="standard" placeholder="Enter Software Seats" />
+                  <InputTypes value={dataToAdd?.seats} setValue={setDataToAdd} id="standard-basic" className="" type="number" labe="Standard" variant="standard" placeholder="Enter Software Seats" />
                 </FormControl>
 
                 <FormControl className='from-controll'>
-                  <UseTextEditor  />
+                  <UseTextEditor value={dataToAdd?.information} setValue={setDataToAdd} />
                 </FormControl>
 
                 <FormControl className='from-controll d-flex text-center ai-center cj-center mt-30'>

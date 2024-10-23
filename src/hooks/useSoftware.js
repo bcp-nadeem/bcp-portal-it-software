@@ -10,12 +10,12 @@ const useSoftware = ()=>{
         console.log("software fetched");
     }
     
-    const handleClick = ()=>{
+    const addSoftware = ()=>{
         console.log("clicked");
         
       }
 
-      return {handleClick}
+      return {addSoftware}
 }
 
 export default useSoftware
