@@ -1,37 +1,14 @@
-import './App.css';
-import { Outlet, useLocation  } from 'react-router-dom';
-import FooterBarBottom from './components/navigation/FooterBarBottom';
-import NavBarTopLogin from './components/navigation/NavBarTopLogin';
-import NavBarTop from './components/navigation/NavBarTop';
-import NavBarLeft from './components/navigation/NavBarLeft';
-import LoginFooterBarBottom from './components/navigation/LoginFooterBarBottom';
-
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import './App.css'
+import routes from './utils/routes.jsx';
+import { AuthProvider } from './store/AuthContext.jsx';
 
 function App() {
-
-  const location = useLocation();
-
-  const mainFlexProperty = "main-content-cover";
-
   return (
-    <>
-      {location.pathname === "/" ? 
-       <NavBarTopLogin />
-      : <NavBarTop />}
-
-      <div className={location.pathname === "/" ? "" : mainFlexProperty}>
-        {location.pathname === "/" ? 
-        ""
-        : <NavBarLeft />}
-          < Outlet />
-      </div>
-
-      {location.pathname === "/" ? 
-       <LoginFooterBarBottom />
-      : <FooterBarBottom />}
-
-      
-    </>
+    //browser router
+    <AuthProvider>
+    <RouterProvider router={routes} />
+    </AuthProvider>
   )
 }
 
