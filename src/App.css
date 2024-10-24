@@ -124,3 +124,7 @@ text-align: center;
 .login-form-group .login-form-input{
     margin-bottom: 15px;
 }
+
+*::-webkit-scrollbar{
+    display: none;
+}

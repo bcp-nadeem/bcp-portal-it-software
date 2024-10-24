@@ -2,6 +2,7 @@ import { Box, Button, Card } from "@mui/material"
 import BasicChips from "../minor/BasicChips"
 import { useState } from "react";
 import SoftwareQuiekInfo from "./SoftwareQuiekInfo";
+import QuillEditor from "./QuillEditor";
 
 const SoftwareCard = ({src, title, category, description, version}) => {
 
@@ -21,7 +22,7 @@ const SoftwareCard = ({src, title, category, description, version}) => {
                     <label htmlFor="">{category}</label>
                 </div>
                 <div className="software-grid-description">
-                    {description}
+                <QuillEditor description={description} />
                 </div>
                 <div className="software-grid-tags">
                     {
