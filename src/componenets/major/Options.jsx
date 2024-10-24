@@ -6,7 +6,7 @@ import { MdEdit } from "react-icons/md";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useState } from 'react';
 
-import AddSoftwareModel from "./AddSoftwareModel"
+
 import AddVersionModel from "./AddVersionModel"
 import DeleteModel from "./DeleteModel"
 
@@ -90,7 +90,6 @@ const Options = () => {
         >
 
           
-          <AddSoftwareModel></AddSoftwareModel>
           <MenuItem disableRipple>
             <MdEdit />&nbsp; Edit
           </MenuItem>

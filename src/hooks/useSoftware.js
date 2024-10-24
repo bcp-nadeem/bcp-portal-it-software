@@ -7,11 +7,12 @@ const useSoftware = ()=>{
         fetchSoftware()
     },[])
     const fetchSoftware = ()=>{
+        
         console.log("software fetched");
     }
     
-    const addSoftware = ()=>{
-        console.log("clicked");
+    const addSoftware = (data)=>{
+        console.log(data);
         
       }
 

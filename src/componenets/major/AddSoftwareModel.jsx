@@ -9,6 +9,7 @@ import PrimaryButton from '../minor/PrimaryButton';
 import UploadButton from '../minor/UploadButton';
 import UseTextEditor from '../major/TextEditor';
 import { IoAddSharp } from 'react-icons/io5';
+import useSoftware from '../../hooks/useSoftware';
 
 const style = {
     position: 'absolute',
@@ -29,6 +30,7 @@ const AddSoftwareModel = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [dataToAdd, setDataToAdd] = useState({});
+    const {addSoftware} = useSoftware()
 
   return (
     <>
@@ -67,22 +69,22 @@ const AddSoftwareModel = () => {
             <Paper className='mt-20' elevation={0}>
               <FormGroup className='d-flex model-from-style'>
                 <FormControl className='from-controll'>
-                  <InputTypes value={dataToAdd?.name} setValue={setDataToAdd} id="standard-basic" className="" type="text" labe="Standard" variant="standard" placeholder="Enter Software Name" />
+                  <InputTypes label="name" value={dataToAdd?.name} setValue={setDataToAdd} id="standard-basic" className="" type="text" labe="Standard" variant="standard" placeholder="Enter Software Name" />
                 </FormControl>
                 <FormControl className='from-controll'>
-                  <CategoryDropdown id="" className="margin-none" title="Select Category" />
+                  <CategoryDropdown id="" label="category" value={dataToAdd?.category} setValue={setDataToAdd} className="margin-none" title="Select Category" />
                 </FormControl>
                 <FormControl className='from-controll'>
                
-                  <InputTypes value={dataToAdd?.seats} setValue={setDataToAdd} id="standard-basic" className="" type="number" labe="Standard" variant="standard" placeholder="Enter Software Seats" />
+                  <InputTypes label="seats" value={dataToAdd?.seats} setValue={setDataToAdd} id="standard-basic" className="" type="number" labe="Standard" variant="standard" placeholder="Enter Software Seats" />
                 </FormControl>
 
                 <FormControl className='from-controll'>
-                  <UseTextEditor value={dataToAdd?.information} setValue={setDataToAdd} />
+                  <UseTextEditor label="information" value={dataToAdd} setValue={setDataToAdd} />
                 </FormControl>
 
                 <FormControl className='from-controll d-flex text-center ai-center cj-center mt-30'>
-                  <PrimaryButton variant="contained" title="Confirm" size="medium" onClickHander="" className="btn-ws-100"></PrimaryButton>
+                  <PrimaryButton variant="contained" title="Confirm" size="medium" onClickHander={()=>addSoftware(dataToAdd)} className="btn-ws-100"></PrimaryButton>
                 </FormControl>
             </FormGroup>
             </Paper>

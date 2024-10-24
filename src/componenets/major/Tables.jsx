@@ -5,8 +5,10 @@ import UserAvatar from "../minor/UserAvatar"
 import Options from "./Options"
 
 const Tables = () => {
+
   return (
     <>
+
     <table>
         <thead>
             <tr>

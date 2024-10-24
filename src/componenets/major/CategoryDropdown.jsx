@@ -3,14 +3,18 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Labels from '../minor/Labels'
 import { useState } from 'react';
+import useCategory from '../../hooks/useCategory';
 
-const CategoryDropdown = ({id, className, title}) => {
+const CategoryDropdown = ({id, className, title, value="", setValue, label}) => {
 
     const [select, setSelect] = useState('');
 
     const handleChangeSelect = (event) => {
         setSelect(event.target.value);
+        setValue(prevState => ({ ...prevState, [label.toLowerCase()]: event.target.value }));
     };
+
+    const {category} = useCategory()
 
 
   return (
@@ -20,16 +24,20 @@ const CategoryDropdown = ({id, className, title}) => {
         labelId="demo-simple-select-standard-label"
         id={id}
         className={className}
-        value={select}
+        value={value}
         onChange={handleChangeSelect}
         label={title}
         >
          <MenuItem value="">
             <em>None</em>
         </MenuItem>
-        <MenuItem value={10}>1</MenuItem>
-        <MenuItem value={20}>2</MenuItem>
-        <MenuItem value={30}>3</MenuItem>
+        {
+            category && category.length>0 && category?.map((item) => (
+                <MenuItem key={item._id} value={item._id}>
+                    {item.name}
+                </MenuItem>
+            ))
+        }
         </Select>
   </FormControl>
   )

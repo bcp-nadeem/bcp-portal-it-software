@@ -14,28 +14,34 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-const UploadButton = ({title, setValue, onClickHander, className}) => {
+const UploadButton = ({ title, setValue, className }) => {
+  const handleFileChange = (event) => {
+    const file = event.target.files;
+    if (file.length > 0) {
+      setValue(prevState => ({
+        ...prevState,
+        image: file[0]  // Store the selected files in state
+      }));
+    }
+  };
+
   return (
     <>
-    <Button
-      component="label"
-
-      onClick={onClickHander} 
-      className={`${className}` }
-      role={undefined}
-      variant="contained"
-      tabIndex={-1}
-      startIcon={<FiUpload />}
-    >
-      {title}
-      <VisuallyHiddenInput
-        type="file"
-        onChange={(event) => setValue(event.target.files)}
-        multiple
-      />
-    </Button>
+      <Button
+        component="label"
+        className={className}
+        variant="contained"
+        startIcon={<FiUpload />}
+      >
+        {title}
+        <VisuallyHiddenInput
+          type="file"
+          onChange={handleFileChange}
+          multiple
+        />
+      </Button>
     </>
-  )
-}
+  );
+};
 
-export default UploadButton
+export default UploadButton;
