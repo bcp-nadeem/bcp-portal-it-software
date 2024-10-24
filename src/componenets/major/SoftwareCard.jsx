@@ -24,7 +24,11 @@ const SoftwareCard = ({src, title, category, description, version}) => {
                     {description}
                 </div>
                 <div className="software-grid-tags">
-                    <BasicChips label={version} size="small" ></BasicChips>
+                    {
+                        version && version.length>0 && version.map((item)=>(
+                            <BasicChips key={item} label={item} size="small" ></BasicChips>
+                        )) || <BasicChips label={"No version found"} size="small" ></BasicChips>
+                    }
                 </div>
                 <div className="software-grid-install-btn">
                     <Button>Install</Button>

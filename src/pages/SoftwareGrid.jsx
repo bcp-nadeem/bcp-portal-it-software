@@ -1,9 +1,12 @@
 import { MdKeyboardArrowRight } from "react-icons/md"
 import SoftwareCard from "../componenets/major/SoftwareCard"
 import SoftwareImg from "../assets/images/software/software-img.png"
+import useSoftware from "../hooks/useSoftware";
 
 const SoftwareGrid = () => {
+    const {software} = useSoftware()
   return (
+
     <>
     <section className='main-content-section'>
         <div className="main-topic-headign">
@@ -16,7 +19,12 @@ const SoftwareGrid = () => {
                     <h3>Software</h3>
                 </div>
                 <div >
-                    <SoftwareCard src={SoftwareImg} title="AutoCAD" category="Autodesk" description="AutoCAD - Design every detail: Accelerate 2D and 3D design documentationwith new and enhance..." version="2024"></SoftwareCard>
+                    {
+                        software && software.length>0 && software.map((item)=>(
+                            <SoftwareCard key={item._id} src={SoftwareImg} title={item.name} category={item.category.name} 
+                            description={item.information} version={item.version}></SoftwareCard>
+                        ))
+                    }
                 </div>
             </div>
         </section>

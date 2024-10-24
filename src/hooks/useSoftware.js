@@ -1,14 +1,23 @@
-import { useEffect } from "react";
-
+import { useEffect,useState } from "react";
+import axios from "axios";
 
 const useSoftware = ()=>{
+    const [software,setSoftware]=useState([])
 
     useEffect(()=>{
         fetchSoftware()
     },[])
-    const fetchSoftware = ()=>{
-        
-        console.log("software fetched");
+    const fetchSoftware = async()=>{
+        try {
+            const result = await axios.get(`${import.meta.env.VITE_API_ROOT}/software`)
+            setSoftware(result.data.softwares);
+            console.log(software);
+            
+            
+        } catch (e) {
+            console.log(e);
+            
+        }
     }
     
     const addSoftware = (data)=>{
@@ -16,7 +25,7 @@ const useSoftware = ()=>{
         
       }
 
-      return {addSoftware}
+      return {software, addSoftware}
 }
 
 export default useSoftware
