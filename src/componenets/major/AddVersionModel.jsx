@@ -14,6 +14,8 @@ import UploadButton from '../minor/UploadButton';
 import Software from './../../components/admin/Software';
 import useSoftware from '../../hooks/useSoftware';
 import useVersion from '../../hooks/useVersion';
+import { MdOutlineFilePresent } from "react-icons/md";
+
 
 const style = {
     position: 'absolute',
@@ -39,7 +41,7 @@ const AddVersionModel = () => {
 
   return (
     <>
-      <Button onClick={handleOpen}>Add Version</Button>
+      <Button className='info-btn' onClick={handleOpen}><MdOutlineFilePresent /></Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -57,10 +59,6 @@ const AddVersionModel = () => {
 
                 <FormControl className='from-controll'>
                   <CategoryDropdown options={software} value={versionDataToAdd?.parent} label="parent" setValue={setVersionDataToAdd} id="" className="margin-none" title="Select Software" />
-                </FormControl>
-
-                <FormControl className='from-controll'>
-                    <UserDropDown title="Select User" />
                 </FormControl>
 
                 <FormControl className='from-controll'>

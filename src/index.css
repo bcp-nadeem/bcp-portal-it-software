@@ -783,7 +783,7 @@ section.profile-buttom-details {
     cursor: pointer;
     background-color: #0045b4;
 }
-section.software-grids {
+.software-grids {
     display: flex;
     justify-content: start;
     flex-wrap: wrap;

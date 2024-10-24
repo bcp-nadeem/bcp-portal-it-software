@@ -18,7 +18,7 @@ const SoftwareGrid = () => {
                 <div className="software-grid-title">
                     <h3>Software</h3>
                 </div>
-                <div >
+                <div className="software-grids">
                     {
                         software && software.length>0 && software.map((item)=>(
                             <SoftwareCard key={item._id} src={SoftwareImg} title={item.name} category={item.category.name} 

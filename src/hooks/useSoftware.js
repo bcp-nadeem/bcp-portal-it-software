@@ -52,7 +52,7 @@ const useSoftware = ()=>{
         
       }
 
-      return {software, addSoftware}
+      return {software, fetchSoftware, addSoftware}
 }
 
 export default useSoftware

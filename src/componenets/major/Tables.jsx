@@ -4,9 +4,15 @@ import Heading from "../minor/Heading"
 import UserAvatar from "../minor/UserAvatar"
 import Options from "./Options"
 import useSoftware from "../../hooks/useSoftware"
+import DeleteModel from "./DeleteModel"
+import AddVersionModel from "./AddVersionModel"
+import EditSoftwareModel from "./EditSoftwareModel"
+
 
 const Tables = () => {
     const {software} = useSoftware()
+    console.log(software);
+    
   return (
     <>
 
@@ -28,9 +34,13 @@ const Tables = () => {
                 </Link>
             </td>
             <td>{item.category.name}</td>
-            <td>{item.version && item.version.length>0 && item.versions.map((version)=>(version.name))}</td>
+            <td>{item.version && item.version.length>0 && item.version.map((version)=>(version.name))}</td>
             <td>
-                <Options />
+                <div className="d-flex cj-left gap-10">
+                    <AddVersionModel></AddVersionModel>
+                    <EditSoftwareModel></EditSoftwareModel>
+                    <DeleteModel></DeleteModel>
+                </div>
             </td>
         </tr>
             ))

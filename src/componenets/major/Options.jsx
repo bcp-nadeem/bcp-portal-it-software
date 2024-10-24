@@ -93,11 +93,10 @@ const Options = () => {
           <MenuItem disableRipple>
             <MdEdit />&nbsp; Edit
           </MenuItem>
-          <DeleteModel></DeleteModel>
         </StyledMenu>
 
                 
-                <AddVersionModel></AddVersionModel>
+                
                 
       </div>
     );

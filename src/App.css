@@ -25,10 +25,30 @@ text-align: center;
 .cj-center{
     justify-content: center;
 }
+.cj-right{
+    justify-content: flex-end;
+}
+.cj-left{
+    justify-content: flex-start;
+}
 .ai-center{
     align-items: center;
 }
-
+.danger-btn {
+    font-size: 18px !important;
+    color: red !important;
+    background-color: #ff00001f !important;
+}
+.info-btn {
+    font-size: 18px !important;
+    color: #6dd7d4 !important;
+    background-color: #79cdca33 !important;
+}
+.success-btn {
+    font-size: 18px !important;
+    color: green !important;
+    background-color: #00800033 !important;
+}
 .mt-100{
     margin-top: 100px;
 }

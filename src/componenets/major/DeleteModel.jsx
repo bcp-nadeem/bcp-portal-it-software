@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { useState } from 'react';
 import Heading from '../minor/Heading';
-import { Divider, FormControl, FormGroup, MenuItem, Paper } from '@mui/material';
+import { Button, Divider, FormControl, FormGroup, MenuItem, Paper } from '@mui/material';
 import PrimaryButton from '../minor/PrimaryButton';
 
 import { FiTrash2 } from 'react-icons/fi';
@@ -28,9 +28,9 @@ const DeleteModel = () => {
 
   return (
     <>
-    <MenuItem onClick={handleOpen} disableRipple>
-        <FiTrash2  /> &nbsp;Delete
-    </MenuItem>
+    <Button className='danger-btn' onClick={handleOpen} disableRipple>
+        <FiTrash2  />
+    </Button>
       <Modal
         open={open}
         onClose={handleClose}

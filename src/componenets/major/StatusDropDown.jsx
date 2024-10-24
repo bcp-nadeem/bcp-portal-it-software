@@ -23,8 +23,9 @@ const StatusDropdown = ({id, className, title, value ,setValue, label}) => {
         <MenuItem value="">
             <em>None</em>
         </MenuItem>
-        <MenuItem value="active">Active</MenuItem>
-        <MenuItem value="inactive">Inactive</MenuItem>
+        <MenuItem value="available">Available</MenuItem>
+        <MenuItem value="unavailable">Unavailable</MenuItem>
+        <MenuItem value="deprecated">Deprecated</MenuItem>
         </Select>
   </FormControl>
   )

@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       {
         path: "/software",
         element: (
-          <ProtectedRoute requireAdmin={true}>
+          <ProtectedRoute >
             <SoftwareGrid />
           </ProtectedRoute>
         ), // Only accessible to admins
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
       {
         path: "/software-details/:softwareId",
         element: (
-          <ProtectedRoute requireAdmin={true}>
+          <ProtectedRoute >
             <SoftwareDetails />
           </ProtectedRoute>
         ), // Only accessible to admins

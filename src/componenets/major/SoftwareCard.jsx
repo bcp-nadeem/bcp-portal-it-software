@@ -10,9 +10,8 @@ const SoftwareCard = ({src, title, category, description, version}) => {
 
   return (
     <>
-        <Box className="software-grids">
             <Card className="software-grid">
-            <div className="software-grid-img">
+                <div className="software-grid-img">
                     <img src={src} alt="" />
                 </div>
                 <div className="software-grid-head">
@@ -38,7 +37,6 @@ const SoftwareCard = ({src, title, category, description, version}) => {
                     </Button>
                 </div>
             </Card>
-        </Box>
         {isOpenSoftwareInfo ? 
             
             <SoftwareQuiekInfo src={src} title="AutoCAD" category="Autodesk" description="AutoCAD - Design every detail: Accelerate 2D and 3D design documentationwith new and enhance..." ></SoftwareQuiekInfo>

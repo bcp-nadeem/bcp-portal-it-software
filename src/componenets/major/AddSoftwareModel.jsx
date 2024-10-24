@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { useState } from 'react';
 import Heading from '../minor/Heading';
-import { Divider, FormControl, FormGroup, MenuItem, Paper } from '@mui/material';
+import { Button, Divider, FormControl, FormGroup, MenuItem, Paper } from '@mui/material';
 import InputTypes from '../minor/InputTypes';
 import CategoryDropdown from './CategoryDropdown';
 import PrimaryButton from '../minor/PrimaryButton';
@@ -38,9 +38,9 @@ const AddSoftwareModel = () => {
   return (
     <>
 
-    <MenuItem onClick={handleOpen} disableRipple>
+    <Button variant="contained" className='' onClick={handleOpen} disableRipple>
         <IoAddSharp /> &nbsp;Add Software
-    </MenuItem>
+    </Button>
 
       <Modal
         open={open}

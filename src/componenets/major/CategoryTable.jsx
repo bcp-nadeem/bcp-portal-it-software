@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import BasicChips from "../minor/BasicChips"
 import Heading from "../minor/Heading"
 import CategoryOption from "./CategoryOption"
+import DeleteModel from "./DeleteModel"
 
 const CategoryTable = () => {
   return (
@@ -24,7 +25,9 @@ const CategoryTable = () => {
                 <BasicChips label="Active"></BasicChips>
             </td>
             <td>
-                <CategoryOption />
+                <div className="d-flex cj-left">
+                    <DeleteModel></DeleteModel>
+                </div>
             </td>
         </tr>
     </table>
