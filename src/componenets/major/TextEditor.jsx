@@ -1,7 +1,7 @@
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-const TextEditor = ({ value = {}, setValue, label }) => {
+const TextEditor = ({ value = {}, setValue, label="data" }) => {
 
   return (
     <>

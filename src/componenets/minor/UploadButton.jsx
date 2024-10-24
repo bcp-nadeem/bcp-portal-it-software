@@ -14,13 +14,13 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-const UploadButton = ({ title, setValue, className,setImagePreviewUrl }) => {
+const UploadButton = ({ title, setValue, className,setImagePreviewUrl, label="" }) => {
   const handleFileChange = (event) => {
     const file = event.target.files;
     if (file.length > 0) {
       setValue(prevState => ({
         ...prevState,
-        image: file[0]  // Store the selected files in state
+        [label]: file[0]  // Store the selected files in state
       }));
       setImagePreviewUrl(URL.createObjectURL(file[0]));
     }

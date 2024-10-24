@@ -10,6 +10,7 @@ import UploadButton from '../minor/UploadButton';
 import UseTextEditor from '../major/TextEditor';
 import { IoAddSharp } from 'react-icons/io5';
 import useSoftware from '../../hooks/useSoftware';
+import useCategory from '../../hooks/useCategory';
 
 const style = {
     position: 'absolute',
@@ -31,6 +32,7 @@ const AddSoftwareModel = () => {
     const handleClose = () => setOpen(false);
     const [dataToAdd, setDataToAdd] = useState({});
     const {addSoftware} = useSoftware()
+    const {category} = useCategory()
     const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
 
   return (
@@ -56,7 +58,7 @@ const AddSoftwareModel = () => {
                 </div>
                 <div className='upload-img-btn'>
                   <div className='mt-20'>
-                    <UploadButton setValue={setDataToAdd} setImagePreviewUrl={setImagePreviewUrl} title="Choose File" onClickHander="" className="" />
+                    <UploadButton label="image" setValue={setDataToAdd} setImagePreviewUrl={setImagePreviewUrl} title="Choose File" onClickHander="" className="" />
                   </div>
                   <br />
                   <Divider />
@@ -73,7 +75,7 @@ const AddSoftwareModel = () => {
                   <InputTypes label="name" value={dataToAdd?.name} setValue={setDataToAdd} id="standard-basic" className="" type="text" labe="Standard" variant="standard" placeholder="Enter Software Name" />
                 </FormControl>
                 <FormControl className='from-controll'>
-                  <CategoryDropdown id="" label="category" value={dataToAdd?.category} setValue={setDataToAdd} className="margin-none" title="Select Category" />
+                  <CategoryDropdown id="" options={category} label="category" value={dataToAdd?.category} setValue={setDataToAdd} className="margin-none" title="Select Category" />
                 </FormControl>
                 <FormControl className='from-controll'>
                

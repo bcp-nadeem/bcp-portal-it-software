@@ -4,13 +4,7 @@ import Select from '@mui/material/Select';
 import Labels from '../minor/Labels'
 import { useState } from 'react';
 
-const StatusDropdown = ({id, className, title}) => {
-
-    const [select, setSelect] = useState('');
-
-    const handleChangeSelect = (event) => {
-        setSelect(event.target.value);
-    };
+const StatusDropdown = ({id, className, title, value ,setValue, label}) => {
 
   return (
     <FormControl variant="standard" sx={{ m: 1, minWidth: 150}}>
@@ -19,15 +13,18 @@ const StatusDropdown = ({id, className, title}) => {
         labelId="demo-simple-select-standard-label"
         id={id}
         className={className}
-        value={select}
-        onChange={handleChangeSelect}
+        value={value}
+        onChange={(e)=>setValue((prevState) => ({
+          ...prevState,
+          [label.toLowerCase()]: e.target.value,
+        }))}
         label={title}
         >
         <MenuItem value="">
             <em>None</em>
         </MenuItem>
-        <MenuItem value="Active">Active</MenuItem>
-        <MenuItem value="Inactive">Inactive</MenuItem>
+        <MenuItem value="active">Active</MenuItem>
+        <MenuItem value="inactive">Inactive</MenuItem>
         </Select>
   </FormControl>
   )

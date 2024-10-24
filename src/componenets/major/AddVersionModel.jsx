@@ -11,6 +11,9 @@ import UseTextEditor from '../major/TextEditor';
 import StatusDropdown from './StatusDropDown';
 import UserDropDown from './UserDropDown';
 import UploadButton from '../minor/UploadButton';
+import Software from './../../components/admin/Software';
+import useSoftware from '../../hooks/useSoftware';
+import useVersion from '../../hooks/useVersion';
 
 const style = {
     position: 'absolute',
@@ -30,6 +33,9 @@ const AddVersionModel = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [versionDataToAdd, setVersionDataToAdd] = useState({})
+    const {software} = useSoftware()
+    const {addVersion} = useVersion()
 
   return (
     <>
@@ -46,11 +52,11 @@ const AddVersionModel = () => {
             <Paper className='mt-20' elevation={0}>
               <FormGroup className='d-flex model-from-style'>
                 <FormControl className='from-controll'>
-                  <InputTypes id="standard-basic" className="" type="text" labe="Standard" variant="standard" placeholder="Enter Version Name" />
+                  <InputTypes value={versionDataToAdd?.name} setValue={setVersionDataToAdd} label="name" id="standard-basic" className="" type="text" variant="standard" placeholder="Enter Version Name" />
                 </FormControl>
 
                 <FormControl className='from-controll'>
-                  <CategoryDropdown id="" className="margin-none" title="Select Software" />
+                  <CategoryDropdown options={software} value={versionDataToAdd?.parent} label="parent" setValue={setVersionDataToAdd} id="" className="margin-none" title="Select Software" />
                 </FormControl>
 
                 <FormControl className='from-controll'>
@@ -58,24 +64,24 @@ const AddVersionModel = () => {
                 </FormControl>
 
                 <FormControl className='from-controll'>
-                    <StatusDropdown title="Select Status" />
+                    <StatusDropdown value={versionDataToAdd?.status || ""} setValue={setVersionDataToAdd} label="status" title="Select Status" />
                 </FormControl>
 
                 <FormControl className='from-controll'>
-                  <UseTextEditor  />
+                  <UseTextEditor value={versionDataToAdd} setValue={setVersionDataToAdd} label="information" />
                 </FormControl>
 
                 <FormControl className='from-controll'>
                     <div className='d-flex ai-center cj-center'>
-                        <UploadButton title="Download File" onClickHander="" className="" />&nbsp;
-                        <UploadButton title="Install File" onClickHander="" className="" />
+                        <UploadButton label="downloadUrl" value={versionDataToAdd?.downloadUrl} setValue={setVersionDataToAdd} title="Download File" onClickHander="" className="" />&nbsp;
+                        <UploadButton label="installUrl" value={versionDataToAdd?.installUrl} setValue={setVersionDataToAdd} title="Install File" onClickHander="" className="" />
                     </div>
                 </FormControl>
 
                 <Divider className='mb-20' />
 
                 <FormControl className='from-controll d-flex text-center ai-center cj-center mt-20'>
-                  <PrimaryButton variant="contained" title="Submit" size="medium" onClickHander="" className="btn-ws-100"></PrimaryButton>
+                  <PrimaryButton variant="contained" title="Submit" size="medium" onClickHander={()=>addVersion(versionDataToAdd)} className="btn-ws-100"></PrimaryButton>
                 </FormControl>
             </FormGroup>
             </Paper>

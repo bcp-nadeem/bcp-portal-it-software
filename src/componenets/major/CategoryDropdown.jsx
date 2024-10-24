@@ -5,7 +5,7 @@ import Labels from '../minor/Labels'
 import { useState } from 'react';
 import useCategory from '../../hooks/useCategory';
 
-const CategoryDropdown = ({id, className, title, value="", setValue, label}) => {
+const CategoryDropdown = ({id, className, title, value="", setValue, label, options}) => {
 
     const [select, setSelect] = useState('');
 
@@ -13,9 +13,6 @@ const CategoryDropdown = ({id, className, title, value="", setValue, label}) => 
         setSelect(event.target.value);
         setValue(prevState => ({ ...prevState, [label.toLowerCase()]: event.target.value }));
     };
-
-    const {category} = useCategory()
-
 
   return (
     <FormControl variant="standard" sx={{ m: 1, minWidth: 150}}>
@@ -32,7 +29,7 @@ const CategoryDropdown = ({id, className, title, value="", setValue, label}) => 
             <em>None</em>
         </MenuItem>
         {
-            category && category.length>0 && category?.map((item) => (
+            options && options.length>0 && options?.map((item) => (
                 <MenuItem key={item._id} value={item._id}>
                     {item.name}
                 </MenuItem>
