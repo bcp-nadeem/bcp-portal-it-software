@@ -31,6 +31,7 @@ const AddSoftwareModel = () => {
     const handleClose = () => setOpen(false);
     const [dataToAdd, setDataToAdd] = useState({});
     const {addSoftware} = useSoftware()
+    const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
 
   return (
     <>
@@ -51,11 +52,11 @@ const AddSoftwareModel = () => {
             <Paper className='mt-15' elevation={0}>
               <div className='asm-img-upload d-flex gap-10 pt-20 pb-20'>
                 <div className='upload-img-preview'>
-                  <img src={Image} />
+                  <img src={ imagePreviewUrl || ""} />
                 </div>
                 <div className='upload-img-btn'>
                   <div className='mt-20'>
-                    <UploadButton setValue={setDataToAdd} title="Choose File" onClickHander="" className="" />
+                    <UploadButton setValue={setDataToAdd} setImagePreviewUrl={setImagePreviewUrl} title="Choose File" onClickHander="" className="" />
                   </div>
                   <br />
                   <Divider />

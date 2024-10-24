@@ -14,7 +14,7 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-const UploadButton = ({ title, setValue, className }) => {
+const UploadButton = ({ title, setValue, className,setImagePreviewUrl }) => {
   const handleFileChange = (event) => {
     const file = event.target.files;
     if (file.length > 0) {
@@ -22,6 +22,7 @@ const UploadButton = ({ title, setValue, className }) => {
         ...prevState,
         image: file[0]  // Store the selected files in state
       }));
+      setImagePreviewUrl(URL.createObjectURL(file[0]));
     }
   };
 

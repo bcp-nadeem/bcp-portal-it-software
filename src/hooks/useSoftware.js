@@ -20,8 +20,35 @@ const useSoftware = ()=>{
         }
     }
     
-    const addSoftware = (data)=>{
-        console.log(data);
+    const addSoftware = async(data)=>{
+        try {
+            const {name, information, category, seats, image } = data
+            console.log(data);
+            
+            const formData = new FormData();
+            formData.append('name',name)
+            formData.append('information',information)
+            formData.append('category',category)
+            formData.append('seats',seats)
+            formData.append('imageUrl',image)
+            console.log(formData)
+            const response = await axios.post(`${import.meta.env.VITE_API_ROOT}/software`,formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',  // Automatically handled by the browser
+                        'authToken' : localStorage.getItem("accessToken")
+                      }
+                }
+            )
+            if(response){
+                console.log(response.data);
+                alert("Software added!!!")
+                setSoftware([...software,response.data.software])
+            }
+        } catch (error) {
+           console.log(error);
+           
+        }
         
       }
 
