@@ -1,7 +1,8 @@
 import { Button } from "@mui/material"
 import { Link } from "react-router-dom"
+import QuillEditor from "./QuillEditor"
 
-const SoftwareQuiekInfo = ({src, title, category, description}) => {
+const SoftwareQuiekInfo = ({id,src, title, category, description}) => {
 
 
   return (
@@ -16,14 +17,14 @@ const SoftwareQuiekInfo = ({src, title, category, description}) => {
 
                 <div className="software-quiek-info-mid">
                     <div className="software-quiek-info-details">
-                        <p>{description}</p>
+                    <QuillEditor description={description} />
                     </div>
                 </div>
                 <div className="software-quiek-info-bottom">
                     <div className="software-quiek-info-btns">
                         <Button className="software-quiek-info-btns-download">Download</Button>
                         <Button className="software-quiek-info-btns-download">Install</Button>
-                        <Link to="/software-details/1"><Button className="software-quiek-info-btn-moreinfo">More info</Button></Link>
+                        <Link to={`/software-details/${id}`}><Button className="software-quiek-info-btn-moreinfo">More info</Button></Link>
                     </div>
                 </div>
             </div>

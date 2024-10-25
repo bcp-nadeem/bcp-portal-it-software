@@ -25,6 +25,7 @@ import Image from '../minor/Image';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../store/AuthContext';
+import UserAvatar from '../minor/UserAvatar';
 
     const darkTheme = createTheme({
         palette: {
@@ -186,7 +187,7 @@ import { useAuth } from '../../store/AuthContext';
                       onClick={handleProfileMenuOpen}
                       color="inherit"
                     >
-                      <MdOutlineAccountCircle />
+                      <UserAvatar src={`${import.meta.env.VITE_EEP_URL}/${user?.employee_image}`} />
                     </IconButton>
                   </Box>
                   <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

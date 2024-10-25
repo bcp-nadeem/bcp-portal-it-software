@@ -10,7 +10,7 @@ import EditSoftwareModel from "./EditSoftwareModel"
 
 
 const Tables = () => {
-    const {software} = useSoftware()
+    const {software, deleteSoftware} = useSoftware()
     console.log(software);
     
   return (
@@ -39,7 +39,7 @@ const Tables = () => {
                 <div className="d-flex cj-left gap-10">
                     <AddVersionModel></AddVersionModel>
                     <EditSoftwareModel></EditSoftwareModel>
-                    <DeleteModel></DeleteModel>
+                    <DeleteModel handleDelete={()=>deleteSoftware(item._id)}></DeleteModel>
                 </div>
             </td>
         </tr>

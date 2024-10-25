@@ -843,6 +843,7 @@ section.software-grid-main {
 .software-grid-install-btn {
     display: flex;
     justify-content: space-evenly;
+    gap : 15px
 }
 .software-grid-install-btn button {
     background-color: #3264c8;

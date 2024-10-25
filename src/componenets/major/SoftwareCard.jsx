@@ -4,7 +4,7 @@ import { useState } from "react";
 import SoftwareQuiekInfo from "./SoftwareQuiekInfo";
 import QuillEditor from "./QuillEditor";
 
-const SoftwareCard = ({src, title, category, description, version}) => {
+const SoftwareCard = ({id, src, title, category, description, version}) => {
 
     const [isOpenSoftwareInfo, setIsOpenSoftwareInfo] = useState(false); 
 
@@ -20,13 +20,13 @@ const SoftwareCard = ({src, title, category, description, version}) => {
                 <div className="software-grid-category">
                     <label htmlFor="">{category}</label>
                 </div>
-                <div className="software-grid-description">
+                {/* <div className="software-grid-description">
                 <QuillEditor description={description} />
-                </div>
+                </div> */}
                 <div className="software-grid-tags">
                     {
                         version && version.length>0 && version.map((item)=>(
-                            <BasicChips key={item} label={item} size="small" ></BasicChips>
+                            <BasicChips key={item._id} label={item.name} size="small" ></BasicChips>
                         )) || <BasicChips label={"No version found"} size="small" ></BasicChips>
                     }
                 </div>
@@ -39,7 +39,7 @@ const SoftwareCard = ({src, title, category, description, version}) => {
             </Card>
         {isOpenSoftwareInfo ? 
             
-            <SoftwareQuiekInfo src={src} title="AutoCAD" category="Autodesk" description="AutoCAD - Design every detail: Accelerate 2D and 3D design documentationwith new and enhance..." ></SoftwareQuiekInfo>
+            <SoftwareQuiekInfo id={id} src={src} title={title} category={category} description={description} ></SoftwareQuiekInfo>
         : 
         ""}
     </>

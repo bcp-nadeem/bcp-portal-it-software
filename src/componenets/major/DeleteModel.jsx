@@ -20,7 +20,7 @@ const style = {
     p: 4
   };
 
-const DeleteModel = () => {
+const DeleteModel = ({handleDelete}) => {
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -44,7 +44,7 @@ const DeleteModel = () => {
               <FormGroup className='d-flex model-from-style'>
                 <FormControl className='from-controll  mt-30'>
                   <div className='d-flex text-center ai-center cj-center'>
-                    <PrimaryButton color="error" variant="contained" title="Delete" size="medium" onClickHander="" className="btn-ws-100"></PrimaryButton> &nbsp;&nbsp;
+                    <PrimaryButton color="error" variant="contained" title="Delete" size="medium" onClickHander={handleDelete} className="btn-ws-100"></PrimaryButton> &nbsp;&nbsp;
                     <PrimaryButton variant="contained" title="Cancel" size="medium" onClickHander="" className="btn-ws-100"></PrimaryButton>
                   </div>
                 </FormControl>

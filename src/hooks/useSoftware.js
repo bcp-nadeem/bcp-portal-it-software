@@ -19,6 +19,18 @@ const useSoftware = ()=>{
             
         }
     }
+
+    const getSoftwareById = async(id,setValue)=>{
+        try {
+            const result = await axios.get(`${import.meta.env.VITE_API_ROOT}/software/${id}`)
+            if(result){
+                setValue(result.data.software)
+            }
+        } catch (e) {
+            console.log(e);
+            
+        }
+    }
     
     const addSoftware = async(data)=>{
         try {
@@ -51,8 +63,23 @@ const useSoftware = ()=>{
         }
         
       }
+      const deleteSoftware = async(id)=>{
+        try {
+            const result = await axios.delete(`${import.meta.env.VITE_API_ROOT}/software/${id}`,{
+                headers: {
+                    'authToken' : localStorage.getItem("accessToken")
+                  }
+            })
+            if(result){
+                fetchSoftware()
+            }
+        } catch (error) {
+            console.log(error);
+            
+        }
+      }
 
-      return {software, fetchSoftware, addSoftware}
+      return {software, fetchSoftware, addSoftware, getSoftwareById, deleteSoftware}
 }
 
 export default useSoftware
