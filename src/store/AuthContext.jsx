@@ -50,8 +50,8 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const isAuthenticated = () => user; // Check if user is logged in
-  const hasPermission = (role) => user?.emp_level <= role; // Check if user has a specific role
+  const isAuthenticated = async() => await user?.emp_level ; // Check if user is logged in
+  const hasPermission = async(role) => await user?.emp_level <= role; // Check if user has a specific role
 
   return (
     <AuthContext.Provider value={{ user, login, logout, isAuthenticated, hasPermission, refreshToken }}>

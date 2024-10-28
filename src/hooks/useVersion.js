@@ -2,7 +2,7 @@ import useSoftware from "./useSoftware";
 import axios from "axios";
 const useVersion = () => {
     const {fetchSoftware} = useSoftware()
-  const addVersion = async(details) => {
+  const addVersion = async(details, close) => {
     try {
       const { name, parent, status, information, downloadUrl, installUrl } =
         details;
@@ -12,7 +12,7 @@ const useVersion = () => {
 
       const formData = new FormData();
       formData.append("name", name);
-      formData.append("parent", parent);
+      formData.append("parent", parent._id);
       formData.append("status", status);
       formData.append("information", information);
       formData.append("downloadUrl", downloadUrl || null);
@@ -27,7 +27,7 @@ const useVersion = () => {
         }
     )
     if(response){
-        console.log(response.data);
+        console.log(response.data.version);
         alert("version added!!!")
         fetchSoftware()
     }

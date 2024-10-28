@@ -32,7 +32,7 @@ const SoftwareDetails = () => {
             <section className='software-details-head'>
                 <div className='software-details-head-info'>
                     <div className='software-details-info-img'>
-                        <img src={SoftwareImg} alt="" />
+                        <img src={`${import.meta.env.VITE_API_ASSET}/${software?.imageUrl}`} alt="" />
                         <div className='software-details-info-title'>
                             <h3>{software?.name}</h3>
                             <label htmlFor="">{software?.category?.name}</label>

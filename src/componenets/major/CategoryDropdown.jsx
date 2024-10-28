@@ -5,39 +5,38 @@ import Labels from '../minor/Labels'
 import { useState } from 'react';
 import useCategory from '../../hooks/useCategory';
 
-const CategoryDropdown = ({id, className, title, value="", setValue, label, options}) => {
-
-    const [select, setSelect] = useState('');
-
+const CategoryDropdown = ({ id, className, title, value, setValue, label, options }) => {
     const handleChangeSelect = (event) => {
-        setSelect(event.target.value);
-        setValue(prevState => ({ ...prevState, [label.toLowerCase()]: event.target.value }));
+      const selectedCategory = options.find((item) => item._id === event.target.value);
+      setValue((prevState) => ({ ...prevState, [label.toLowerCase()]: selectedCategory }));
     };
-
-  return (
-    <FormControl variant="standard" sx={{ m: 1, minWidth: 150}}>
+  
+    return (
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 150 }}>
         <Labels title={title} />
         <Select
-        labelId="demo-simple-select-standard-label"
-        id={id}
-        className={className}
-        value={value}
-        onChange={handleChangeSelect}
-        label={title}
+          labelId="demo-simple-select-standard-label"
+          id={id}
+          className={className}
+          value={value || ""} // Use empty string if value is undefined
+          onChange={handleChangeSelect}
+          label={title}
         >
-         <MenuItem value="">
+          <MenuItem value="">
             <em>None</em>
-        </MenuItem>
-        {
-            options && options.length>0 && options?.map((item) => (
-                <MenuItem key={item._id} value={item._id}>
-                    {item.name}
-                </MenuItem>
-            ))
-        }
+          </MenuItem>
+          {options &&
+            options.length > 0 &&
+            options.map((item) => (
+              <MenuItem key={item._id} value={item._id}>
+                {item.name}
+              </MenuItem>
+            ))}
         </Select>
-  </FormControl>
-  )
-}
+      </FormControl>
+    );
+};
+
+  
 
 export default CategoryDropdown

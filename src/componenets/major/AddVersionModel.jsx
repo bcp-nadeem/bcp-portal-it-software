@@ -58,7 +58,7 @@ const AddVersionModel = () => {
                 </FormControl>
 
                 <FormControl className='from-controll'>
-                  <CategoryDropdown options={software} value={versionDataToAdd?.parent} label="parent" setValue={setVersionDataToAdd} id="" className="margin-none" title="Select Software" />
+                  <CategoryDropdown options={software} value={versionDataToAdd?.parent?._id || ""} label="parent" setValue={setVersionDataToAdd} id="" className="margin-none" title="Select Software" />
                 </FormControl>
 
                 <FormControl className='from-controll'>
@@ -79,7 +79,7 @@ const AddVersionModel = () => {
                 <Divider className='mb-20' />
 
                 <FormControl className='from-controll d-flex text-center ai-center cj-center mt-20'>
-                  <PrimaryButton variant="contained" title="Submit" size="medium" onClickHander={()=>addVersion(versionDataToAdd)} className="btn-ws-100"></PrimaryButton>
+                  <PrimaryButton variant="contained" title="Submit" size="medium" onClickHander={()=>addVersion(versionDataToAdd, handleClose)} className="btn-ws-100"></PrimaryButton>
                 </FormControl>
             </FormGroup>
             </Paper>

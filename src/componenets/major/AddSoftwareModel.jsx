@@ -75,7 +75,7 @@ const AddSoftwareModel = () => {
                   <InputTypes label="name" value={dataToAdd?.name} setValue={setDataToAdd} id="standard-basic" className="" type="text" labe="Standard" variant="standard" placeholder="Enter Software Name" />
                 </FormControl>
                 <FormControl className='from-controll'>
-                  <CategoryDropdown id="" options={category} label="category" value={dataToAdd?.category} setValue={setDataToAdd} className="margin-none" title="Select Category" />
+                  <CategoryDropdown id="" options={category} label="category" value={dataToAdd?.category?._id} setValue={setDataToAdd} className="margin-none" title="Select Category" />
                 </FormControl>
                 <FormControl className='from-controll'>
                
@@ -87,7 +87,7 @@ const AddSoftwareModel = () => {
                 </FormControl>
 
                 <FormControl className='from-controll d-flex text-center ai-center cj-center mt-30'>
-                  <PrimaryButton variant="contained" title="Confirm" size="medium" onClickHander={()=>addSoftware(dataToAdd)} className="btn-ws-100"></PrimaryButton>
+                  <PrimaryButton variant="contained" title="Confirm" size="medium" onClickHander={()=>addSoftware(dataToAdd, handleClose)} className="btn-ws-100"></PrimaryButton>
                 </FormControl>
             </FormGroup>
             </Paper>

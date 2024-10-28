@@ -6,6 +6,7 @@ import { Button, Divider, FormControl, FormGroup, MenuItem, Paper } from '@mui/m
 import PrimaryButton from '../minor/PrimaryButton';
 
 import { FiTrash2 } from 'react-icons/fi';
+import useSoftware from '../../hooks/useSoftware';
 
 const style = {
     position: 'absolute',
@@ -25,6 +26,7 @@ const DeleteModel = ({handleDelete}) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const {deleteSoftware} = useSoftware()
 
   return (
     <>

@@ -7,6 +7,7 @@ import QuillEditor from "./QuillEditor";
 const SoftwareCard = ({id, src, title, category, description, version}) => {
 
     const [isOpenSoftwareInfo, setIsOpenSoftwareInfo] = useState(false); 
+    const [selectedVersion, setSelectedVersion] = useState(version[0]);
 
   return (
     <>
@@ -26,12 +27,17 @@ const SoftwareCard = ({id, src, title, category, description, version}) => {
                 <div className="software-grid-tags">
                     {
                         version && version.length>0 && version.map((item)=>(
-                            <BasicChips key={item._id} label={item.name} size="small" ></BasicChips>
+                            <BasicChips onClick={() => setSelectedVersion(item)} key={item._id} label={item.name} size="small" ></BasicChips>
                         )) || <BasicChips label={"No version found"} size="small" ></BasicChips>
                     }
                 </div>
                 <div className="software-grid-install-btn">
-                    <Button>Install</Button>
+                    {
+                        selectedVersion &&  selectedVersion?.installUrl && <Button href={selectedVersion?.installUrl} >Install {selectedVersion.name}</Button>
+                    }
+                    {
+                        selectedVersion &&  selectedVersion?.downloadUrl && <Button >Download {selectedVersion.name}</Button>
+                    }
                     <Button onClick={() => setIsOpenSoftwareInfo(!isOpenSoftwareInfo)}>
                         {isOpenSoftwareInfo ? "Close" : "Quick Info"}
                     </Button>
