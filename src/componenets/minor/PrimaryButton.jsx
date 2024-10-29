@@ -1,11 +1,12 @@
+// PrimaryButton.jsx
 import { Button } from "@mui/material";
 
-const PrimaryButton = ({ color, variant, title, onClickHander, className, size }) => {
+const PrimaryButton = ({ color, variant, title, onClickHandler, className, size }) => {
   return (
     <Button
       color={color}
       variant={variant}
-      onClick={onClickHander}
+      onClick={onClickHandler}
       size={size}
       className={`${className} button`}
     >
@@ -14,4 +15,4 @@ const PrimaryButton = ({ color, variant, title, onClickHander, className, size }
   );
 };
 
-export default PrimaryButton
+export default PrimaryButton;
