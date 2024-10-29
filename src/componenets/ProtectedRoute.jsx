@@ -1,12 +1,15 @@
-// src/components/ProtectedRoute.jsx
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../store/AuthContext';
 
 const ProtectedRoute = ({ children, requireAdmin = false }) => {
-  const { isAuthenticated, hasPermission } = useAuth();
+  const { isAuthenticated, hasPermission, isLoading } = useAuth();
+
+  if (isLoading) {
+    return <div>Loading...</div>; // Or your loading component
+  }
 
   if (!isAuthenticated()) {
-    return <Navigate to="/" replace />; // Redirect to login if not authenticated
+    return <Navigate to="/" replace />;
   }
 
   if (requireAdmin && !hasPermission(1)) {
