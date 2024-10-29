@@ -27,6 +27,29 @@ const useSoftware = () => {
     }
   }, []);
 
+  const getSoftwareById = async (id) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const result = await axios.get(
+        `${import.meta.env.VITE_API_ROOT}/software/${id}`,
+        {
+          headers: {
+            authToken: localStorage.getItem("accessToken"),
+          },
+        }
+      );
+      console.log(result.data.data);
+      
+      return result.data.data;
+    } catch (e) {
+      setError(e.message);
+      console.error(e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const addSoftware = async (data, close) => {
     setIsLoading(true);
     setError(null);
@@ -141,6 +164,7 @@ const useSoftware = () => {
     isLoading,
     error,
     fetchSoftware,
+    getSoftwareById,
     addSoftware,
     updateSoftware,
     deleteSoftware,

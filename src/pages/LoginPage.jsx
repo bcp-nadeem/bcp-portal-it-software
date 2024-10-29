@@ -62,7 +62,7 @@ const LoginPage = () => {
             <FormControl variant="standard">
               <PrimaryButton
                 variant="contained"
-                onClickHander={loginHandler}
+                onClickHandler={loginHandler}
                 className="mt-20"
                 title="Login"
               />

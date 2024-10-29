@@ -11,15 +11,68 @@ import useSoftware from "../hooks/useSoftware";
 import QuillEditor from "../componenets/major/QuillEditor";
 
 const SoftwareDetails = () => {
-  const {softwareId} = useParams()
-  const {getSoftwareById} = useSoftware()
-  const [software,setSoftware] = useState({})
+  const { softwareId } = useParams();
+  const { getSoftwareById } = useSoftware();
+  const [software, setSoftware] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(()=>{
-    getSoftwareById(softwareId, setSoftware)
-    console.log(software);
-    
-  },[softwareId])
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchSoftwareDetails = async () => {
+      try {
+        setLoading(true);
+        const result = await getSoftwareById(softwareId);
+        if (isMounted) {
+          if (result) {
+            setSoftware(result);
+          } else {
+            setError('Software not found');
+          }
+        }
+      } catch (err) {
+        if (isMounted) {
+          setError(err.message || 'Failed to fetch software details');
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchSoftwareDetails();
+
+    // Cleanup function
+    return () => {
+      isMounted = false;
+    };
+  }, [softwareId]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-red-500">{error}</div>
+      </div>
+    );
+  }
+
+  if (!software) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-gray-500">No software found</div>
+      </div>
+    );
+  }
 
   return (
     <>
