@@ -16,6 +16,8 @@ export const AuthProvider = ({ children }) => {
       const result = await axios.post(`${import.meta.env.VITE_API_ROOT}/auth/login`, userData);
   
       if (result) {
+        console.log(result);
+        
         setUser(result.data.data.user);
         localStorage.setItem('accessToken', result.data.data.accessToken);
         localStorage.setItem('refreshToken', result.data.data.refreshToken);
@@ -39,6 +41,8 @@ export const AuthProvider = ({ children }) => {
       const result = await axios.post(`${import.meta.env.VITE_API_ROOT}/auth/refresh-token`, { refreshToken });
   
       if (result) {
+        console.log(result);
+        
         setUser(result.data.data.user);
         localStorage.setItem('accessToken', result.data.data.accessToken);
         localStorage.setItem('refreshToken', result.data.data.refreshToken);
