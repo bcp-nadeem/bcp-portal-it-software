@@ -9,7 +9,7 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
     return <Navigate to="/" replace />; // Redirect to login if not authenticated
   }
 
-  if (requireAdmin && !hasPermission(7)) {
+  if (requireAdmin && !hasPermission(1)) {
     return <Navigate to="/dashboard" replace />;
   }
   

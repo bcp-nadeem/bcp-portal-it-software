@@ -3,13 +3,12 @@ import axios from "axios";
 
 const useSoftware = ()=>{
     const [software,setSoftware]=useState([])
-
    
     const fetchSoftware = async()=>{
         try {
             const result = await axios.get(`${import.meta.env.VITE_API_ROOT}/software`)
-            setSoftware(result.data.softwares);
-            console.log(software);
+            setSoftware(result.data.data.softwares);
+            console.log(result);
             
             
         } catch (e) {
@@ -22,7 +21,9 @@ const useSoftware = ()=>{
         try {
             const result = await axios.get(`${import.meta.env.VITE_API_ROOT}/software/${id}`)
             if(result){
-                setValue(result.data.software)
+                console.log(result)
+                
+                setValue(result.data.data)
             }
         } catch (e) {
             console.log(e);

@@ -7,8 +7,8 @@ const useCategory=()=>{
         try {
             const result = await axios.get(`${import.meta.env.VITE_API_ROOT}/category`)
             if(result){
-                console.log("category fetched :", result.data.categories[0]);
-                setCategory(result.data.categories)
+                console.log("category fetched :", result);
+                setCategory(result.data.data.categories)
             }
         } catch (error) {
             throw error
