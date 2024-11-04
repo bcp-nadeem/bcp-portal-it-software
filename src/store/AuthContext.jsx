@@ -8,19 +8,26 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    info : null,
+    isAuthenticated: false
+  });
   const [isLoading, setIsLoading] = useState(true);
 
   // Check for existing session on mount
   useEffect(() => {
     const initializeAuth = async () => {
-      const token = localStorage.getItem('accessToken');
+      const token = await localStorage.getItem('accessToken');
       if (token) {
         try {
           const result = await axios.get(`${import.meta.env.VITE_API_ROOT}/auth/me`, {
-            headers: { Authorization: `Bearer ${token}` }
+            headers: { authToken: `${token}` }
           });
-          setUser(result.data.data.user);
+          console.log(result.data.data);
+          setUser({
+            info : result.data.data,
+            isAuthenticated: true
+        });
         } catch (error) {
           // Token might be expired, try to refresh
           try {
@@ -41,7 +48,9 @@ export const AuthProvider = ({ children }) => {
       const result = await axios.post(`${import.meta.env.VITE_API_ROOT}/auth/login`, userData);
       
       if (result?.data?.data) {
-        setUser(result.data.data.user);
+        console.log("logged in",result.data.data);
+        
+        setUser({ info:result.data.data.user, isAuthenticated: true });
         localStorage.setItem('accessToken', result.data.data.accessToken);
         localStorage.setItem('refreshToken', result.data.data.refreshToken);
         return true;
@@ -59,16 +68,17 @@ export const AuthProvider = ({ children }) => {
   };
 
   const refreshToken = async () => {
-    const refreshToken = localStorage.getItem('refreshToken');
-    if (!refreshToken) {
-      throw new Error('No refresh token available');
-    }
+
+    const refreshToken = await localStorage.getItem('refreshToken');
+    console.log("refreshToken", refreshToken);
+    
+    if (refreshToken) {
 
     try {
       const result = await axios.post(`${import.meta.env.VITE_API_ROOT}/auth/refresh-token`, { refreshToken });
       
       if (result?.data?.data) {
-        setUser(result.data.data.user);
+        setUser({info:result.data.data.user, isAuthenticated: true });
         localStorage.setItem('accessToken', result.data.data.accessToken);
         localStorage.setItem('refreshToken', result.data.data.refreshToken);
         return true;
@@ -77,7 +87,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       throw error;
     }
-  };
+  }}
 
   // Changed to sync function that checks user state directly
   const isAuthenticated = () => Boolean(user);

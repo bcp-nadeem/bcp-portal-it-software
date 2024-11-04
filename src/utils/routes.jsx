@@ -53,7 +53,7 @@ const router = createBrowserRouter([
       {
         path: "software-list",
         element: (
-          <ProtectedRoute requireAdmin={true}>
+          <ProtectedRoute requiredLevel="1">
             <SoftwareList />
           </ProtectedRoute>
         ), // Only accessible to admins
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
       {
         path: "/category-list",
         element: (
-          <ProtectedRoute requireAdmin={true}>
+          <ProtectedRoute requiredLevel="1">
             <CategoryList />
           </ProtectedRoute>
         ), // Only accessible to admins
