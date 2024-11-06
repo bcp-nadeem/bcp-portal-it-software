@@ -9,89 +9,78 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
-    // Initialize user from localStorage if available
-    const storedUser = localStorage.getItem('user');
-    return storedUser ? JSON.parse(storedUser) : null;
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : { info: null, isAuthenticated: false };
   });
   const [isLoading, setIsLoading] = useState(true);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  // Debug logging function
   const logDebug = (message, data = {}) => {
     console.log(`[Auth Debug] ${message}`, data);
   };
 
   useEffect(() => {
     const initializeAuth = async () => {
-      logDebug('Initializing auth...');
+      logDebug("Initializing auth...");
       try {
-        const token = localStorage.getItem("refreshToken");
-        const storedUser = localStorage.getItem("user");
-        
-        logDebug('Stored credentials:', { 
-          hasToken: !!token, 
-          hasStoredUser: !!storedUser 
-        });
+        const token = localStorage.getItem("accessToken");
 
         if (token) {
-          const success = await refreshToken();
-          logDebug('Token refresh result:', { success });
-          
-          if (!success) {
-            logDebug('Token refresh failed, logging out');
+          try {
+            const result = await axios.get(`${import.meta.env.VITE_API_ROOT}/auth/me`, {
+              headers: { authToken: `${token}` },
+            });
+            setUser({ info: result.data.data, isAuthenticated: true });
+            logDebug("User authenticated from token", { user: result.data.data });
+          } catch (error) {
+            logDebug("Token validation failed, trying to refresh token");
+            await refreshToken();
           }
         } else {
-          logDebug('No token found, setting as not authenticated');
-          setUser(null);
+          logDebug("No token found, setting as not authenticated");
+          setUser({ info: null, isAuthenticated: false });
         }
       } catch (error) {
-        logDebug('Auth initialization error:', { error: error.message });
+        logDebug("Auth initialization error:", { error: error.message });
       } finally {
         setIsLoading(false);
         setIsInitialized(true);
-        logDebug('Auth initialization complete', { 
-          isAuthenticated: !!user,
-          user 
-        });
+        logDebug("Auth initialization complete", { isAuthenticated: !!user.isAuthenticated, user });
       }
     };
 
     initializeAuth();
   }, []);
 
-  // Store user in localStorage when it changes
   useEffect(() => {
-    if (user) {
-      localStorage.setItem('user', JSON.stringify(user));
-      logDebug('User state updated', { user });
+    if (user.info) {
+      localStorage.setItem("user", JSON.stringify(user));
+      logDebug("User state updated", { user });
     } else {
-      localStorage.removeItem('user');
-      logDebug('User state cleared');
+      localStorage.removeItem("user");
+      logDebug("User state cleared");
     }
   }, [user]);
 
   const login = async (userData) => {
-    logDebug('Login attempt', { userData });
+    logDebug("Login attempt", { userData });
     try {
       setIsLoading(true);
-      const result = await axios.post(
-        `${import.meta.env.VITE_API_ROOT}/auth/login`,
-        userData
-      );
+      const result = await axios.post(`${import.meta.env.VITE_API_ROOT}/auth/login`, userData);
 
       if (result?.data?.data) {
-        const { user: userData, accessToken, refreshToken } = result.data.data;
-        setUser(userData);
+        const { user: userInfo, accessToken, refreshToken } = result.data.data;
+        setUser({ info: userInfo, isAuthenticated: true });
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
-        localStorage.setItem("user", JSON.stringify(userData));
-        logDebug('Login successful', { userData });
+        localStorage.setItem("user", JSON.stringify(userInfo));
+        logDebug("Login successful", { userInfo });
         return true;
       }
-      logDebug('Login failed - invalid response data');
+      logDebug("Login failed - invalid response data");
       return false;
     } catch (error) {
-      logDebug('Login error:', { error: error.message });
+      logDebug("Login error:", { error: error.message });
       return false;
     } finally {
       setIsLoading(false);
@@ -99,8 +88,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    logDebug('Logging out');
-    setUser(null);
+    logDebug("Logging out");
+    setUser({ info: null, isAuthenticated: false });
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("user");
@@ -108,60 +97,43 @@ export const AuthProvider = ({ children }) => {
 
   const refreshToken = async () => {
     const token = localStorage.getItem("refreshToken");
-    logDebug('Attempting token refresh', { hasToken: !!token });
+    logDebug("Attempting token refresh", { hasToken: !!token });
 
     if (!token) {
       return false;
     }
 
     try {
-      const result = await axios.post(
-        `${import.meta.env.VITE_API_ROOT}/auth/refresh-token`,
-        { refreshToken: token }
-      );
+      const result = await axios.post(`${import.meta.env.VITE_API_ROOT}/auth/refresh-token`, { refreshToken: token });
 
       if (result?.data?.data) {
-        const { user: userData, accessToken, refreshToken } = result.data.data;
-        setUser(userData);
+        const { user: userInfo, accessToken, refreshToken } = result.data.data;
+        setUser({ info: userInfo, isAuthenticated: true });
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
-        localStorage.setItem("user", JSON.stringify(userData));
-        logDebug('Token refresh successful', { userData });
+        localStorage.setItem("user", JSON.stringify(userInfo));
+        logDebug("Token refresh successful", { userInfo });
         return true;
       }
-      logDebug('Token refresh failed - invalid response data');
+      logDebug("Token refresh failed - invalid response data");
       return false;
     } catch (error) {
-      logDebug('Token refresh error:', { error: error.message });
+      logDebug("Token refresh error:", { error: error.message });
       return false;
     }
   };
 
   const isAuthenticated = () => {
-    const hasUser = Boolean(user);
-    const hasToken = Boolean(localStorage.getItem("accessToken"));
-    logDebug('Checking authentication', { 
-      hasUser, 
-      hasToken,
-      user
-    });
-    return hasUser && hasToken;
+    return user.isAuthenticated && localStorage.getItem("accessToken");
   };
 
   const hasPermission = (requiredLevel) => {
-    if (!user || !user.emp_level) {
-      logDebug('Permission check failed - no user or emp_level', { 
-        user, 
-        requiredLevel 
-      });
+    if (!user.info || user.info.emp_level == null) {
+      logDebug("Permission check failed - no user or emp_level", { user, requiredLevel });
       return false;
     }
-    const hasPermission = parseInt(user.emp_level) <= parseInt(requiredLevel);
-    logDebug('Checking permission', { 
-      userLevel: user.emp_level, 
-      requiredLevel,
-      hasPermission 
-    });
+    const hasPermission = parseInt(user.info.emp_level) <= parseInt(requiredLevel);
+    logDebug("Checking permission", { userLevel: user.info.emp_level, requiredLevel, hasPermission });
     return hasPermission;
   };
 
@@ -175,7 +147,7 @@ export const AuthProvider = ({ children }) => {
         hasPermission,
         refreshToken,
         isLoading,
-        isInitialized
+        isInitialized,
       }}
     >
       {children}

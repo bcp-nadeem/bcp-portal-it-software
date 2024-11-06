@@ -158,7 +158,7 @@ import UserAvatar from '../minor/UserAvatar';
 
     return (
       <>
-        {user && (
+        {user?.isAuthenticated && (
         <>
           <Box sx={{ flexGrow: 1 }}>
             <ThemeProvider theme={darkTheme}>
@@ -187,7 +187,7 @@ import UserAvatar from '../minor/UserAvatar';
                       onClick={handleProfileMenuOpen}
                       color="inherit"
                     >
-                      <UserAvatar src={`${import.meta.env.VITE_EEP_URL}/${user?.employee_image}`} />
+                      <UserAvatar src={`${import.meta.env.VITE_EEP_URL}/${user?.info?.employee_image}`} />
                     </IconButton>
                   </Box>
                   <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
