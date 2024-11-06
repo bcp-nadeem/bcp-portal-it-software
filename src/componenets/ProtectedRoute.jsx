@@ -1,38 +1,5 @@
-<<<<<<< HEAD
-import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../store/AuthContext';
-
-const ProtectedRoute = ({ children, requireAdmin = false }) => {
-  const { isAuthenticated, hasPermission, isLoading, user } = useAuth();
-  const location = useLocation();
-
-  console.log('[ProtectedRoute Debug]', {
-    isLoading,
-    isAuthenticated: isAuthenticated(),
-    user,
-    requireAdmin,
-    currentPath: location.pathname
-  });
-
-  if (isLoading) {
-    console.log('[ProtectedRoute] Still loading...');
-    return <div>Loading...</div>;
-  }
-
-  if (!isAuthenticated()) {
-    console.log('[ProtectedRoute] Not authenticated, redirecting to login');
-    return <Navigate to="/" state={{ from: location.pathname }} replace />;
-  }
-
-  if (requireAdmin && !hasPermission(1)) {
-    console.log('[ProtectedRoute] Insufficient permissions, redirecting to dashboard');
-    return <Navigate to="/dashboard" replace />;
-  }
-
-  console.log('[ProtectedRoute] Access granted');
-=======
 import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../store/AuthContext";
 import { Loader2 } from "lucide-react";
 
@@ -44,69 +11,63 @@ const LoadingSpinner = ({ message }) => (
 );
 
 const ProtectedRoute = ({ children, requiredLevel = 10, redirectTo = '/' }) => {
-  const { user, isLoading } = useAuth();
+  const { isAuthenticated, hasPermission, isLoading, user } = useAuth();
+  const location = useLocation();
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [shouldRedirect, setShouldRedirect] = useState({ redirect: false, to: redirectTo });
 
+  console.log('[ProtectedRoute Debug]', {
+    isLoading,
+    isAuthenticated: isAuthenticated(),
+    user,
+    requiredLevel,
+    currentPath: location.pathname
+  });
+
   useEffect(() => {
     const checkAuthorization = () => {
-      // Reset authorization when checks start
-      setIsAuthorized(false);
+      setIsAuthorized(false); // Reset authorization status initially
 
-      // Still loading auth state
-      if (isLoading || !user) {
+      if (isLoading) return; // If still loading, skip checks
+
+      if (!isAuthenticated()) {
+        console.log('[ProtectedRoute] Not authenticated, redirecting to login');
+        setShouldRedirect({ redirect: true, to: "/" });
         return;
       }
 
-      // Check authentication
-      if (!user.isAuthenticated) {
-        setShouldRedirect({ redirect: true, to: redirectTo });
-        return;
-      }
-
-      // Check if user.info exists
-      if (!user.info) {
+      if (!user?.info) {
         console.warn('User info is missing');
-        setShouldRedirect({ redirect: true, to: redirectTo });
+        setShouldRedirect({ redirect: true, to: "/" });
         return;
       }
 
-      // Parse levels with fallback to 0
       const userLevel = parseInt(user.info.emp_level || 0);
-      const requiredLevelNum = parseInt(requiredLevel || 0);
-
-      // Check authorization level
-      if (userLevel > requiredLevelNum) {
-        console.log(`Access denied: User level (${userLevel}) is above required level (${requiredLevelNum})`);
+      if (userLevel > requiredLevel) {
+        console.log(`Access denied: User level (${userLevel}) is above required level (${requiredLevel})`);
         setShouldRedirect({ redirect: true, to: "/dashboard" });
         return;
       }
 
-      // All checks passed
-      setIsAuthorized(true);
+      setIsAuthorized(true); // All checks passed
     };
 
     checkAuthorization();
-  }, [user, isLoading, redirectTo, requiredLevel]);
+  }, [user, isLoading, requiredLevel, redirectTo, isAuthenticated]);
 
-  // Always show loading until we're sure about authorization
   if (!isAuthorized) {
-    // If we need to redirect, do it immediately
     if (shouldRedirect.redirect) {
-      return <Navigate to={shouldRedirect.to} replace />;
+      return <Navigate to={shouldRedirect.to} state={{ from: location.pathname }} replace />;
     }
-    // Otherwise show loading
+
     return (
       <div className="fixed inset-0 z-50">
-        <LoadingSpinner 
-          message={isLoading ? "Fetching Data..." : "Authenticating..."} 
-        />
+        <LoadingSpinner message={isLoading ? "Fetching Data..." : "Authenticating..."} />
       </div>
     );
   }
 
-  // Only render children if explicitly authorized
->>>>>>> d12897c7a0eef0f6d9f136daa590b1e355ca698f
+  console.log('[ProtectedRoute] Access granted');
   return children;
 };
 
