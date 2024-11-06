@@ -2,10 +2,14 @@ import { MdKeyboardArrowRight } from "react-icons/md"
 import SoftwareCard from "../componenets/major/SoftwareCard"
 import SoftwareImg from "../assets/images/software/software-img.png"
 import useSoftware from "../hooks/useSoftware";
+import { useEffect } from "react";
 
 const SoftwareGrid = () => {
-    const {software} = useSoftware()
-    console.log("software grid",software);
+    const {software, fetchSoftware} = useSoftware()
+    useEffect(() => {
+        fetchSoftware();
+        console.log("software grid",software);
+    },[])
     
   return (
 

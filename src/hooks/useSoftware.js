@@ -155,10 +155,6 @@ const useSoftware = () => {
     }
   };
 
-  useEffect(() => {
-    fetchSoftware();
-  }, [fetchSoftware]);
-
   return {
     software,
     isLoading,
