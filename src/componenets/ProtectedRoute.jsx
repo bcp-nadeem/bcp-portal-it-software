@@ -16,14 +16,6 @@ const ProtectedRoute = ({ children, requiredLevel = 10, redirectTo = '/' }) => {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [shouldRedirect, setShouldRedirect] = useState({ redirect: false, to: redirectTo });
 
-  console.log('[ProtectedRoute Debug]', {
-    isLoading,
-    isAuthenticated: isAuthenticated(),
-    user,
-    requiredLevel,
-    currentPath: location.pathname
-  });
-
   useEffect(() => {
     const checkAuthorization = () => {
       setIsAuthorized(false); // Reset authorization status initially
@@ -31,20 +23,17 @@ const ProtectedRoute = ({ children, requiredLevel = 10, redirectTo = '/' }) => {
       if (isLoading) return; // If still loading, skip checks
 
       if (!isAuthenticated()) {
-        console.log('[ProtectedRoute] Not authenticated, redirecting to login');
         setShouldRedirect({ redirect: true, to: "/" });
         return;
       }
 
       if (!user?.info) {
-        console.warn('User info is missing');
         setShouldRedirect({ redirect: true, to: "/" });
         return;
       }
 
       const userLevel = parseInt(user.info.emp_level || 0);
       if (userLevel > requiredLevel) {
-        console.log(`Access denied: User level (${userLevel}) is above required level (${requiredLevel})`);
         setShouldRedirect({ redirect: true, to: "/dashboard" });
         return;
       }
@@ -67,7 +56,6 @@ const ProtectedRoute = ({ children, requiredLevel = 10, redirectTo = '/' }) => {
     );
   }
 
-  console.log('[ProtectedRoute] Access granted');
   return children;
 };
 

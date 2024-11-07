@@ -21,7 +21,6 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const initializeAuth = async () => {
-      logDebug("Initializing auth...");
       try {
         const token = localStorage.getItem("accessToken");
 
@@ -31,21 +30,16 @@ export const AuthProvider = ({ children }) => {
               headers: { authToken: `${token}` },
             });
             setUser({ info: result.data.data, isAuthenticated: true });
-            logDebug("User authenticated from token", { user: result.data.data });
           } catch (error) {
-            logDebug("Token validation failed, trying to refresh token");
             await refreshToken();
           }
         } else {
-          logDebug("No token found, setting as not authenticated");
           setUser({ info: null, isAuthenticated: false });
         }
       } catch (error) {
-        logDebug("Auth initialization error:", { error: error.message });
       } finally {
         setIsLoading(false);
         setIsInitialized(true);
-        logDebug("Auth initialization complete", { isAuthenticated: !!user.isAuthenticated, user });
       }
     };
 
@@ -55,15 +49,12 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (user.info) {
       localStorage.setItem("user", JSON.stringify(user));
-      logDebug("User state updated", { user });
     } else {
       localStorage.removeItem("user");
-      logDebug("User state cleared");
     }
   }, [user]);
 
   const login = async (userData) => {
-    logDebug("Login attempt", { userData });
     try {
       setIsLoading(true);
       const result = await axios.post(`${import.meta.env.VITE_API_ROOT}/auth/login`, userData);
@@ -74,13 +65,10 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         localStorage.setItem("user", JSON.stringify(userInfo));
-        logDebug("Login successful", { userInfo });
         return true;
       }
-      logDebug("Login failed - invalid response data");
       return false;
     } catch (error) {
-      logDebug("Login error:", { error: error.message });
       return false;
     } finally {
       setIsLoading(false);
@@ -88,7 +76,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    logDebug("Logging out");
     setUser({ info: null, isAuthenticated: false });
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
@@ -97,7 +84,6 @@ export const AuthProvider = ({ children }) => {
 
   const refreshToken = async () => {
     const token = localStorage.getItem("refreshToken");
-    logDebug("Attempting token refresh", { hasToken: !!token });
 
     if (!token) {
       return false;
@@ -112,13 +98,10 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         localStorage.setItem("user", JSON.stringify(userInfo));
-        logDebug("Token refresh successful", { userInfo });
         return true;
       }
-      logDebug("Token refresh failed - invalid response data");
       return false;
     } catch (error) {
-      logDebug("Token refresh error:", { error: error.message });
       return false;
     }
   };
@@ -129,11 +112,9 @@ export const AuthProvider = ({ children }) => {
 
   const hasPermission = (requiredLevel) => {
     if (!user.info || user.info.emp_level == null) {
-      logDebug("Permission check failed - no user or emp_level", { user, requiredLevel });
       return false;
     }
     const hasPermission = parseInt(user.info.emp_level) <= parseInt(requiredLevel);
-    logDebug("Checking permission", { userLevel: user.info.emp_level, requiredLevel, hasPermission });
     return hasPermission;
   };
 

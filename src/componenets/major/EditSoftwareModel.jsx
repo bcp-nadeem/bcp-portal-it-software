@@ -7,7 +7,6 @@ import {
   Divider,
   FormControl,
   FormGroup,
-  MenuItem,
   Paper,
 } from "@mui/material";
 import InputTypes from "../minor/InputTypes";
@@ -15,10 +14,9 @@ import CategoryDropdown from "./CategoryDropdown";
 import PrimaryButton from "../minor/PrimaryButton";
 import UploadButton from "../minor/UploadButton";
 import UseTextEditor from "../major/TextEditor";
-import { IoAddSharp } from "react-icons/io5";
+import { RiEditLine } from "react-icons/ri";
 import useSoftware from "../../hooks/useSoftware";
 import useCategory from "../../hooks/useCategory";
-import { RiEditLine } from "react-icons/ri";
 
 const style = {
   position: "absolute",
@@ -33,19 +31,33 @@ const style = {
   p: 4,
 };
 
-const EditSoftwareModel = ({ data }) => {
+const EditSoftwareModel = ({ data, onSuccess }) => {
   const [open, setOpen] = useState(false);
+  const [dataToAdd, setDataToAdd] = useState({});
+  const { updateSoftware } = useSoftware();
+  const { category, fetchCategory } = useCategory();
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [dataToAdd, setDataToAdd] = useState({});
-  const { fetchSoftware,updateSoftware } = useSoftware();
-  const { category } = useCategory();
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+
   useEffect(() => {
     setDataToAdd(data);
-    console.log("data", dataToAdd);
   }, [data]);
 
+  useEffect(() => {
+    fetchCategory();
+  }, []);
+
+  const handleSubmit = async () => {
+    const success = await updateSoftware(dataToAdd);
+    if (success) {
+      handleClose();
+      if (onSuccess) {
+        onSuccess();
+      }
+    }
+  };
 
   return (
     <>
@@ -60,7 +72,7 @@ const EditSoftwareModel = ({ data }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Heading className="mb-5" heading="Add Software" />
+          <Heading className="mb-5" heading="Edit Software" />
           <Divider />
           <Paper className="mt-15" elevation={0}>
             <div className="asm-img-upload d-flex gap-10 pt-20 pb-20">
@@ -73,6 +85,7 @@ const EditSoftwareModel = ({ data }) => {
                         dataToAdd?.imageUrl) ||
                     imagePreviewUrl
                   }
+                  alt="Software"
                 />
               </div>
               <div className="upload-img-btn">
@@ -82,14 +95,13 @@ const EditSoftwareModel = ({ data }) => {
                     setValue={setDataToAdd}
                     setImagePreviewUrl={setImagePreviewUrl}
                     title="Choose File"
-                    onClickHander=""
                     className=""
                   />
                 </div>
                 <br />
                 <Divider />
                 <div>
-                  <label htmlFor="">
+                  <label>
                     Allowed JPG, JPEG or PNG. Image Resolution: 225px * 225px.
                     Max size of 800K
                   </label>
@@ -106,23 +118,20 @@ const EditSoftwareModel = ({ data }) => {
                   value={dataToAdd?.name}
                   setValue={setDataToAdd}
                   id="standard-basic"
-                  className=""
                   type="text"
-                  labe="Standard"
                   variant="standard"
                   placeholder="Enter Software Name"
                 />
               </FormControl>
               <FormControl className="from-controll">
                 <CategoryDropdown
-                  id=""
                   options={category}
                   label="category"
-                  value={dataToAdd?.category?._id} // Pass the default category value
+                  value={dataToAdd?.category?._id}
                   setValue={setDataToAdd}
                   className="margin-none"
                   title="Select Category"
-                />{" "}
+                />
               </FormControl>
               <FormControl className="from-controll">
                 <InputTypes
@@ -130,14 +139,11 @@ const EditSoftwareModel = ({ data }) => {
                   value={dataToAdd?.seats}
                   setValue={setDataToAdd}
                   id="standard-basic"
-                  className=""
                   type="number"
-                  labe="Standard"
                   variant="standard"
                   placeholder="Enter Software Seats"
                 />
               </FormControl>
-
               <FormControl className="from-controll">
                 <UseTextEditor
                   label="information"
@@ -145,19 +151,14 @@ const EditSoftwareModel = ({ data }) => {
                   setValue={setDataToAdd}
                 />
               </FormControl>
-
               <FormControl className="from-controll d-flex text-center ai-center cj-center mt-30">
-              <PrimaryButton
-  variant="contained"
-  title="Confirm"
-  size="medium"
-  onClickHandler={async () => {
-    await updateSoftware(dataToAdd, handleClose);
-    await fetchSoftware();
-  }}
-  className="btn-ws-100"
-/>
-
+                <PrimaryButton
+                  variant="contained"
+                  title="Confirm"
+                  size="medium"
+                  onClickHandler={handleSubmit}
+                  className="btn-ws-100"
+                />
               </FormControl>
             </FormGroup>
           </Paper>

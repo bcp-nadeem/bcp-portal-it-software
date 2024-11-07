@@ -14,8 +14,7 @@ const useCategory=()=>{
             throw error
         }
     }
-    useEffect(()=>{fetchCategory()},[]);
-    return {category,setCategory};
+    return {category,setCategory, fetchCategory};
 }
 
 export default useCategory

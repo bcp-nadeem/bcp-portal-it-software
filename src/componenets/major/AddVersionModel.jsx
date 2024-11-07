@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Heading from '../minor/Heading';
 import { Divider, FormControl, FormGroup, Paper } from '@mui/material';
 import InputTypes from '../minor/InputTypes';
@@ -30,15 +30,32 @@ const style = {
     p: 4
   };
 
-const AddVersionModel = () => {
+const AddVersionModel = ({parent,onSuccess}) => {
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [versionDataToAdd, setVersionDataToAdd] = useState({})
-    const {software} = useSoftware()
-    const {addVersion} = useVersion()
+    const [versionDataToAdd, setVersionDataToAdd] = useState({
+      parent:parent,
+      name: '',
+      status: '',
+      information: '',
+      downloadUrl: [],
+      installUrl: [],
 
+    })
+    const {software, fetchSoftware} = useSoftware()
+    const {addVersion} = useVersion()
+    useEffect(()=>{
+       fetchSoftware()
+    },[])
+    const handleSubmit = async () => {
+      await addVersion(versionDataToAdd, handleClose);
+        if (onSuccess) {
+          onSuccess();
+        
+      }
+    };
   return (
     <>
       <Button className='info-btn' onClick={handleOpen}><MdOutlineFilePresent /></Button>
@@ -58,7 +75,7 @@ const AddVersionModel = () => {
                 </FormControl>
 
                 <FormControl className='from-controll'>
-                  <CategoryDropdown options={software} value={versionDataToAdd?.parent?._id || ""} label="parent" setValue={setVersionDataToAdd} id="" className="margin-none" title="Select Software" />
+                  <CategoryDropdown options={software} value={versionDataToAdd?.parent?._id || parent?._id || ""} label="parent" setValue={setVersionDataToAdd} id="" className="margin-none" title="Select Software" />
                 </FormControl>
 
                 <FormControl className='from-controll'>
@@ -79,7 +96,7 @@ const AddVersionModel = () => {
                 <Divider className='mb-20' />
 
                 <FormControl className='from-controll d-flex text-center ai-center cj-center mt-20'>
-                  <PrimaryButton variant="contained" title="Submit" size="medium" onClickHander={()=>addVersion(versionDataToAdd, handleClose)} className="btn-ws-100"></PrimaryButton>
+                  <PrimaryButton variant="contained" title="Submit" size="medium" onClickHandler={()=>handleSubmit()} className="btn-ws-100"></PrimaryButton>
                 </FormControl>
             </FormGroup>
             </Paper>

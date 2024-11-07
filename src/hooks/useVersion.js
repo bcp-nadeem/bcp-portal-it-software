@@ -27,9 +27,10 @@ const useVersion = () => {
         }
     )
     if(response){
-        console.log(response.data.version);
+        console.log(response.data);
         alert("version added!!!")
         fetchSoftware()
+        close()
     }
     } catch (error) {
       console.log(error);

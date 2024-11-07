@@ -39,28 +39,30 @@ const useSoftware = () => {
           },
         }
       );
-      console.log(result.data.data);
-      
       return result.data.data;
     } catch (e) {
       setError(e.message);
       console.error(e);
+      return null;
     } finally {
       setIsLoading(false);
     }
   };
 
-  const addSoftware = async (data, close) => {
+  const addSoftware = async (data) => {
     setIsLoading(true);
     setError(null);
     try {
-      const { name, information, category, seats, image } = data;
       const formData = new FormData();
-      formData.append("name", name);
-      formData.append("information", information);
-      formData.append("category", category._id);
-      formData.append("seats", seats);
-      formData.append("imageUrl", image);
+      Object.keys(data).forEach(key => {
+        if (key === 'category') {
+          formData.append(key, data[key]._id);
+        } else if (key === 'image') {
+          formData.append('imageUrl', data[key]);
+        } else {
+          formData.append(key, data[key]);
+        }
+      });
 
       const response = await axios.post(
         `${import.meta.env.VITE_API_ROOT}/software`,
@@ -74,8 +76,7 @@ const useSoftware = () => {
       );
 
       if (response?.data?.success) {
-        await fetchSoftware(); // Refresh the entire list
-        close?.();
+        await fetchSoftware(); // Refresh the list after adding
         return true;
       }
       return false;
@@ -88,19 +89,20 @@ const useSoftware = () => {
     }
   };
 
-  const updateSoftware = async (data, close) => {
+  const updateSoftware = async (data) => {
     setIsLoading(true);
     setError(null);
     try {
-      const { name, information, category, seats, image } = data;
       const formData = new FormData();
-      formData.append("name", name);
-      formData.append("information", information);
-      formData.append("category", category._id);
-      formData.append("seats", seats);
-      if (image) {
-        formData.append("imageUrl", image);
-      }
+      Object.keys(data).forEach(key => {
+        if (key === 'category') {
+          formData.append(key, data[key]._id);
+        } else if (key === 'image' && data[key]) {
+          formData.append('imageUrl', data[key]);
+        } else if (key !== 'imageUrl') {
+          formData.append(key, data[key]);
+        }
+      });
 
       const response = await axios.put(
         `${import.meta.env.VITE_API_ROOT}/software/${data._id}`,
@@ -114,8 +116,7 @@ const useSoftware = () => {
       );
 
       if (response?.data?.success) {
-        await fetchSoftware(); // Refresh the entire list
-        close?.();
+        await fetchSoftware(); // Refresh the list after updating
         return true;
       }
       return false;
@@ -142,7 +143,7 @@ const useSoftware = () => {
       );
 
       if (response?.data?.success) {
-        await fetchSoftware(); // Refresh the entire list
+        await fetchSoftware(); // Refresh the list after deleting
         return true;
       }
       return false;

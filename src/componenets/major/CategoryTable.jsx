@@ -3,8 +3,15 @@ import BasicChips from "../minor/BasicChips"
 import Heading from "../minor/Heading"
 import CategoryOption from "./CategoryOption"
 import DeleteModel from "./DeleteModel"
+import useCategory from "../../hooks/useCategory"
+import { useEffect } from "react"
 
 const CategoryTable = () => {
+    const { category, fetchCategory  } = useCategory();
+    useEffect(() => {
+        fetchCategory();
+    },[])
+
   return (
     <>
     <table>
@@ -15,21 +22,27 @@ const CategoryTable = () => {
                 <th>Action</th>
             </tr>
         </thead>
-        <tr>
-            <td>
-                <Link to="/" className="d-flex d-flex-align-center gap-10">
-                   <Heading heading="Autocad" className="fs-16"></Heading>
-                </Link>
-            </td>
-            <td>
-                <BasicChips label="Active"></BasicChips>
-            </td>
-            <td>
-                <div className="d-flex cj-left">
-                    <DeleteModel></DeleteModel>
-                </div>
-            </td>
-        </tr>
+        {
+            category && category.length>0 && category?.map((cat) => {
+                return (
+                    <tr key={cat._id}>
+                    <td>
+                        <Link to="/" className="d-flex d-flex-align-center gap-10">
+                           <Heading heading={cat.name} className="fs-16"></Heading>
+                        </Link>
+                    </td>
+                    <td>
+                        <BasicChips label={cat.status}></BasicChips>
+                    </td>
+                    <td>
+                        <div className="d-flex cj-left">
+                            <DeleteModel></DeleteModel>
+                        </div>
+                    </td>
+                </tr>)
+            })
+        }
+       
     </table>
     </>
   )

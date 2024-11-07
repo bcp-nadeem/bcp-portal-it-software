@@ -10,6 +10,7 @@ const CategoryDropdown = ({ id, className, title, value, setValue, label, option
       const selectedCategory = options.find((item) => item._id === event.target.value);
       setValue((prevState) => ({ ...prevState, [label.toLowerCase()]: selectedCategory }));
     };
+    
   
     return (
       <FormControl variant="standard" sx={{ m: 1, minWidth: 150 }}>
@@ -22,13 +23,13 @@ const CategoryDropdown = ({ id, className, title, value, setValue, label, option
           onChange={handleChangeSelect}
           label={title}
         >
-          <MenuItem value="">
+          <MenuItem value={value}>
             <em>None</em>
           </MenuItem>
           {options &&
             options.length > 0 &&
             options.map((item) => (
-              <MenuItem key={item._id} value={item._id}>
+              <MenuItem key={item._id} value={item?._id}>
                 {item.name}
               </MenuItem>
             ))}
