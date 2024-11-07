@@ -8,19 +8,17 @@ import EditSoftwareModel from "./EditSoftwareModel";
 import { useEffect } from "react";
 import { CircularProgress } from "@mui/material";
 
-const Tables = () => {
-  const {
-    software,
-    isLoading,
-    error,
-    setSoftware,
-    fetchSoftware,
-    deleteSoftware,
-  } = useSoftware();
+const Tables = ({ data: software, fetchSoftware }) => {
+  const { isLoading, error, deleteSoftware } = useSoftware();
 
-  useEffect(() => {
-    fetchSoftware();
-  }, [fetchSoftware]);
+  const handleDeleteSoftware = async (id) => {
+    try {
+      await deleteSoftware(id);
+      fetchSoftware();
+    } catch (e) {
+      console.error("Error deleting software:", e);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -72,9 +70,9 @@ const Tables = () => {
             </td>
             <td>
               <div className="d-flex cj-left gap-10">
-                <AddVersionModel 
-                  parent={item} 
-                  onSuccess={fetchSoftware} 
+                <AddVersionModel
+                  parent={item}
+                  onSuccess={fetchSoftware}
                 />
                 <EditSoftwareModel
                   data={item}
@@ -82,7 +80,8 @@ const Tables = () => {
                 />
                 <DeleteModel
                   id={item._id}
-                  handleDelete={() => deleteSoftware(item._id)}
+                  handleDelete={() => handleDeleteSoftware(item._id)}
+                  onSuccess={fetchSoftware}
                 />
               </div>
             </td>

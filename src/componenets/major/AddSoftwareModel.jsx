@@ -1,13 +1,12 @@
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Heading from "../minor/Heading";
 import {
   Button,
   Divider,
   FormControl,
   FormGroup,
-  MenuItem,
   Paper,
 } from "@mui/material";
 import InputTypes from "../minor/InputTypes";
@@ -32,14 +31,30 @@ const style = {
   p: 4,
 };
 
-const AddSoftwareModel = () => {
+const AddSoftwareModal = ({ onSuccess }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [dataToAdd, setDataToAdd] = useState({});
   const { addSoftware } = useSoftware();
-  const { category } = useCategory();
+  const { category, fetchCategory } = useCategory();
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+
+  useEffect(() => {
+    fetchCategory();
+  }, [fetchCategory]);
+
+  const handleSubmit = async () => {
+    try {
+      await addSoftware(dataToAdd);
+      handleClose();
+      if (onSuccess) {
+        onSuccess();
+      }
+    } catch (error) {
+      console.error('Error adding software:', error);
+    }
+  };
 
   return (
     <>
@@ -64,7 +79,7 @@ const AddSoftwareModel = () => {
           <Paper className="mt-15" elevation={0}>
             <div className="asm-img-upload d-flex gap-10 pt-20 pb-20">
               <div className="upload-img-preview">
-                <img src={imagePreviewUrl || ""} />
+                <img src={imagePreviewUrl || ""} alt="Software" />
               </div>
               <div className="upload-img-btn">
                 <div className="mt-20">
@@ -73,7 +88,7 @@ const AddSoftwareModel = () => {
                     setValue={setDataToAdd}
                     setImagePreviewUrl={setImagePreviewUrl}
                     title="Choose File"
-                    onClickHander=""
+                    onClickHandler=""
                     className=""
                   />
                 </div>
@@ -99,7 +114,6 @@ const AddSoftwareModel = () => {
                   id="standard-basic"
                   className=""
                   type="text"
-                  labe="Standard"
                   variant="standard"
                   placeholder="Enter Software Name"
                 />
@@ -123,7 +137,6 @@ const AddSoftwareModel = () => {
                   id="standard-basic"
                   className=""
                   type="number"
-                  labe="Standard"
                   variant="standard"
                   placeholder="Enter Software Seats"
                 />
@@ -138,7 +151,13 @@ const AddSoftwareModel = () => {
               </FormControl>
 
               <FormControl className="from-controll d-flex text-center ai-center cj-center mt-30">
-                <PrimaryButton variant="contained" title="Confirm" size="medium" onClickHander={()=>addSoftware(dataToAdd, handleClose)} className="btn-ws-100"></PrimaryButton>
+                <PrimaryButton
+                  variant="contained"
+                  title="Confirm"
+                  size="medium"
+                  onClickHandler={handleSubmit}
+                  className="btn-ws-100"
+                />
               </FormControl>
             </FormGroup>
           </Paper>
@@ -148,4 +167,4 @@ const AddSoftwareModel = () => {
   );
 };
 
-export default AddSoftwareModel;
+export default AddSoftwareModal;

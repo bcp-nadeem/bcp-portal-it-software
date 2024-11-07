@@ -49,7 +49,7 @@ const useSoftware = () => {
     }
   };
 
-  const addSoftware = async (data) => {
+  const addSoftware = async (data, close) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -76,7 +76,8 @@ const useSoftware = () => {
       );
 
       if (response?.data?.success) {
-        await fetchSoftware(); // Refresh the list after adding
+        console.log(response.data);
+        close()
         return true;
       }
       return false;
