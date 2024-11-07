@@ -78,12 +78,12 @@ const EditSoftwareModel = ({ data, onSuccess }) => {
             <div className="asm-img-upload d-flex gap-10 pt-20 pb-20">
               <div className="upload-img-preview">
                 <img
-                  src={
+                  src={imagePreviewUrl ||
                     (dataToAdd?.imageUrl?.startsWith("uploads") &&
                       import.meta.env.VITE_API_ASSET +
                         "/" +
-                        dataToAdd?.imageUrl) ||
-                    imagePreviewUrl
+                        dataToAdd?.imageUrl) 
+                    
                   }
                   alt="Software"
                 />

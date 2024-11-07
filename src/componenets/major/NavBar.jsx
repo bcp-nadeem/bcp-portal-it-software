@@ -43,7 +43,8 @@ import UserAvatar from '../minor/UserAvatar';
   
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  
+    console.log(user);
+    
     const handleProfileMenuOpen = (event) => {
       setAnchorEl(event.currentTarget);
     };

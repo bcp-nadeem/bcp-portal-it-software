@@ -29,7 +29,8 @@ export const AuthProvider = ({ children }) => {
             const result = await axios.get(`${import.meta.env.VITE_API_ROOT}/auth/me`, {
               headers: { authToken: `${token}` },
             });
-            setUser({ info: result.data.data, isAuthenticated: true });
+            
+            // setUser({ info: result.data.data, isAuthenticated: true });
           } catch (error) {
             await refreshToken();
           }
