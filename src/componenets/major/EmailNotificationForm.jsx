@@ -5,15 +5,36 @@ import PrimaryButton from "../minor/PrimaryButton"
 import UserDropDown from "./UserDropDown"
 import CategoryDropdown from "./CategoryDropdown"
 import UserMultiSelect from "./UserMultiSelect"
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 
 const EmailNotificationForm = () => {
+    const [users, setUsers] = useState([])
+    const getAllUsers = async()=>{
+        try {
+            const result = await axios.get(`${import.meta.env.VITE_API_ROOT}/auth/user/all`,{
+                headers:{
+                    authToken: localStorage.getItem("accessToken"),
+                }
+            })
+
+            console.log(result.data);
+            
+        } catch (error) {
+            throw error
+        }
+    }
+
+    useEffect(()=>{
+        getAllUsers()
+    },[])
   return (
     <>
             <Paper className='mt-20' elevation={0}>
                 <FormGroup className='d-flex model-from-style'>
                     <FormControl className='from-controll'>
-                        <UserMultiSelect title="Select User" />
+                        <UserMultiSelect data={users}  title="Select User" />
                     </FormControl>
                     <FormControl className='from-controll'>
                         <CategoryDropdown id="" className="margin-none" title="Select Software" />

@@ -31,7 +31,7 @@ const names = [
   'Kelly Snyder',
 ];
 
-const UserMultiSelect = () => {
+const UserMultiSelect = ({data}) => {
 
     const [personName, setPersonName] = useState([]);
 
@@ -59,7 +59,7 @@ const UserMultiSelect = () => {
             renderValue={(selected) => selected.join(', ')}
             MenuProps={MenuProps}
             >
-            {names.map((name) => (
+            {data.map((name) => (
                 <MenuItem key={name} value={name}>
                 <Checkbox checked={personName.includes(name)} />
                 <ListItemText primary={name} />
