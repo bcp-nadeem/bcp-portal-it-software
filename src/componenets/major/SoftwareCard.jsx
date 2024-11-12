@@ -13,7 +13,9 @@ const SoftwareCard = ({id, src, title, category, description, version}) => {
     <>
             <Card className="software-grid">
                 <div className="software-grid-img">
-                    <img src={src} alt="" />
+
+                    {src ? <img src={src} alt="" /> : <h1>hello</h1>}
+
                 </div>
                 <div className="software-grid-head">
                     <h3>{title}</h3>

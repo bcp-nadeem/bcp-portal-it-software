@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useSoftware from "../hooks/useSoftware";
 import QuillEditor from "../componenets/major/QuillEditor";
+import PrimaryButton from "../componenets/minor/PrimaryButton";
 
 const SoftwareDetails = () => {
   const { softwareId } = useParams();
@@ -98,14 +99,67 @@ const SoftwareDetails = () => {
             </section>
             <section className='software-details-mid'>
                 <div className='software-details-boxes-indetails-page'> 
-                   <InfoCards Icons={<BiStats />} Numbers={software?.seats} text="Seats"></InfoCards>
-                   <InfoCards Icons={<FiCpu />} Numbers={software?.version?.length} text="Version"></InfoCards>
+                   <InfoCards Icons={<BiStats />} Numbers={software?.seats} text="Total Seats"></InfoCards>
+                   <InfoCards Icons={<FiCpu />} Numbers={software?.version?.length} text="Total Version"></InfoCards>
                    <InfoCards Icons={<FiGitMerge />} Numbers={software?.category?.name} text="Category"></InfoCards>
                 </div>
             </section>
             <section className='software-details-down'>
               <div className='software-info-cover'>
                 <QuillEditor description={software?.information} />
+              </div>
+              <div className="software-download-history tableFixHead">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Version Name</th>
+                    <th>Version Decription</th>
+                    <th>Download link</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>AutoCad</td>
+                    <td className="sv-description-style">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
+                    <td><PrimaryButton title="Download" /></td>
+                  </tr>
+                  <tr>
+                    <td>AutoCad</td>
+                    <td className="sv-description-style">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
+                    <td><PrimaryButton title="Download" /></td>
+                  </tr>
+                  <tr>
+                    <td>AutoCad</td>
+                    <td className="sv-description-style">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
+                    <td><PrimaryButton title="Download" /></td>
+                  </tr>
+                  <tr>
+                    <td>AutoCad</td>
+                    <td className="sv-description-style">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
+                    <td><PrimaryButton title="Download" /></td>
+                  </tr>
+                  <tr>
+                    <td>AutoCad</td>
+                    <td className="sv-description-style">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
+                    <td><PrimaryButton title="Download" /></td>
+                  </tr>
+                  <tr>
+                    <td>AutoCad</td>
+                    <td className="sv-description-style">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
+                    <td><PrimaryButton title="Download" /></td>
+                  </tr>
+                  <tr>
+                    <td>AutoCad</td>
+                    <td className="sv-description-style">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
+                    <td><PrimaryButton title="Download" /></td>
+                  </tr>
+                  <tr>
+                    <td>AutoCad</td>
+                    <td className="sv-description-style">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
+                    <td><PrimaryButton title="Download" /></td>
+                  </tr>
+                </tbody>
+              </table>
               </div>
             </section>
         </section>

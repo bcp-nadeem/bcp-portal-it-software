@@ -9,6 +9,7 @@ import SoftwareList from "../pages/SoftwareList.jsx";
 import CategoryList from "../pages/CategoryList.jsx";
 import UserProfile from "../pages/UserProfile.jsx";
 import ProtectedRoute from "../componenets/ProtectedRoute.jsx";
+import EmailNotification from "../pages/EmailNotification.jsx";
 
 // Declare the router
 const router = createBrowserRouter([
@@ -71,6 +72,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <UserProfile />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/email-notification",
+        element: (
+          <ProtectedRoute>
+            <EmailNotification />
           </ProtectedRoute>
         ),
       },

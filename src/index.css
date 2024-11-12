@@ -435,11 +435,14 @@ span.software-list-action-btn svg {
     align-items: center;
     flex-wrap: wrap;
 }
+.software-details-info-img img {
+    max-width: 100px;
+}
 .software-details-info-img {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 195px;
+    gap: 15px;
 }
 .software-details-info-button button {
     border: none;
@@ -475,9 +478,37 @@ span.software-list-action-btn svg {
 }
 section.software-details-down {
     margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 .software-info-cover {
     margin-bottom: 15px;
+    width: 800px;
+    max-width: 800px;
+}
+.software-download-history {
+    width: 800px;
+    max-width: 800px;
+}
+.software-download-history table {
+    height: 400px;
+    overflow-y: scroll;
+    display: block;
+}
+
+.message.success {
+    position: absolute;
+    top: 80px;
+    z-index: 1;
+    right: 0;
+    margin-right: 10px;
+    width: 150px;
+}
+
+.sv-description-style{
+    font-size: 13px;
+    line-height: 18px;
 }
 .software-info-cover ul li {
     font-size: 14px;
@@ -787,9 +818,12 @@ section.profile-buttom-details {
     display: flex;
     justify-content: start;
     flex-wrap: wrap;
+    position: relative;
 }
 .software-grid {
     max-width: 300px;
+    width: 300px;
+    height: 265px;
     background-color: #ffffff;
     padding: 15px;
     border-radius: 5px;
@@ -831,27 +865,37 @@ section.software-grid-main {
 }
 .software-grid-tags {
     display: flex;
-    justify-content: flex-start;
-    margin-bottom: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 15px 0px;
+    gap: 8px;
 }
 .software-grid-tags span {
     padding: 2px 20px;
     font-size: 11px;
-    color: var(--primary_color);
+    color: var(--dark_color);
     font-weight: 600;
 }
 .software-grid-install-btn {
     display: flex;
     justify-content: space-evenly;
-    gap : 15px
+    gap: 15px;
+    height: 35px;
+    width: 300px;
+    align-items: end;
+    position: absolute;
+    bottom: 25px;
+}
+.software-quiek-info-head img {
+    max-width: 100px;
 }
 .software-grid-install-btn button {
     background-color: #3264c8;
-    width: 130px;
+    width: 105px;
     padding: 8px;
     border-radius: 5px;
     color: #fff;
-    font-size: 13px;
+    font-size: 10px;
     cursor: pointer;
     border: none;
 }
@@ -909,6 +953,7 @@ section.software-grid-main {
     top: 0px;
     right: 0;
     max-width: 380px;
+    width: 380px;
     height: 100%;
     background-color: #F2F8FF;
     display: flex;
@@ -930,11 +975,15 @@ section.software-grid-main {
 } */
 .software-quiek-info-btns {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 5px;
+    position: absolute;
+    bottom: 5%;
+    width: 340px;
 }
 .software-quiek-info-btns button {
-    font-size: 13px;
-    padding: 8px 16px;
+    font-size: 11px;
+    padding: 8px 15px;
     border: none;
     border-radius: 3px;
     cursor: pointer;
@@ -962,4 +1011,12 @@ section.notification-grid-cover img {
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
+}
+
+@media(max-width: 1500px){
+    .software-grid-install-btn{
+        position:relative;
+        bottom: 0px;
+        width: 100%;
+    }
 }

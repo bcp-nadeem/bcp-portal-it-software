@@ -130,7 +130,7 @@ import UserAvatar from '../minor/UserAvatar';
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon className='nav-icon-style'><FiBell /></ListItemIcon>
-              <ListItemText primary="Notifications" />
+              <Link to="/email-notification"><ListItemText primary="Notifications" /></Link>
             </ListItemButton>
           </ListItem>
         </List>
@@ -174,11 +174,6 @@ import UserAvatar from '../minor/UserAvatar';
                   />
                   <Box sx={{ flexGrow: 1 }} />
                   <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                    <IconButton size="large" aria-label="show notifications" color="inherit">
-                      <Badge badgeContent={1} color="error">
-                        <IoNotifications />
-                      </Badge>
-                    </IconButton>
                     <IconButton
                       size="large"
                       edge="end"

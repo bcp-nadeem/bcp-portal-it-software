@@ -1,7 +1,9 @@
 import { FiActivity, FiUploadCloud } from "react-icons/fi"
 import { IoCode } from "react-icons/io5"
 import { LuUsers } from "react-icons/lu"
-import { RiCheckDoubleFill } from "react-icons/ri"
+import { GoVersions } from "react-icons/go";
+import { LiaDownloadSolid } from "react-icons/lia";
+
 
 const Dashboard = () => {
   return (
@@ -20,9 +22,9 @@ const Dashboard = () => {
                       <div className='score-title-dash'>Total Software’s</div>
                     </div>
                     <div className='dashboard-grid-value-show'>
-                      <div className='lg-icon'><FiUploadCloud /></div>
+                      <div className='lg-icon'><LiaDownloadSolid /></div>
                       <div className='score-dash'>02</div>
-                      <div className='score-title-dash'>New Updates</div>
+                      <div className='score-title-dash'>Total Downloads</div>
                     </div>
                   </div>
                   <div>
@@ -32,13 +34,13 @@ const Dashboard = () => {
                       <div className='score-title-dash'>Total Users</div>
                     </div>
                     <div className='dashboard-grid-value-show'>
-                      <div className='lg-icon'><FiActivity /></div>
+                      <div className='lg-icon'><GoVersions /></div>
                       <div className='score-dash'>02</div>
-                      <div className='score-title-dash'>Active Trials</div>
+                      <div className='score-title-dash'>Total Versions</div>
                     </div>
                   </div>
               </div>
-              <div className='dashboard-grid-part'>
+              {/* <div className='dashboard-grid-part'>
                 <div className='dashboard-grid-announcements'>
                     <div className="announcement-title"><h2>Upcoming releases 
                     and announcements...</h2></div>
@@ -49,7 +51,7 @@ const Dashboard = () => {
                     </div>
                     <div className="announcement-button"><RiCheckDoubleFill /> Checkout</div>
                 </div>
-              </div>
+              </div> */}
           </section>
 
         </section>

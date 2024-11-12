@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { useState } from 'react';
 import Heading from '../minor/Heading';
-import { Divider, FormControl, FormGroup, MenuItem, Paper } from '@mui/material';
+import { Button, Divider, FormControl, FormGroup, MenuItem, Paper } from '@mui/material';
 import InputTypes from '../minor/InputTypes';
 import CategoryDropdown from './CategoryDropdown';
 import PrimaryButton from '../minor/PrimaryButton';
@@ -33,9 +33,14 @@ const AddCategoryModel = () => {
   return (
     <>
 
-    <MenuItem onClick={handleOpen} disableRipple>
+      <Button
+        variant="contained"
+        className=""
+        onClick={handleOpen}
+        disableRipple
+      >
         <IoAddSharp /> &nbsp;Add Category
-    </MenuItem>
+      </Button>
 
       <Modal
         open={open}
@@ -49,10 +54,10 @@ const AddCategoryModel = () => {
             <Paper className='mt-20' elevation={0}>
               <FormGroup className='d-flex model-from-style'>
                 <FormControl className='from-controll'>
-                  <InputTypes id="standard-basic" className="" type="text" labe="Standard" variant="standard" placeholder="Enter Category Name" />
+                  <InputTypes id="standard-basic" label="Add Category Name" className="" type="text" labe="Standard" variant="standard" placeholder="Enter Category Name" />
                 </FormControl>
                 <FormControl className='from-controll'>
-                  <StatusDropdown id="" className="margin-none" title="Select Category" />
+                  <StatusDropdown id="" className="margin-none" title="Select Status" />
                 </FormControl>
                 <FormControl className='from-controll d-flex text-center ai-center cj-center mt-30'>
                   <PrimaryButton variant="contained" title="Submit" size="medium" onClickHander="" className="btn-ws-100"></PrimaryButton>
