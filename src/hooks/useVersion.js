@@ -36,7 +36,16 @@ const useVersion = () => {
       console.log(error);
     }
   };
-  return { addVersion };
+
+  const getTotalVersions = async() => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_ROOT}/version/count`); 
+      return response.data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return { addVersion, getTotalVersions };
 };
 
 export default useVersion;

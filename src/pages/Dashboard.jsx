@@ -3,9 +3,47 @@ import { IoCode } from "react-icons/io5"
 import { LuUsers } from "react-icons/lu"
 import { GoVersions } from "react-icons/go";
 import { LiaDownloadSolid } from "react-icons/lia";
+import useSoftware from "../hooks/useSoftware";
+import { useEffect, useState } from "react";
+import useVersion from "../hooks/useVersion";
+import axios from "axios";
 
 
 const Dashboard = () => {
+  const {getTotalSoftware} = useSoftware();
+  const {getTotalVersions} = useVersion();
+
+  const [stats, setStats] = useState({
+    totalSoftware: 0,
+    totalDownloads: 0,
+    totalUsers: 0,
+    totalVersions: 0
+  });
+
+  const getTotalUsers = async()=>{
+    try {
+      const result = await axios.get(`${import.meta.env.VITE_API_ROOT}/auth/count`)
+      
+      setStats((prevStats) => ({ ...prevStats, totalUsers: result.data.data }))
+    } catch (error) {
+      throw error
+    }
+  }
+
+  useEffect(() => {
+    const softwares = getTotalSoftware()
+    softwares.then((res) => {
+      setStats(prev=>({...prev, totalSoftware: res}))
+    })
+
+    const versions = getTotalVersions()
+    versions.then((res) => {
+      setStats(prev=>({...prev, totalVersions: res}))
+    })
+
+    getTotalUsers()
+
+  },[])
   return (
     <>
      <section className="main-section-mid">
@@ -18,24 +56,24 @@ const Dashboard = () => {
                   <div>
                     <div className='dashboard-grid-value-show'>
                       <div className='lg-icon'><IoCode /></div>
-                      <div className='score-dash'>20</div>
+                      <div className='score-dash'>{stats?.totalSoftware}</div>
                       <div className='score-title-dash'>Total Software’s</div>
                     </div>
                     <div className='dashboard-grid-value-show'>
                       <div className='lg-icon'><LiaDownloadSolid /></div>
-                      <div className='score-dash'>02</div>
+                      <div className='score-dash'>00</div>
                       <div className='score-title-dash'>Total Downloads</div>
                     </div>
                   </div>
                   <div>
                     <div className='dashboard-grid-value-show'>
                       <div className='lg-icon'><LuUsers /></div>
-                      <div className='score-dash'>02</div>
+                      <div className='score-dash'>{stats?.totalUsers}</div>
                       <div className='score-title-dash'>Total Users</div>
                     </div>
                     <div className='dashboard-grid-value-show'>
                       <div className='lg-icon'><GoVersions /></div>
-                      <div className='score-dash'>02</div>
+                      <div className='score-dash'>{stats?.totalVersions}</div>
                       <div className='score-title-dash'>Total Versions</div>
                     </div>
                   </div>

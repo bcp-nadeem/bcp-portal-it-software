@@ -49,6 +49,23 @@ const useSoftware = () => {
     }
   };
 
+  const getTotalSoftware = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const result = await axios.get(
+        `${import.meta.env.VITE_API_ROOT}/software/count`
+      );      
+      return result.data.data.totalItems;
+    } catch (e) { 
+      setError(e.message);
+      console.error(e);
+      return null;
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   const addSoftware = async (data, close) => {
     setIsLoading(true);
     setError(null);
@@ -163,6 +180,7 @@ const useSoftware = () => {
     error,
     fetchSoftware,
     getSoftwareById,
+    getTotalSoftware,
     addSoftware,
     updateSoftware,
     deleteSoftware,

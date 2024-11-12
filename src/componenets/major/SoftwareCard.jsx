@@ -38,7 +38,7 @@ const SoftwareCard = ({id, src, title, category, description, version}) => {
                         selectedVersion &&  selectedVersion?.installUrl && <Button href={selectedVersion?.installUrl} >Install {selectedVersion.name}</Button>
                     }
                     {
-                        selectedVersion &&  selectedVersion?.downloadUrl && <Button >Download {selectedVersion.name}</Button>
+                        selectedVersion &&  selectedVersion?.downloadUrl && <Button href={selectedVersion?.downloadUrl} >Download {selectedVersion.name}</Button>
                     }
                     <Button onClick={() => setIsOpenSoftwareInfo(!isOpenSoftwareInfo)}>
                         {isOpenSoftwareInfo ? "Close" : "Quick Info"}
