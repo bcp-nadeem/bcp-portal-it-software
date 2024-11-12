@@ -10,6 +10,7 @@ import UploadButton from '../minor/UploadButton';
 import UseTextEditor from '../major/TextEditor';
 import { IoAddSharp } from 'react-icons/io5';
 import StatusDropdown from './StatusDropDown';
+import useCategory from '../../hooks/useCategory';
 
 const style = {
     position: 'absolute',
@@ -24,11 +25,15 @@ const style = {
     p: 4
   };
 
-const AddCategoryModel = () => {
-
+const AddCategoryModel = ({onSuccess}) => {
+    const { addCategory } = useCategory();
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [newCategoryValue, setNewCategoryValue] = useState({
+      name: '',
+      status: '',
+    });
 
   return (
     <>
@@ -54,13 +59,13 @@ const AddCategoryModel = () => {
             <Paper className='mt-20' elevation={0}>
               <FormGroup className='d-flex model-from-style'>
                 <FormControl className='from-controll'>
-                  <InputTypes id="standard-basic" label="Add Category Name" className="" type="text" labe="Standard" variant="standard" placeholder="Enter Category Name" />
+                  <InputTypes id="standard-basic" value={newCategoryValue.name} setValue={setNewCategoryValue} label="Name" className="" type="text" labe="Standard" variant="standard" placeholder="Enter Category Name" />
                 </FormControl>
                 <FormControl className='from-controll'>
-                  <StatusDropdown id="" className="margin-none" title="Select Status" />
+                  <StatusDropdown label="Status" id="" value={newCategoryValue.status} setValue={setNewCategoryValue} className="margin-none" title="Select Status" options={['active', 'inactive']} />
                 </FormControl>
                 <FormControl className='from-controll d-flex text-center ai-center cj-center mt-30'>
-                  <PrimaryButton variant="contained" title="Submit" size="medium" onClickHander="" className="btn-ws-100"></PrimaryButton>
+                  <PrimaryButton variant="contained" title="Submit" size="medium" onClickHandler={()=>addCategory(newCategoryValue, handleClose, onSuccess)} className="btn-ws-100"></PrimaryButton>
                 </FormControl>
             </FormGroup>
             </Paper>

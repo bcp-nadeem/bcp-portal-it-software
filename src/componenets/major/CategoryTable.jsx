@@ -5,16 +5,10 @@ import DeleteModel from "./DeleteModel";
 import useCategory from "../../hooks/useCategory";
 import { useEffect, useCallback } from "react";
 
-const CategoryTable = () => {
-  const { category, fetchCategory, deleteCategory } = useCategory();
+const CategoryTable = ({data , fetchCategory}) => {
+  const { deleteCategory } = useCategory();
 
-  const fetchCategoryData = useCallback(() => {
-    fetchCategory();
-  }, [fetchCategory]);
 
-  useEffect(() => {
-    fetchCategoryData();
-  }, [fetchCategoryData]);
 
   return (
     <>
@@ -27,8 +21,8 @@ const CategoryTable = () => {
           </tr>
         </thead>
         <tbody>
-          {category.length > 0 &&
-            category.map((cat) => (
+          {data.length > 0 &&
+            data.map((cat) => (
               <tr key={cat._id}>
                 <td>
                   <Link to="/" className="d-flex d-flex-align-center gap-10">
@@ -41,8 +35,9 @@ const CategoryTable = () => {
                 <td>
                   <div className="d-flex cj-left">
                     <DeleteModel
-                      handleDelete={() => deleteCategory(cat._id)}
-                      onSuccess={fetchCategoryData}
+                    id={cat._id}
+                      handleDelete={deleteCategory}
+                      onSuccess={fetchCategory}
                     ></DeleteModel>
                   </div>
                 </td>

@@ -22,14 +22,13 @@ const style = {
 
 const DeleteModel = ({ id, handleDelete, onSuccess }) => {
   const [open, setOpen] = useState(false);
-  const { deleteSoftware } = useSoftware();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const onClick = async () => {
     try {
-      await deleteSoftware(id);
+      await handleDelete(id);
       handleClose();
       if (onSuccess) {
         onSuccess();

@@ -53,7 +53,7 @@ const Tables = ({ data: software, fetchSoftware }) => {
             <td>
               <Link to="/" className="d-flex d-flex-align-center gap-10">
                 <UserAvatar
-                  src={`${import.meta.env.VITE_API_ASSET}/${item.imageUrl}`}
+                  src={`${item.imageUrl}`}
                 />
                 <Heading heading={item.name} className="fs-16" />
               </Link>

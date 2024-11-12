@@ -4,7 +4,7 @@ import Select from '@mui/material/Select';
 import Labels from '../minor/Labels'
 import { useState } from 'react';
 
-const StatusDropdown = ({id, className, title, value ,setValue, label}) => {
+const StatusDropdown = ({id, className, title, value ,setValue, label, options}) => {
 
   return (
     <FormControl variant="standard" sx={{ m: 1, minWidth: 150}}>
@@ -23,9 +23,13 @@ const StatusDropdown = ({id, className, title, value ,setValue, label}) => {
         <MenuItem value="">
             <em>None</em>
         </MenuItem>
-        <MenuItem value="available">Available</MenuItem>
-        <MenuItem value="unavailable">Unavailable</MenuItem>
-        <MenuItem value="deprecated">Deprecated</MenuItem>
+        {
+          options && options.length > 0 && options.map((item, index) => (
+            <MenuItem key={index} value={item}>
+              {item}
+            </MenuItem>
+          ))
+        }
         </Select>
   </FormControl>
   )

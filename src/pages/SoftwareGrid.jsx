@@ -27,7 +27,7 @@ const SoftwareGrid = () => {
                 <div className="software-grids">
                     {
                         software && software.length>0 && software.map((item)=>(
-                            <SoftwareCard key={item._id} id={item._id} src={`${import.meta.env.VITE_API_ASSET}/${item?.imageUrl}`} title={item.name} category={item.category.name} 
+                            <SoftwareCard key={item._id} id={item._id} src={`${item?.imageUrl}`} title={item.name} category={item.category.name} 
                             description={item.information} version={item.version}></SoftwareCard>
                         ))
                     }

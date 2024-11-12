@@ -28,9 +28,9 @@ const SoftwareCard = ({id, src, title, category, description, version}) => {
                 </div> */}
                 <div className="software-grid-tags">
                     {
-                        version && version.length>0 && version.map((item)=>(
-                            <BasicChips onClick={() => setSelectedVersion(item)} key={item._id} label={item.name} size="small" ></BasicChips>
-                        )) || <BasicChips label={"No version found"} size="small" ></BasicChips>
+                        version && version.length>0 && 
+                            <BasicChips onClick={() => setSelectedVersion(version[version.length-1])} key={version[version.length-1]._id} label={version[version.length-1].name} size="small" ></BasicChips>
+                         || <BasicChips label={"No version found"} size="small" ></BasicChips>
                     }
                 </div>
                 <div className="software-grid-install-btn">

@@ -1,5 +1,5 @@
 import { MdKeyboardArrowRight } from "react-icons/md";
-import SoftwareImg from "../assets/images/software/software-img.png"
+import SoftwareImg from "../assets/images/software/software-img.png";
 import { BiStats } from "react-icons/bi";
 import { FiCpu } from "react-icons/fi";
 import { FiGitMerge } from "react-icons/fi";
@@ -29,12 +29,12 @@ const SoftwareDetails = () => {
           if (result) {
             setSoftware(result);
           } else {
-            setError('Software not found');
+            setError("Software not found");
           }
         }
       } catch (err) {
         if (isMounted) {
-          setError(err.message || 'Failed to fetch software details');
+          setError(err.message || "Failed to fetch software details");
         }
       } finally {
         if (isMounted) {
@@ -77,38 +77,57 @@ const SoftwareDetails = () => {
 
   return (
     <>
-      <section className='main-content-section'>
+      <section className="main-content-section">
         <div className="main-topic-headign">
-            <h3>Dashboard  <MdKeyboardArrowRight /> Software <MdKeyboardArrowRight /> <span>Software details</span></h3>
+          <h3>
+            Dashboard <MdKeyboardArrowRight /> Software <MdKeyboardArrowRight />{" "}
+            <span>Software details</span>
+          </h3>
         </div>
-        <section className='software-details-cover'>
-
-            <section className='software-details-head'>
-                <div className='software-details-head-info'>
-                    <div className='software-details-info-img'>
-                        <img src={`${import.meta.env.VITE_API_ASSET}/${software?.imageUrl}`} alt="" />
-                        <div className='software-details-info-title'>
-                            <h3>{software?.name}</h3>
-                            <label htmlFor="">{software?.category?.name}</label>
-                        </div>
-                    </div>
-                    <div className='software-details-info-button'>
-                        <Button>Download</Button>
-                    </div>
+        <section className="software-details-cover">
+          <section className="software-details-head">
+            <div className="software-details-head-info">
+              <div className="software-details-info-img">
+                <img
+                  src={`${import.meta.env.VITE_API_ASSET}/${
+                    software?.imageUrl
+                  }`}
+                  alt=""
+                />
+                <div className="software-details-info-title">
+                  <h3>{software?.name}</h3>
+                  <label htmlFor="">{software?.category?.name}</label>
                 </div>
-            </section>
-            <section className='software-details-mid'>
-                <div className='software-details-boxes-indetails-page'> 
-                   <InfoCards Icons={<BiStats />} Numbers={software?.seats} text="Total Seats"></InfoCards>
-                   <InfoCards Icons={<FiCpu />} Numbers={software?.version?.length} text="Total Version"></InfoCards>
-                   <InfoCards Icons={<FiGitMerge />} Numbers={software?.category?.name} text="Category"></InfoCards>
-                </div>
-            </section>
-            <section className='software-details-down'>
-              <div className='software-info-cover'>
-                <QuillEditor description={software?.information} />
               </div>
-              <div className="software-download-history tableFixHead">
+              <div className="software-details-info-button">
+                <Button>Download</Button>
+              </div>
+            </div>
+          </section>
+          <section className="software-details-mid">
+            <div className="software-details-boxes-indetails-page">
+              <InfoCards
+                Icons={<BiStats />}
+                Numbers={software?.seats}
+                text="Total Seats"
+              ></InfoCards>
+              <InfoCards
+                Icons={<FiCpu />}
+                Numbers={software?.version?.length}
+                text="Total Version"
+              ></InfoCards>
+              <InfoCards
+                Icons={<FiGitMerge />}
+                Numbers={software?.category?.name}
+                text="Category"
+              ></InfoCards>
+            </div>
+          </section>
+          <section className="software-details-down">
+            <div className="software-info-cover">
+              <QuillEditor description={software?.information} />
+            </div>
+            <div className="software-download-history tableFixHead">
               <table>
                 <thead>
                   <tr>
@@ -118,54 +137,26 @@ const SoftwareDetails = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>AutoCad</td>
-                    <td className="sv-description-style">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
-                    <td><PrimaryButton title="Download" /></td>
-                  </tr>
-                  <tr>
-                    <td>AutoCad</td>
-                    <td className="sv-description-style">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
-                    <td><PrimaryButton title="Download" /></td>
-                  </tr>
-                  <tr>
-                    <td>AutoCad</td>
-                    <td className="sv-description-style">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
-                    <td><PrimaryButton title="Download" /></td>
-                  </tr>
-                  <tr>
-                    <td>AutoCad</td>
-                    <td className="sv-description-style">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
-                    <td><PrimaryButton title="Download" /></td>
-                  </tr>
-                  <tr>
-                    <td>AutoCad</td>
-                    <td className="sv-description-style">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
-                    <td><PrimaryButton title="Download" /></td>
-                  </tr>
-                  <tr>
-                    <td>AutoCad</td>
-                    <td className="sv-description-style">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
-                    <td><PrimaryButton title="Download" /></td>
-                  </tr>
-                  <tr>
-                    <td>AutoCad</td>
-                    <td className="sv-description-style">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
-                    <td><PrimaryButton title="Download" /></td>
-                  </tr>
-                  <tr>
-                    <td>AutoCad</td>
-                    <td className="sv-description-style">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
-                    <td><PrimaryButton title="Download" /></td>
-                  </tr>
+                  {software?.version?.map((version, index) => (
+                      <tr key={index}>
+                        <td>{version.name}</td>
+                        <td className="sv-description-style">
+                          <QuillEditor description={version.information}/>
+                        </td>
+                        <td>
+                          <PrimaryButton title="Download" />
+                        </td>
+                      </tr>
+                 
+                  ))}
                 </tbody>
               </table>
-              </div>
-            </section>
+            </div>
+          </section>
         </section>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default SoftwareDetails
+export default SoftwareDetails;
