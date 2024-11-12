@@ -79,7 +79,7 @@ const AddVersionModel = ({parent,onSuccess}) => {
                 </FormControl>
 
                 <FormControl className='from-controll'>
-                    <StatusDropdown value={versionDataToAdd?.status || ""} setValue={setVersionDataToAdd} label="status" title="Select Status" />
+                    <StatusDropdown options={['available', 'unavailable', 'deprecated']} value={versionDataToAdd?.status || ""} setValue={setVersionDataToAdd} label="status" title="Select Status" />
                 </FormControl>
 
                 <FormControl className='from-controll'>
