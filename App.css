@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: content-box;
+}
+:root{
+    --primary_color: #0061FF;
+    --dark_color: #63788B;
+}
+body{
+    font-family: "Roboto", sans-serif;
+}
+.text-center{
+text-align: center;
+}
+.nav-btn-color svg{
+    color: var(--primary_color);
+    font-size: 24px;
+}
+/* defualt property */
+.d-flex{
+    display: flex;
+}
+.cj-center{
+    justify-content: center;
+}
+.cj-right{
+    justify-content: flex-end;
+}
+.cj-left{
+    justify-content: flex-start;
+}
+.ai-center{
+    align-items: center;
+}
+.danger-btn {
+    font-size: 18px !important;
+    color: red !important;
+    background-color: #ff00001f !important;
+}
+.info-btn {
+    font-size: 18px !important;
+    color: #6dd7d4 !important;
+    background-color: #79cdca33 !important;
+}
+.success-btn {
+    font-size: 18px !important;
+    color: green !important;
+    background-color: #00800033 !important;
+}
+.mt-100{
+    margin-top: 100px;
+}
+.mt-80{
+    margin-top: 80px;
+}
+.mt-70{
+    margin-top: 70px;
+}
+.mt-50{
+    margin-top: 50px;
+}
+.mt-20{
+    margin-top: 20px;
+}
+/* Margin Botton */
+.mb-100{
+    margin-bottom: 100px;
+}
+.mb-80{
+    margin-bottom: 80px;
+}
+.mb-70{
+    margin-bottom: 70px;
+}
+.mb-50{
+    margin-bottom: 50px;
+}
+.mb-20{
+    margin-bottom: 20px !important;
+}
+.mb-15{
+    margin-bottom: 15px !important;
+}
+.mb-10{
+    margin-bottom: 10px;
+}
+.mb-5{
+    margin-bottom: 5px;
+}
+
+
+
+
+
+.img-logo {
+    max-width: 50px;
+    border-radius: 100%;
+}
+.nav-img-holder {
+    text-align: center;
+    padding: 4px 0px 0px;
+}
+.img-logo-nav{
+    max-width: 60px;
+    border-radius: 100%;
+}
+.nav-icon-style{
+    font-size: 20px;
+    font-weight: 600;
+}
+.nav-bar-style {
+    box-shadow: 0px 2px 8px #e7e7e7 !important;
+}
+.bgImageFromMiddleTop{
+    width: 100%;
+    height: 320px;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 0;
+    transform: translateX(0px) rotate(180deg);
+    z-index: -1;
+}
+.bgImageFromMiddleButtom{
+    width: 100%;
+    height: 320px;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+.login-form-style{
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+}
+.login-form-group input{
+    margin-bottom: 5px;
+}
+.login-form-group .login-form-input{
+    margin-bottom: 15px;
+}
+
+*::-webkit-scrollbar{
+    display: none;
+}
+
+
+
+
+:root {
+    --primary-blue: #007bff;
+    --light-blue: #e6f2ff;
+    --white: #ffffff;
+    --dark-blue: #0056b3;
+  }
+  
+  .message {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    background-color: var(--white);
+    border: 1px solid var(--primary-blue);
+  }
+  
+  .message.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .message.success,
+  .message.error {
+    background-color: var(--light-blue);
+  }
+  
+  .message-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .message p {
+    margin: 0;
+    color: var(--primary-blue);
+    font-weight: 500;
+  }
+  
+  .action-button {
+    background: var(--primary-blue);
+    color: var(--white);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 16px;
+    font-weight: 600;
+  }
+  
+  .action-button:hover {
+    background-color: var(--dark-blue);
+  }
+  
+  .close-button {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 16px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    color: var(--primary-blue);
+  }
+  
+  .close-button:hover {
+    opacity: 1;
+  }
