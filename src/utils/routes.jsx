@@ -41,7 +41,7 @@ const router = createBrowserRouter([
           <ProtectedRoute >
             <SoftwareGrid />
           </ProtectedRoute>
-        ), // Only accessible to admins
+        ), 
       },
       {
         path: "/software-details/:softwareId",
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
           <ProtectedRoute >
             <SoftwareDetails />
           </ProtectedRoute>
-        ), // Only accessible to admins
+        ), 
       },
       {
         path: "software-list",
@@ -78,7 +78,7 @@ const router = createBrowserRouter([
       {
         path: "/email-notification",
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute requiredLevel="1">
             <EmailNotification />
           </ProtectedRoute>
         ),

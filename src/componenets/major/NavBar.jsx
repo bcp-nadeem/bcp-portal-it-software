@@ -121,18 +121,26 @@ import UserAvatar from '../minor/UserAvatar';
               <Link to='/software'><ListItemText primary="Software's" /></Link>
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          {
+            user?.info?.emp_level == 1 && (
+              <>
+               <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon className='nav-icon-style'><IoGitMerge /></ListItemIcon>
               <Link to='/category-list'><ListItemText primary="Category" /></Link>
             </ListItemButton>
           </ListItem>
+             
+
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon className='nav-icon-style'><FiBell /></ListItemIcon>
               <Link to="/email-notification"><ListItemText primary="Notifications" /></Link>
             </ListItemButton>
           </ListItem>
+          </>
+            )
+          }
         </List>
       </Box>
     );
