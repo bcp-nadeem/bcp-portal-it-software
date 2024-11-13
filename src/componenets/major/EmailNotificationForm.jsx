@@ -8,6 +8,7 @@ import UserMultiSelect from "./UserMultiSelect";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import TextEditor from "./TextEditor";
+import VersionDropdown from "./VersionDropdown";
 
 const EmailNotificationForm = () => {
   const [users, setUsers] = useState([]);
@@ -49,6 +50,15 @@ const EmailNotificationForm = () => {
         <FormControl className="from-controll">
           <CategoryDropdown id="" value={formData.category} setValue={setFormData} label="category" className="margin-none" title="Select Category" options={["Option 1", "Option 2"]} />
         </FormControl>
+
+        <FormControl className="from-controll">
+          <div className="d-flex gap-10 cj-center width-100 MuiFormControl-style">
+            <CategoryDropdown options="" value="" label="parent" setValue="" id="" className="margin-none" title="Select Software" />
+            <VersionDropdown options="" value="" label="parent" setValue="" id="" className="margin-none" title="Select Version" />
+          </div>
+        </FormControl>
+
+
         <FormControl className="from-controll">
           <TextEditor
             id="standard-basic"

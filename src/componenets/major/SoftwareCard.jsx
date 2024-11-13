@@ -3,6 +3,7 @@ import BasicChips from "../minor/BasicChips"
 import { useState } from "react";
 import SoftwareQuiekInfo from "./SoftwareQuiekInfo";
 import QuillEditor from "./QuillEditor";
+import { Link } from "react-router-dom";
 
 const SoftwareCard = ({id, src, title, category, description, version}) => {
 
@@ -11,14 +12,13 @@ const SoftwareCard = ({id, src, title, category, description, version}) => {
 
   return (
     <>
+          
             <Card className="software-grid">
                 <div className="software-grid-img">
-
                     {src ? <img src={src} alt="" /> : <h1>hello</h1>}
-
                 </div>
                 <div className="software-grid-head">
-                    <h3>{title}</h3>
+                <Link to={`/software-details/${id}`} ><h3>{title}</h3></Link>
                 </div>
                 <div className="software-grid-category">
                     <label htmlFor="">{category}</label>
@@ -45,6 +45,7 @@ const SoftwareCard = ({id, src, title, category, description, version}) => {
                     </Button>
                 </div>
             </Card>
+            
         {isOpenSoftwareInfo ? 
             
             <SoftwareQuiekInfo id={id} src={src} title={title} category={category} description={description} ></SoftwareQuiekInfo>

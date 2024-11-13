@@ -3,6 +3,7 @@ import SoftwareCard from "../componenets/major/SoftwareCard"
 import SoftwareImg from "../assets/images/software/software-img.png"
 import useSoftware from "../hooks/useSoftware";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const SoftwareGrid = () => {
     const {software, fetchSoftware} = useSoftware()

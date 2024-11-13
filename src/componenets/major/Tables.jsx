@@ -7,10 +7,10 @@ import AddVersionModel from "./AddVersionModel";
 import EditSoftwareModel from "./EditSoftwareModel";
 import { useEffect } from "react";
 import { CircularProgress } from "@mui/material";
+import BasicChips from "../minor/BasicChips";
 
 const Tables = ({ data: software, fetchSoftware }) => {
   const { isLoading, error, deleteSoftware } = useSoftware();
-
   const handleDeleteSoftware = async (id) => {
     try {
       await deleteSoftware(id);
@@ -51,7 +51,7 @@ const Tables = ({ data: software, fetchSoftware }) => {
         {software?.map((item) => (
           <tr key={item._id}>
             <td>
-              <Link to="/" className="d-flex d-flex-align-center gap-10">
+              <Link to={`/software-details/${item._id}`} className="d-flex d-flex-align-center gap-10">
                 <UserAvatar
                   src={`${item.imageUrl}`}
                 />
@@ -61,10 +61,11 @@ const Tables = ({ data: software, fetchSoftware }) => {
             <td>{item?.category?.name}</td>
             <td>{item?.seats}</td>
             <td>
+            
               {item?.version?.map((version, index) => (
                 <span key={version._id}>
-                  {version.name}
-                  {index < item.version.length - 1 ? ", " : ""}
+                  <BasicChips label={version.name}></BasicChips>
+                  {index < item.version.length - 1 ? " " : ""}
                 </span>
               ))}
             </td>
