@@ -18,57 +18,47 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
+const UserMultiSelect = ({ data, setValue, label, value }) => {
+  const [personName, setPersonName] = useState([]);
 
-const UserMultiSelect = ({data}) => {
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
 
-    const [personName, setPersonName] = useState([]);
+    setPersonName(typeof value === 'string' ? value.split(',') : value);
 
-    const handleChange = (event) => {
-      const {
-        target: { value },
-      } = event;
-      setPersonName(
-        // On autofill we get a stringified value.
-        typeof value === 'string' ? value.split(',') : value,
-      );
-    };
+    // Update formData in the parent component
+    setValue((prevState) => ({
+      ...prevState,
+      [label]: value.map(user => user.user.employee_email), // Adjust as needed, here we use `employee_email`
+    }));
+  };
 
   return (
-    <>
-        <FormControl sx={{width: 600 }}>
-            <InputLabel id="demo-multiple-checkbox-label">Select Users</InputLabel>
-            <Select
-            labelId="demo-multiple-checkbox-label"
-            id="demo-multiple-checkbox"
-            multiple
-            value={personName}
-            onChange={handleChange}
-            input={<OutlinedInput label="Select Users" />}
-            renderValue={(selected) => selected.join(', ')}
-            MenuProps={MenuProps}
-            >
-            {data.map((name) => (
-                <MenuItem key={name} value={name}>
-                <Checkbox checked={personName.includes(name)} />
-                <ListItemText primary={name} />
-                </MenuItem>
-            ))}
-            </Select>
-        </FormControl>
-    </>
-  )
-}
+    <FormControl sx={{ width: 600 }}>
+      <InputLabel id="demo-multiple-checkbox-label">Select Users</InputLabel>
+      <Select
+        labelId="demo-multiple-checkbox-label"
+        id="demo-multiple-checkbox"
+        multiple
+        value={personName}
+        onChange={handleChange}
+        input={<OutlinedInput label="Select Users" />}
+        renderValue={(selected) =>
+          selected.map((user) => `${user.user.employee_first_name} ${user.user.employee_last_name}`).join(', ')
+        }
+        MenuProps={MenuProps}
+      >
+        {data.map((user) => (
+          <MenuItem key={user?._doc?._id || user?._id} value={user}>
+            <Checkbox checked={personName.includes(user)} />
+            <ListItemText primary={`${user?.user?.employee_first_name} ${user?.user?.employee_last_name}`} />
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  );
+};
 
-export default UserMultiSelect
+export default UserMultiSelect;

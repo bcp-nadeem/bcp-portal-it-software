@@ -7,7 +7,7 @@ import useCategory from '../../hooks/useCategory';
 
 const CategoryDropdown = ({ id, className, title, value, setValue, label, options }) => {
     const handleChangeSelect = (event) => {
-      const selectedCategory = options.find((item) => item._id === event.target.value);
+      const selectedCategory = options.find((item) => item._id ||item === event.target.value);
       setValue((prevState) => ({ ...prevState, [label.toLowerCase()]: selectedCategory }));
     };
     
@@ -29,8 +29,8 @@ const CategoryDropdown = ({ id, className, title, value, setValue, label, option
           {options &&
             options.length > 0 &&
             options.map((item) => (
-              <MenuItem key={item._id} value={item?._id}>
-                {item.name}
+              <MenuItem key={item._id ||item} value={item?._id ||item}>
+                {item.name || item}
               </MenuItem>
             ))}
         </Select>
