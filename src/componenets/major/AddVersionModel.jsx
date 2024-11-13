@@ -11,7 +11,6 @@ import UseTextEditor from '../major/TextEditor';
 import StatusDropdown from './StatusDropDown';
 import UserDropDown from './UserDropDown';
 import UploadButton from '../minor/UploadButton';
-import Software from './../../components/admin/Software';
 import useSoftware from '../../hooks/useSoftware';
 import useVersion from '../../hooks/useVersion';
 import { MdOutlineFilePresent } from "react-icons/md";
