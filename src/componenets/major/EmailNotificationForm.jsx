@@ -7,6 +7,7 @@ import CategoryDropdown from "./CategoryDropdown";
 import UserMultiSelect from "./UserMultiSelect";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import TextEditor from "./TextEditor";
 
 const EmailNotificationForm = () => {
   const [users, setUsers] = useState([]);
@@ -49,15 +50,11 @@ const EmailNotificationForm = () => {
           <CategoryDropdown id="" value={formData.category} setValue={setFormData} label="category" className="margin-none" title="Select Category" options={["Option 1", "Option 2"]} />
         </FormControl>
         <FormControl className="from-controll">
-          <InputTypes
+          <TextEditor
             id="standard-basic"
             label="Subject"
-            value={formData.subject}
+            value={formData}
             setValue={setFormData}
-            className=""
-            type="text"
-            variant="standard"
-            placeholder="Enter Subject"
           />
         </FormControl>
         <FormControl className="from-controll d-flex text-center ai-center cj-center mt-30">
