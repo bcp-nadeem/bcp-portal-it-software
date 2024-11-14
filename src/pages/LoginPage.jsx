@@ -1,10 +1,12 @@
+import React, { useState } from 'react';
 import { Box, Card, FormControl, FormGroup } from "@mui/material";
 import InputTypes from "../componenets/minor/InputTypes";
 import PrimaryButton from "../componenets/minor/PrimaryButton";
 import { useAuth } from "../store/AuthContext";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
+import PositiveAlert from "../componenets/minor/PositiveAlert";
+import NegativeAlert from "../componenets/minor/NegativeAlert";
 
 const LoginPage = () => {
 
@@ -18,6 +20,8 @@ const LoginPage = () => {
     password: ""
   });
 
+  const [alert, setAlert] = useState(null);
+
   const { login, isLoading } = useAuth();
 
   const navigate = useNavigate();
@@ -27,7 +31,10 @@ const LoginPage = () => {
     console.log(result);
     
     if(result){
-      navigate('/dashboard')
+      setAlert({ type: 'success', message: 'Logged in successfully!' });
+      navigate('/dashboard');
+    } else {
+      setAlert({ type: 'error', message: 'Failed to log in. Please try again.' });
     }
   };
 
@@ -76,6 +83,13 @@ const LoginPage = () => {
               </FormControl>
             </FormGroup>
           </Card>
+        )}
+        {alert && (
+          alert.type === 'success' ? (
+            <PositiveAlert message={alert.message} />
+          ) : (
+            <NegativeAlert message={alert.message} />
+          )
         )}
       </Box>
     </div>
