@@ -4,6 +4,7 @@ import PrimaryButton from "../componenets/minor/PrimaryButton";
 import { useAuth } from "../store/AuthContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const LoginPage = () => {
 
@@ -33,47 +34,49 @@ const LoginPage = () => {
   return (
     <div className="login-form-style">
       <Box>
-        <Card style={loginFormStyle}>
-          <div className="mb-15">
-            <h3>LOGIN</h3>
+        {isLoading ? (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+            <CircularProgress />
+            <p style={{ marginLeft: '10px' }}>Hang tight, we're logging you in...</p>
           </div>
-          <FormGroup className="login-form-group">
-            <FormControl variant="standard">
-              <InputTypes
-                className="mb-15"
-                value={userData.email}
-                setValue={setUserData}
-                id="standard-basic"
-                label="Email"
-                variant="standard"
-              />
-            </FormControl>
-            <FormControl variant="standard">
-              <InputTypes
-                className="mb-15"
-                value={userData.password}
-                setValue={setUserData}
-                id="standard-basic"
-                label="Password"
-                variant="standard"
-                type="password"
-              />
-            </FormControl>
-            <FormControl variant="standard">
-              <PrimaryButton
-                variant="contained"
-                onClickHandler={loginHandler}
-                className="mt-20"
-                title="Login"
-              />
-            </FormControl>
-          </FormGroup>
-        </Card>
-        <div>
-          {
-            isLoading && <p>Loading...</p>
-          }
-        </div>
+        ) : (
+          <Card style={loginFormStyle}>
+            <div className="mb-15">
+              <h3>LOGIN</h3>
+            </div>
+            <FormGroup className="login-form-group">
+              <FormControl variant="standard">
+                <InputTypes
+                  className="mb-15"
+                  value={userData.email}
+                  setValue={setUserData}
+                  id="standard-basic"
+                  label="Email"
+                  variant="standard"
+                />
+              </FormControl>
+              <FormControl variant="standard">
+                <InputTypes
+                  className="mb-15"
+                  value={userData.password}
+                  setValue={setUserData}
+                  id="standard-basic"
+                  label="Password"
+                  variant="standard"
+                  type="password"
+                />
+              </FormControl>
+              <FormControl variant="standard">
+                <PrimaryButton
+                  variant="contained"
+                  onClickHandler={loginHandler}
+                  className="mt-20"
+                  title="Login"
+                />
+              </FormControl>
+            </FormGroup>
+          </Card>
+        )}
       </Box>
     </div>
   );
