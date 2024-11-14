@@ -1,14 +1,19 @@
 import useSoftware from "./useSoftware";
 import axios from "axios";
-const useVersion = () => {
-    const {fetchSoftware} = useSoftware()
-  const addVersion = async(details, close) => {
-    try {
-      const { name, parent, status, information, downloadUrl, installUrl } =
-        details;
+import { useState } from "react";
 
-        console.log(details);
-        
+const useVersion = () => {
+  const { fetchSoftware } = useSoftware();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const addVersion = async (details, close) => {
+    setLoading(true);
+    setError(null); // Reset error state
+    try {
+      const { name, parent, status, information, downloadUrl, installUrl } = details;
+
+      console.log(details);
 
       const formData = new FormData();
       formData.append("name", name);
@@ -18,34 +23,42 @@ const useVersion = () => {
       formData.append("downloadUrl", downloadUrl || null);
       formData.append("installUrl", installUrl || null);
 
-      const response = await axios.post(`${import.meta.env.VITE_API_ROOT}/version`,formData,
-        {
-            headers: {
-                'Content-Type': 'multipart/form-data',  // Automatically handled by the browser
-                'authToken' : localStorage.getItem("accessToken")
-              }
+      const response = await axios.post(`${import.meta.env.VITE_API_ROOT}/version`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'authToken': localStorage.getItem("accessToken")
         }
-    )
-    if(response){
+      });
+
+      if (response) {
         console.log(response.data);
-        alert("version added!!!")
-        fetchSoftware()
-        close()
-    }
+        alert("Version added!");
+        fetchSoftware();
+        close();
+      }
     } catch (error) {
-      console.log(error);
+      setError(error);
+      console.error("Error adding version:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const getTotalVersions = async() => {
+  const getTotalVersions = async () => {
+    setLoading(true);
+    setError(null);
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_ROOT}/version/count`); 
+      const response = await axios.get(`${import.meta.env.VITE_API_ROOT}/version/count`);
       return response.data.data;
     } catch (error) {
-      console.log(error);
+      setError(error);
+      console.error("Error getting total versions:", error);
+    } finally {
+      setLoading(false);
     }
   };
-  return { addVersion, getTotalVersions };
+
+  return { addVersion, getTotalVersions, loading, error };
 };
 
 export default useVersion;
