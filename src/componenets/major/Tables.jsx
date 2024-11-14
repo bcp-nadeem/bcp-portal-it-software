@@ -101,7 +101,7 @@ const Tables = ({ data: software, fetchSoftware }) => {
           <table>
             <thead>
           {
-            open===item._id && (
+            open===item._id && item?.version?.length>0 && (
               <tr>
                 <th colSpan={5}>
                   <td>
