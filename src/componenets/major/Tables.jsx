@@ -5,12 +5,15 @@ import useSoftware from "../../hooks/useSoftware";
 import DeleteModel from "./DeleteModel";
 import AddVersionModel from "./AddVersionModel";
 import EditSoftwareModel from "./EditSoftwareModel";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
 import BasicChips from "../minor/BasicChips";
 
 const Tables = ({ data: software, fetchSoftware }) => {
   const { isLoading, error, deleteSoftware } = useSoftware();
+  console.log(software);
+  
+  const [open, setOpen] = useState(null);
   const handleDeleteSoftware = async (id) => {
     try {
       await deleteSoftware(id);
@@ -23,7 +26,7 @@ const Tables = ({ data: software, fetchSoftware }) => {
   if (isLoading) {
     return (
       <div className="d-flex justify-center align-center p-4">
-        <CircularProgress />
+        Loading...
       </div>
     );
   }
@@ -36,7 +39,7 @@ const Tables = ({ data: software, fetchSoftware }) => {
     );
   }
 
-  return (
+  if(!isLoading && !error)return (
     <table>
       <thead>
         <tr>
@@ -48,7 +51,7 @@ const Tables = ({ data: software, fetchSoftware }) => {
         </tr>
       </thead>
       <tbody>
-        {software?.map((item) => (
+        {software?.map((item) => (<>
           <tr key={item._id}>
             <td>
               <Link to={`/software-details/${item._id}`} className="d-flex d-flex-align-center gap-10">
@@ -85,8 +88,64 @@ const Tables = ({ data: software, fetchSoftware }) => {
                   onSuccess={fetchSoftware}
                 />
               </div>
+
+            </td>
+            <td >
+              <div onClick={()=>setOpen(prev=>prev!==null && prev===item._id ? null : item._id)}>
+              D
+
+              </div>
             </td>
           </tr>
+
+          <table>
+            <thead>
+          {
+            open===item._id && (
+              <tr>
+                <th colSpan={5}>
+                  <td>
+                    name
+                  </td>
+                  <td>
+                    users
+                  </td>
+                  <td>
+                    status
+                  </td>
+                  <td>
+                    install url
+                  </td>
+                  <td>
+                    download url
+                  </td>
+                  <td>
+                    options
+                  </td>
+                </th>
+              </tr>
+            )
+          }
+          </thead>
+          <tbody>
+            {
+               open===item._id &&item?.version?.map((version) => (
+                <tr key={version._id}>
+                  <td>{version?.name}</td>
+                  <td>{version?.users?.lenght>0 ? version?.users?.length : 0}</td>
+                  <td>{version?.status}</td>
+                  <td>{version?.installUrl?"yes" : "no"}</td>
+                  <td>{version?.downloadUrl?"yes" : "no"}</td>
+                  <td>
+
+                  </td>
+                </tr>
+              ))
+            }
+            </tbody>
+            </table>
+          
+          </>
         ))}
       </tbody>
     </table>

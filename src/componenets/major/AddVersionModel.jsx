@@ -74,7 +74,7 @@ const AddVersionModel = ({parent,onSuccess}) => {
                 </FormControl>
 
                 <FormControl className='from-controll'>
-                  <CategoryDropdown options={software} value={versionDataToAdd?.parent?._id || parent?._id || ""} label="parent" setValue={setVersionDataToAdd} id="" className="margin-none" title="Select Software" />
+                  <CategoryDropdown options={software} value={versionDataToAdd?.parent?._id || parent?._id || ""} label="parent" setValue={""} id="" className="margin-none" title="Select Software" />
                 </FormControl>
 
                 <FormControl className='from-controll'>
