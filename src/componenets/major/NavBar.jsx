@@ -118,7 +118,7 @@ import UserAvatar from '../minor/UserAvatar';
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon className='nav-icon-style'><IoCode /></ListItemIcon>
-              <Link to='/software'><ListItemText primary="Software's" /></Link>
+              <Link to={`${user?.info?.emp_level == 1 ? '/software-list' : '/software'}`}><ListItemText primary="Software's" /></Link>
             </ListItemButton>
           </ListItem>
           {

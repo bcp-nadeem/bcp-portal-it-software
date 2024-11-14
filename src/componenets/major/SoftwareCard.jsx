@@ -5,10 +5,10 @@ import SoftwareQuiekInfo from "./SoftwareQuiekInfo";
 import QuillEditor from "./QuillEditor";
 import { Link } from "react-router-dom";
 
-const SoftwareCard = ({id, src, title, category, description, version}) => {
+const SoftwareCard = ({id, src, title, category, description, version}) => {    
 
     const [isOpenSoftwareInfo, setIsOpenSoftwareInfo] = useState(false); 
-    const [selectedVersion, setSelectedVersion] = useState(version[0]);
+    const [selectedVersion, setSelectedVersion] = useState(version[version?.length-1]);
 
   return (
     <>
@@ -48,7 +48,7 @@ const SoftwareCard = ({id, src, title, category, description, version}) => {
             
         {isOpenSoftwareInfo ? 
             
-            <SoftwareQuiekInfo id={id} src={src} title={title} category={category} description={description} ></SoftwareQuiekInfo>
+            <SoftwareQuiekInfo id={id} src={src} title={title} category={category} description={description} version={selectedVersion} ></SoftwareQuiekInfo>
         : 
         ""}
     </>

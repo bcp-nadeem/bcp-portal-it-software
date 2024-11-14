@@ -100,7 +100,13 @@ const SoftwareDetails = () => {
                 </div>
               </div>
               <div className="software-details-info-button">
-                <Button>Download</Button>
+              {
+                            software?.version[software?.version?.length-1]?.installUrl && (
+                              <PrimaryButton href={software?.version[software?.version?.length-1]?.installUrl} title="Install" />
+                            ) || software?.version[software?.version?.length-1]?.downloadUrl && (
+                              <PrimaryButton href={software?.version[software?.version?.length-1]?.downloadUrl} title="Download" />
+                            )
+                          }
               </div>
             </div>
           </section>
@@ -144,7 +150,13 @@ const SoftwareDetails = () => {
                           <QuillEditor description={version.information}/>
                         </td>
                         <td>
-                          <PrimaryButton title="Download" />
+                          {
+                            version.installUrl && (
+                              <PrimaryButton href={version.installUrl} title="Install" />
+                            ) || version.downloadUrl && (
+                              <PrimaryButton href={version.downloadUrl} title="Download" />
+                            )
+                          }
                         </td>
                       </tr>
                  
