@@ -17,7 +17,7 @@ const LoginPage = () => {
     password: ""
   });
 
-  const { login } = useAuth();
+  const { login, isLoading } = useAuth();
 
   const navigate = useNavigate();
 
@@ -69,6 +69,11 @@ const LoginPage = () => {
             </FormControl>
           </FormGroup>
         </Card>
+        <div>
+          {
+            isLoading && <p>Loading...</p>
+          }
+        </div>
       </Box>
     </div>
   );
