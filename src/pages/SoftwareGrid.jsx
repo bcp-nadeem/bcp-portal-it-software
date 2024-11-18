@@ -2,10 +2,14 @@ import { MdKeyboardArrowRight } from "react-icons/md"
 import SoftwareCard from "../componenets/major/SoftwareCard"
 import SoftwareImg from "../assets/images/software/software-img.png"
 import useSoftware from "../hooks/useSoftware";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const SoftwareGrid = () => {
+
+    const [isOpenGrid, setIsOpenGrid] = useState(null);
+
+
     const {software, fetchSoftware} = useSoftware()
     useEffect(() => {
         fetchSoftware();
@@ -28,7 +32,7 @@ const SoftwareGrid = () => {
                 <div className="software-grids">
                     {
                         software && software.length>0 && software.map((item)=>(
-                            <SoftwareCard key={item._id} id={item._id} src={`${item?.imageUrl}`} title={item.name} category={item.category.name} 
+                            <SoftwareCard open={isOpenGrid} setopen={setIsOpenGrid} key={item._id} id={item._id} src={`${item?.imageUrl}`} title={item.name} category={item.category.name} 
                             description={item.information} version={item.version}></SoftwareCard>
                         ))
                     }
@@ -36,8 +40,6 @@ const SoftwareGrid = () => {
             </div>
         </section>
     </section>
-
-    
 
     </>
   )

@@ -5,41 +5,23 @@ import SoftwareQuiekInfo from "./SoftwareQuiekInfo";
 import QuillEditor from "./QuillEditor";
 import { Link } from "react-router-dom";
 
-const SoftwareCard = ({id, src, title, category, description, version}) => {    
+const SoftwareCard = ({open, setopen, id, src, title, category, description, version}) => {    
 
-    const [isOpenSoftwareInfo, setIsOpenSoftwareInfo] = useState(null);
-    const [prevOpen, setPrevOpen] = useState(null);
+    // const [isOpenSoftwareInfo, setIsOpenSoftwareInfo] = useState(null);
 
     const handleClickOpen = (id) => {
-
-        console.log(setIsOpenSoftwareInfo(id));
-       
+        setopen(null);
+        setopen(id);
     };
     
     const handleClickClose = () => {
-        setIsOpenSoftwareInfo(null);
+        setopen(null);
     };
-
-    useEffect(() => {
-        console.log(setPrevOpen(isOpenSoftwareInfo)); // Update the previous count
-    }, [isOpenSoftwareInfo]);
-
-    // const [isOpenSoftwareInfo, setIsOpenSoftwareInfo] = useState(false); 
-
-    // const SoftwareInfoPopUp = (id) => {
-
-    //     setIsOpenSoftwareInfo(id);
-
-    //     // setIsOpenSoftwareInfo((prev) => (prev === id ? null : id));
-    //     // console.log(id)
-
-    // }
 
     const [selectedVersion, setSelectedVersion] = useState(version[version?.length-1]);
 
   return (
     <>
-          
             <Card className="software-grid">
                 <div className="software-grid-img">
                     {src ? <img src={src} alt="" /> : <h1>hello</h1>}
@@ -69,13 +51,13 @@ const SoftwareCard = ({id, src, title, category, description, version}) => {
                     }
 
                     {
-                        !isOpenSoftwareInfo ? 
+                        !open ? 
                         <Button onClick={() => handleClickOpen(id)}>
-                            {isOpenSoftwareInfo ? "Close" : "Quick Info"}
+                            {open == id ? "Close" : "Quick Info"}
                         </Button>
                         :
                         <Button onClick={() => handleClickClose(id)}>
-                            {isOpenSoftwareInfo ? "Close" : "Quick Info"}
+                            {open == id ? "Close" : "Quick Info"}
                         </Button>
                     }
 
@@ -83,10 +65,12 @@ const SoftwareCard = ({id, src, title, category, description, version}) => {
                 </div>
             </Card>
                     
-        {isOpenSoftwareInfo ? 
+        {open == id ? 
             
             <SoftwareQuiekInfo id={id} src={src} title={title} category={category} description={description} version={selectedVersion} ></SoftwareQuiekInfo>
+
         : 
+
         ""}
     </>
   )
