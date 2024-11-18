@@ -151,13 +151,22 @@ const AddSoftwareModal = ({ onSuccess }) => {
               </FormControl>
 
               <FormControl className="from-controll d-flex text-center ai-center cj-center mt-30">
-                <PrimaryButton
-                  variant="contained"
-                  title="Confirm"
-                  size="medium"
-                  onClickHandler={handleSubmit}
-                  className="btn-ws-100"
-                />
+                <div className="d-flex gap-10">
+                  <PrimaryButton
+                    variant="contained"
+                    title="Confirm"
+                    size="medium"
+                    onClickHandler={handleSubmit}
+                    className="btn-ws-100"
+                  />
+                  <PrimaryButton
+                    variant="contained"
+                    title="Cancel"
+                    size="medium"
+                    onClickHandler={handleClose}
+                    className="btn-ws-100"
+                  />
+                </div>
               </FormControl>
             </FormGroup>
           </Paper>

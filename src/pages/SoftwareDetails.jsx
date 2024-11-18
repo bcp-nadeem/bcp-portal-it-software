@@ -11,6 +11,19 @@ import useSoftware from "../hooks/useSoftware";
 import QuillEditor from "../componenets/major/QuillEditor";
 import PrimaryButton from "../componenets/minor/PrimaryButton";
 
+import { styled } from '@mui/material/styles';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+
+
+const CustomWidthTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))({
+  [`& .${tooltipClasses.tooltip}`]: {
+    maxWidth: 500,
+  },
+});
+
+
 const SoftwareDetails = () => {
   const { softwareId } = useParams();
   const { getSoftwareById } = useSoftware();
@@ -147,7 +160,11 @@ const SoftwareDetails = () => {
                       <tr key={index}>
                         <td>{version.name}</td>
                         <td className="sv-description-style">
-                          <QuillEditor description={version.information}/>
+
+                          <CustomWidthTooltip title={<QuillEditor description={version.information}/>}>
+                            <Button sx={{ m: 1 }}>Decription</Button>
+                          </CustomWidthTooltip>
+
                         </td>
                         <td>
                           {

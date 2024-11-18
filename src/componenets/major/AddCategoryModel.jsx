@@ -65,7 +65,10 @@ const AddCategoryModel = ({onSuccess}) => {
                   <StatusDropdown label="Status" id="" value={newCategoryValue.status} setValue={setNewCategoryValue} className="margin-none" title="Select Status" options={['active', 'inactive']} />
                 </FormControl>
                 <FormControl className='from-controll d-flex text-center ai-center cj-center mt-30'>
-                  <PrimaryButton variant="contained" title="Submit" size="medium" onClickHandler={()=>addCategory(newCategoryValue, handleClose, onSuccess)} className="btn-ws-100"></PrimaryButton>
+                  <div className='d-flex gap-10'>
+                    <PrimaryButton variant="contained" title="Submit" size="medium" onClickHandler={()=>addCategory(newCategoryValue, handleClose, onSuccess)} className="btn-ws-100"></PrimaryButton>
+                    <PrimaryButton variant="contained" title="Cancel" size="medium" onClickHandler={handleClose} className="btn-ws-100"></PrimaryButton>
+                  </div>
                 </FormControl>
             </FormGroup>
             </Paper>

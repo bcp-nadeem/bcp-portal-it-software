@@ -6,8 +6,11 @@ import DeleteModel from "./DeleteModel";
 import AddVersionModel from "./AddVersionModel";
 import EditSoftwareModel from "./EditSoftwareModel";
 import { useEffect, useState } from "react";
-import { CircularProgress } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import BasicChips from "../minor/BasicChips";
+import { IoIosArrowDown } from "react-icons/io";
+import EditVersioneModel from "./EditVersionModel";
+
 
 const Tables = ({ data: software, fetchSoftware }) => {
   const { isLoading, error, deleteSoftware } = useSoftware();
@@ -92,58 +95,42 @@ const Tables = ({ data: software, fetchSoftware }) => {
             </td>
             <td >
               <div onClick={()=>setOpen(prev=>prev!==null && prev===item._id ? null : item._id)}>
-              D
+
+                <Button><IoIosArrowDown /></Button>
 
               </div>
             </td>
           </tr>
 
-          <table>
-            <thead>
+
           {
             open===item._id && item?.version?.length>0 && (
-              <tr>
-                <th colSpan={5}>
-                  <td>
-                    name
-                  </td>
-                  <td>
-                    users
-                  </td>
-                  <td>
-                    status
-                  </td>
-                  <td>
-                    install url
-                  </td>
-                  <td>
-                    download url
-                  </td>
-                  <td>
-                    options
-                  </td>
-                </th>
+              <tr >
+                <th>Version</th>
+                <th>Status</th>
+                <th>install url</th>
+                <th>download url</th>
+                <th>Action</th>
               </tr>
             )
           }
-          </thead>
-          <tbody>
-            {
-               open===item._id &&item?.version?.map((version) => (
+      
+
+          {
+              open===item._id &&item?.version?.map((version) => (
                 <tr key={version._id}>
                   <td>{version?.name}</td>
-                  <td>{version?.users?.lenght>0 ? version?.users?.length : 0}</td>
-                  <td>{version?.status}</td>
+                  <td>Active</td>
                   <td>{version?.installUrl?"yes" : "no"}</td>
                   <td>{version?.downloadUrl?"yes" : "no"}</td>
-                  <td>
-
+                  <td className="d-flex gap-10">
+                    <EditVersioneModel></EditVersioneModel>
+                    <DeleteModel></DeleteModel>
                   </td>
                 </tr>
               ))
             }
-            </tbody>
-            </table>
+
           
           </>
         ))}

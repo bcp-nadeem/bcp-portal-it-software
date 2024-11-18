@@ -17,6 +17,7 @@ import UseTextEditor from "../major/TextEditor";
 import { RiEditLine } from "react-icons/ri";
 import useSoftware from "../../hooks/useSoftware";
 import useCategory from "../../hooks/useCategory";
+import StatusDropdown from "./StatusDropDown";
 
 const style = {
   position: "absolute",
@@ -31,12 +32,11 @@ const style = {
   p: 4,
 };
 
-const EditSoftwareModel = ({ data, onSuccess }) => {
+const EditVersioneModel = ({ data, onSuccess }) => {
   const [open, setOpen] = useState(false);
   const [dataToAdd, setDataToAdd] = useState({});
   const { updateSoftware } = useSoftware();
   const { category, fetchCategory } = useCategory();
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -72,43 +72,7 @@ const EditSoftwareModel = ({ data, onSuccess }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Heading className="mb-5" heading="Edit Software" />
-          <Divider />
-          <Paper className="mt-15" elevation={0}>
-            <div className="asm-img-upload d-flex gap-10 pt-20 pb-20">
-              <div className="upload-img-preview">
-                <img
-                  src={imagePreviewUrl ||
-                    (dataToAdd?.imageUrl?.startsWith("uploads") &&
-                      import.meta.env.VITE_API_ASSET +
-                        "/" +
-                        dataToAdd?.imageUrl) 
-                    
-                  }
-                  alt="Software"
-                />
-              </div>
-              <div className="upload-img-btn">
-                <div className="mt-20">
-                  <UploadButton
-                    label="image"
-                    setValue={setDataToAdd}
-                    setImagePreviewUrl={setImagePreviewUrl}
-                    title="Choose File"
-                    className=""
-                  />
-                </div>
-                <br />
-                <Divider />
-                <div>
-                  <label>
-                    Allowed JPG, JPEG or PNG. Image Resolution: 225px * 225px.
-                    Max size of 800K
-                  </label>
-                </div>
-              </div>
-            </div>
-          </Paper>
+          <Heading className="mb-5" heading="Edit Version Details" />
           <Divider />
           <Paper className="mt-20" elevation={0}>
             <FormGroup className="d-flex model-from-style">
@@ -120,37 +84,31 @@ const EditSoftwareModel = ({ data, onSuccess }) => {
                   id="standard-basic"
                   type="text"
                   variant="standard"
-                  placeholder="Enter Software Name"
+                  placeholder="Enter Version Name"
                 />
               </FormControl>
               <FormControl className="from-controll">
-                <CategoryDropdown
-                  options={category}
-                  label="category"
-                  value={dataToAdd?.category?._id}
-                  setValue={setDataToAdd}
-                  className="margin-none"
-                  title="Select Category"
-                />
+                <StatusDropdown options="" value="" setValue="" label="status" title="Select Status" />
               </FormControl>
-              <FormControl className="from-controll">
-                <InputTypes
-                  label="seats"
-                  value={dataToAdd?.seats}
-                  setValue={setDataToAdd}
-                  id="standard-basic"
-                  type="number"
-                  variant="standard"
-                  placeholder="Enter Software Seats"
-                />
-              </FormControl>
-              <FormControl className="from-controll">
-                <UseTextEditor
-                  label="information"
-                  value={dataToAdd}
-                  setValue={setDataToAdd}
-                />
-              </FormControl>
+
+                <FormControl className="from-controll">
+                    <UseTextEditor
+                    label="information"
+                    value={dataToAdd}
+                    setValue={setDataToAdd}
+                    />
+                </FormControl>
+
+              
+                <FormControl className='from-controll'>
+                    <div className='d-flex ai-center cj-center'>
+                        <UploadButton label="downloadUrl" value="" setValue="" title="Download File" onClickHander="" className="" />&nbsp;
+                        <UploadButton label="installUrl" value="" setValue="" title="Install File" onClickHander="" className="" />
+                    </div>
+                </FormControl>
+
+                <Divider className='mb-20' />
+
               <FormControl className="from-controll d-flex text-center ai-center cj-center mt-30">
                 <div className="d-flex gap-10">
                   <PrimaryButton
@@ -177,4 +135,4 @@ const EditSoftwareModel = ({ data, onSuccess }) => {
   );
 };
 
-export default EditSoftwareModel;
+export default EditVersioneModel;

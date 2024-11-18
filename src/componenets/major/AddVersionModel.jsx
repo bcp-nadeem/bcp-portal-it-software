@@ -95,7 +95,10 @@ const AddVersionModel = ({parent,onSuccess}) => {
                 <Divider className='mb-20' />
 
                 <FormControl className='from-controll d-flex text-center ai-center cj-center mt-20'>
-                  <PrimaryButton variant="contained" title="Submit" size="medium" onClickHandler={()=>handleSubmit()} className="btn-ws-100"></PrimaryButton>
+                  <div className='d-flex gap-10'>
+                    <PrimaryButton variant="contained" title="Submit" size="medium" onClickHandler={()=>handleSubmit()} className="btn-ws-100"></PrimaryButton>
+                    <PrimaryButton variant="contained" title="Cancel" size="medium" onClickHandler={()=>handleClose()} className="btn-ws-100"></PrimaryButton>
+                  </div>
                 </FormControl>
             </FormGroup>
             </Paper>
