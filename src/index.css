@@ -751,9 +751,6 @@ border: none;
     border: 1px solid #e1e1e1;
     border-radius: 5px;
 }
-section.profile-details-wrapper {
-    
-}
 section.profile-details-wrapper .profile-head-details {
     display: flex;
     justify-content: center;
@@ -1028,7 +1025,6 @@ section.notification-grid-cover img {
     margin-right: auto;
     margin-top: 10px;
 }
-
 @media(max-width: 1500px){
     .software-grid-install-btn{
         position:relative;
